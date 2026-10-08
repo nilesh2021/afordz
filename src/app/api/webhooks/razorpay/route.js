@@ -34,7 +34,7 @@ export async function POST(request) {
     return NextResponse.json({ error: "Missing event id." }, { status: 400 });
   }
 
-  if (hasWebhookEvent(eventId)) {
+  if (await hasWebhookEvent(eventId)) {
     return NextResponse.json({ received: true });
   }
 
@@ -45,7 +45,7 @@ export async function POST(request) {
     return NextResponse.json({ error: "Incomplete event." }, { status: 400 });
   }
 
-  const order = getOrderByRazorpayOrderId(razorpayOrderId);
+  const order = await getOrderByRazorpayOrderId(razorpayOrderId);
   if (!order) {
     return NextResponse.json({ received: true });
   }
@@ -67,21 +67,21 @@ export async function POST(request) {
   }
 
   if (!confirmed.ok) {
-    recordWebhookEvent(eventId);
+    await recordWebhookEvent(eventId);
     return NextResponse.json({ received: true });
   }
 
-  const paid = markOrderPaid({
+  const paid = await markOrderPaid({
     razorpayOrderId: order.razorpayOrderId,
     paymentId,
     paidAt: new Date().toISOString(),
   });
 
   if (paid === "conflict") {
-    recordWebhookEvent(eventId);
+    await recordWebhookEvent(eventId);
     return NextResponse.json({ received: true });
   }
 
-  recordWebhookEvent(eventId);
+  await recordWebhookEvent(eventId);
   return NextResponse.json({ received: true });
 }

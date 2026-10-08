@@ -39,12 +39,12 @@ export async function POST(request) {
     return redirectTo(request, "unmatched");
   }
 
-  let order = getOrderByPaymentId(paymentId);
+  let order = await getOrderByPaymentId(paymentId);
   if (!order) {
     const lookedUp = await fetchPayment(paymentId);
     const razorpayOrderId = lookedUp.ok ? lookedUp.payment?.order_id : "";
     if (typeof razorpayOrderId === "string" && razorpayOrderId.startsWith("order_")) {
-      order = getOrderByRazorpayOrderId(razorpayOrderId);
+      order = await getOrderByRazorpayOrderId(razorpayOrderId);
     }
   }
 
@@ -67,7 +67,7 @@ export async function POST(request) {
     );
   }
 
-  const paid = markOrderPaid({
+  const paid = await markOrderPaid({
     razorpayOrderId: order.razorpayOrderId,
     paymentId,
     paidAt: new Date().toISOString(),
@@ -77,7 +77,7 @@ export async function POST(request) {
     return redirectTo(request, "unmatched");
   }
 
-  const issued = issueDownloadToken(order.id);
+  const issued = await issueDownloadToken(order.id);
   if (!issued) {
     return redirectTo(request, "unavailable");
   }

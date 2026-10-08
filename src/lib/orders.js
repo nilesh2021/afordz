@@ -1,5 +1,5 @@
 import { createHash, randomBytes } from "node:crypto";
-import { getDb, withImmediateTransaction } from "./db.js";
+import { dbGet, dbRun, withWriteTransaction } from "./db.js";
 
 export const DOWNLOAD_TTL_SECONDS = 48 * 60 * 60;
 
@@ -36,15 +36,13 @@ function mapOrder(row) {
   };
 }
 
-export function insertPendingOrder(order) {
-  getDb()
-    .prepare(
-      `INSERT INTO orders (
-        id, razorpay_order_id, status, amount_paise, currency,
-        customer_name, customer_email, items_json, created_at
-      ) VALUES (?, ?, 'pending', ?, ?, ?, ?, ?, ?)`,
-    )
-    .run(
+export async function insertPendingOrder(order) {
+  await dbRun(
+    `INSERT INTO orders (
+      id, razorpay_order_id, status, amount_paise, currency,
+      customer_name, customer_email, items_json, created_at
+    ) VALUES (?, ?, 'pending', ?, ?, ?, ?, ?, ?)`,
+    [
       order.id,
       order.razorpayOrderId,
       order.amountPaise,
@@ -53,33 +51,31 @@ export function insertPendingOrder(order) {
       order.customerEmail,
       JSON.stringify(order.items),
       order.createdAt,
-    );
+    ],
+  );
 }
 
-export function getOrderByRazorpayOrderId(razorpayOrderId) {
-  const row = getDb()
-    .prepare("SELECT * FROM orders WHERE razorpay_order_id = ?")
-    .get(razorpayOrderId);
+export async function getOrderByRazorpayOrderId(razorpayOrderId) {
+  const row = await dbGet("SELECT * FROM orders WHERE razorpay_order_id = ?", [razorpayOrderId]);
   return mapOrder(row);
 }
 
-export function getOrderByPaymentId(paymentId) {
-  const row = getDb().prepare("SELECT * FROM orders WHERE payment_id = ?").get(paymentId);
+export async function getOrderByPaymentId(paymentId) {
+  const row = await dbGet("SELECT * FROM orders WHERE payment_id = ?", [paymentId]);
   return mapOrder(row);
 }
 
-export function getPaidOrderByToken(token) {
+export async function getPaidOrderByToken(token) {
   if (typeof token !== "string" || token.length < 32) {
     return null;
   }
-  const row = getDb()
-    .prepare(
-      `SELECT * FROM orders
-       WHERE download_token_hash = ?
-         AND status = 'paid'
-         AND download_expires_at > ?`,
-    )
-    .get(hashToken(token), new Date().toISOString());
+  const row = await dbGet(
+    `SELECT * FROM orders
+     WHERE download_token_hash = ?
+       AND status = 'paid'
+       AND download_expires_at > ?`,
+    [hashToken(token), new Date().toISOString()],
+  );
   return mapOrder(row);
 }
 
@@ -87,12 +83,13 @@ function isUniqueConstraint(error) {
   return typeof error?.message === "string" && /UNIQUE/i.test(error.message);
 }
 
-export function markOrderPaid({ razorpayOrderId, paymentId, paidAt }) {
+export async function markOrderPaid({ razorpayOrderId, paymentId, paidAt }) {
   try {
-    return withImmediateTransaction((db) => {
-      const current = db
-        .prepare("SELECT status, payment_id FROM orders WHERE razorpay_order_id = ?")
-        .get(razorpayOrderId);
+    return await withWriteTransaction(async (db) => {
+      const current = await db.get(
+        "SELECT status, payment_id FROM orders WHERE razorpay_order_id = ?",
+        [razorpayOrderId],
+      );
 
       if (!current) {
         return "missing";
@@ -106,14 +103,13 @@ export function markOrderPaid({ razorpayOrderId, paymentId, paidAt }) {
         return "conflict";
       }
 
-      const result = db
-        .prepare(
-          `UPDATE orders
-           SET status = 'paid', payment_id = ?, paid_at = COALESCE(paid_at, ?)
-           WHERE razorpay_order_id = ?
-             AND (payment_id IS NULL OR payment_id = ?)`,
-        )
-        .run(paymentId, paidAt, razorpayOrderId, paymentId);
+      const result = await db.run(
+        `UPDATE orders
+         SET status = 'paid', payment_id = ?, paid_at = COALESCE(paid_at, ?)
+         WHERE razorpay_order_id = ?
+           AND (payment_id IS NULL OR payment_id = ?)`,
+        [paymentId, paidAt, razorpayOrderId, paymentId],
+      );
 
       return result.changes === 1 ? "paid" : "conflict";
     });
@@ -125,16 +121,15 @@ export function markOrderPaid({ razorpayOrderId, paymentId, paidAt }) {
   }
 }
 
-export function issueDownloadToken(orderId) {
+export async function issueDownloadToken(orderId) {
   const token = randomBytes(32).toString("base64url");
   const expiresAt = new Date(Date.now() + DOWNLOAD_TTL_SECONDS * 1000).toISOString();
-  const result = getDb()
-    .prepare(
-      `UPDATE orders
-       SET download_token_hash = ?, download_expires_at = ?
-       WHERE id = ? AND status = 'paid'`,
-    )
-    .run(hashToken(token), expiresAt, orderId);
+  const result = await dbRun(
+    `UPDATE orders
+     SET download_token_hash = ?, download_expires_at = ?
+     WHERE id = ? AND status = 'paid'`,
+    [hashToken(token), expiresAt, orderId],
+  );
 
   if (result.changes !== 1) {
     return null;
@@ -143,22 +138,22 @@ export function issueDownloadToken(orderId) {
   return { token, expiresAt };
 }
 
-export function hasWebhookEvent(eventId) {
-  const row = getDb().prepare("SELECT event_id FROM webhook_events WHERE event_id = ?").get(eventId);
+export async function hasWebhookEvent(eventId) {
+  const row = await dbGet("SELECT event_id FROM webhook_events WHERE event_id = ?", [eventId]);
   return Boolean(row);
 }
 
-export function recordWebhookEvent(eventId) {
+export async function recordWebhookEvent(eventId) {
   try {
-    return withImmediateTransaction((db) => {
-      const existing = db.prepare("SELECT event_id FROM webhook_events WHERE event_id = ?").get(eventId);
+    return await withWriteTransaction(async (db) => {
+      const existing = await db.get("SELECT event_id FROM webhook_events WHERE event_id = ?", [eventId]);
       if (existing) {
         return false;
       }
-      db.prepare("INSERT INTO webhook_events (event_id, processed_at) VALUES (?, ?)").run(
+      await db.run("INSERT INTO webhook_events (event_id, processed_at) VALUES (?, ?)", [
         eventId,
         new Date().toISOString(),
-      );
+      ]);
       return true;
     });
   } catch (error) {

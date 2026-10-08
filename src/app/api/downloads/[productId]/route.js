@@ -18,7 +18,7 @@ export async function GET(_request, { params }) {
 
   const cookieStore = await cookies();
   const token = cookieStore.get(DOWNLOAD_COOKIE)?.value;
-  const order = getPaidOrderByToken(token);
+  const order = await getPaidOrderByToken(token);
   const ownsProduct = order?.items?.some((item) => item.id === productId);
 
   if (!ownsProduct) {

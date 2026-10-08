@@ -167,8 +167,8 @@ test("checkout price comes from the catalogue, not the request", () => {
   );
 });
 
-test("orders persist in sqlite and duplicate webhook events are ignored", () => {
-  insertPendingOrder({
+test("orders persist in sqlite and duplicate webhook events are ignored", async () => {
+  await insertPendingOrder({
     id: expected.localOrderId,
     razorpayOrderId: expected.razorpayOrderId,
     amountPaise: expected.amountPaise,
@@ -180,7 +180,7 @@ test("orders persist in sqlite and duplicate webhook events are ignored", () => 
   });
 
   assert.equal(
-    markOrderPaid({
+    await markOrderPaid({
       razorpayOrderId: expected.razorpayOrderId,
       paymentId: expected.paymentId,
       paidAt: new Date().toISOString(),
@@ -188,7 +188,7 @@ test("orders persist in sqlite and duplicate webhook events are ignored", () => 
     "paid",
   );
   assert.equal(
-    markOrderPaid({
+    await markOrderPaid({
       razorpayOrderId: expected.razorpayOrderId,
       paymentId: expected.paymentId,
       paidAt: new Date().toISOString(),
@@ -196,7 +196,7 @@ test("orders persist in sqlite and duplicate webhook events are ignored", () => 
     "already_paid",
   );
   assert.equal(
-    markOrderPaid({
+    await markOrderPaid({
       razorpayOrderId: expected.razorpayOrderId,
       paymentId: "pay_other",
       paidAt: new Date().toISOString(),
@@ -204,17 +204,17 @@ test("orders persist in sqlite and duplicate webhook events are ignored", () => 
     "conflict",
   );
 
-  const issued = issueDownloadToken(expected.localOrderId);
+  const issued = await issueDownloadToken(expected.localOrderId);
   assert.equal(typeof issued.token, "string");
   assert.equal(issued.token.includes(" "), false);
-  const paid = getPaidOrderByToken(issued.token);
+  const paid = await getPaidOrderByToken(issued.token);
   assert.equal(paid.paymentId, expected.paymentId);
   assert.equal(Object.hasOwn(paid, "downloadToken"), false);
-  assert.equal(getPaidOrderByToken("not-a-real-token-value-with-enough-length"), null);
+  assert.equal(await getPaidOrderByToken("not-a-real-token-value-with-enough-length"), null);
 
-  assert.equal(recordWebhookEvent("evt_1"), true);
-  assert.equal(recordWebhookEvent("evt_1"), false);
-  assert.equal(hasWebhookEvent("evt_1"), true);
+  assert.equal(await recordWebhookEvent("evt_1"), true);
+  assert.equal(await recordWebhookEvent("evt_1"), false);
+  assert.equal(await hasWebhookEvent("evt_1"), true);
 });
 
 test.after(() => {

@@ -22,7 +22,7 @@ export async function POST(request) {
     return NextResponse.json({ error: "The payment could not be verified." }, { status: 400 });
   }
 
-  const order = getOrderByRazorpayOrderId(orderId);
+  const order = await getOrderByRazorpayOrderId(orderId);
   if (!order) {
     return NextResponse.json({ error: "The payment could not be verified." }, { status: 400 });
   }
@@ -43,7 +43,7 @@ export async function POST(request) {
     );
   }
 
-  const paid = markOrderPaid({
+  const paid = await markOrderPaid({
     razorpayOrderId: order.razorpayOrderId,
     paymentId,
     paidAt: new Date().toISOString(),
@@ -53,7 +53,7 @@ export async function POST(request) {
     return NextResponse.json({ error: "The payment could not be recorded." }, { status: 409 });
   }
 
-  const issued = issueDownloadToken(order.id);
+  const issued = await issueDownloadToken(order.id);
   if (!issued) {
     return NextResponse.json({ error: "The download could not be prepared." }, { status: 500 });
   }

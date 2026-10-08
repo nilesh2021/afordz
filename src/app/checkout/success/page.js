@@ -73,7 +73,7 @@ export default async function CheckoutSuccessPage({ searchParams }) {
   const query = await searchParams;
   const errorCode = typeof query.error === "string" ? query.error : "";
   const cookieStore = await cookies();
-  const order = getPaidOrderByToken(cookieStore.get(DOWNLOAD_COOKIE)?.value);
+  const order = await getPaidOrderByToken(cookieStore.get(DOWNLOAD_COOKIE)?.value);
 
   const message =
     errorCode === "unavailable"

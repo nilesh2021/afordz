@@ -1,6 +1,8 @@
 import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { buildCheckoutOrder } from "@/lib/checkout-order";
+import { ensureOrderDatabase } from "@/lib/db";
+import { logOrderStoreError } from "@/lib/order-db-log";
 import { insertPendingOrder } from "@/lib/orders";
 import { createRazorpayOrder } from "@/lib/razorpay";
 
@@ -41,6 +43,25 @@ export async function POST(request) {
     return NextResponse.json({ error: checkout.error }, { status: 400 });
   }
 
+  try {
+    await ensureOrderDatabase();
+  } catch (error) {
+    logOrderStoreError("ensure", error);
+    if (error?.code === "ORDER_DB_UNCONFIGURED") {
+      return NextResponse.json(
+        {
+          error:
+            "Checkout is temporarily unavailable. Configure persistent order storage for this deployment.",
+        },
+        { status: 503 },
+      );
+    }
+    return NextResponse.json(
+      { error: "The order could not be saved. Nothing was charged." },
+      { status: 500 },
+    );
+  }
+
   const localOrderId = randomUUID();
   const created = await createRazorpayOrder({
     amountPaise: checkout.amountPaise,
@@ -53,7 +74,7 @@ export async function POST(request) {
   }
 
   try {
-    insertPendingOrder({
+    await insertPendingOrder({
       id: localOrderId,
       razorpayOrderId: created.razorpayOrderId,
       amountPaise: checkout.amountPaise,
@@ -63,7 +84,8 @@ export async function POST(request) {
       items: checkout.items,
       createdAt: new Date().toISOString(),
     });
-  } catch {
+  } catch (error) {
+    logOrderStoreError("insert_pending", error);
     return NextResponse.json(
       { error: "The order could not be saved. Nothing was charged." },
       { status: 500 },
