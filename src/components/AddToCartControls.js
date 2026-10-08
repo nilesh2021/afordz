@@ -54,7 +54,7 @@ export default function AddToCartControls({ product }) {
             : "One digital licence per order.")}
       </p>
       <p className="text-sm leading-6 text-zinc-600">
-        Adding this licence does not download the archive. The file is released only after the server confirms a captured test payment.
+        Adding this licence does not download the archive. The file is released only after the server confirms a captured payment.
       </p>
     </div>
   );

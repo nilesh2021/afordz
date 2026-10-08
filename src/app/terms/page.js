@@ -16,9 +16,9 @@ export default function TermsPage() {
           Afordz currently lists one digital product, 500 Bootstrap 5 and 500 Tailwind HTML Templates. The product page describes the 1,000 single HTML files in the download. Licence and support text stay drafts until you replace them.
         </p>
       </DraftSection>
-      <DraftSection title="Test checkout">
+      <DraftSection title="Checkout">
         <p>
-          Checkout can open a Razorpay test payment. It does not accept live charges. A download is released only after this server confirms that Razorpay captured the payment for the same order, amount, and INR currency. The download expires. These draft terms are not a licence to the template files.
+          Checkout opens a Razorpay payment for the catalogue amount in INR. A download is released only after this server confirms that Razorpay captured the payment for the same order, amount, and INR currency. The download expires. These draft terms are not a licence to the template files.
         </p>
       </DraftSection>
       <DraftSection title="Licence">

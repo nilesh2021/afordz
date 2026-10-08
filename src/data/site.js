@@ -63,8 +63,8 @@ export const downloadSteps = [
     body: "Add the bundle to the cart. The cart keeps a single digital licence and will not add a second copy.",
   },
   {
-    title: "Pay in Razorpay test mode",
-    body: "Checkout asks for a name and an email address. Card and UPI details are entered on Razorpay. Live keys are rejected.",
+    title: "Pay with Razorpay",
+    body: "Checkout asks for a name and an email address. Card and UPI details are entered on Razorpay.",
   },
   {
     title: "Download after a captured payment",
@@ -73,7 +73,7 @@ export const downloadSteps = [
 ];
 
 export const downloadNote =
-  "A download is issued only after the server confirms a captured Razorpay test payment. The paid archive stays out of the public folder, and the download expires.";
+  "A download is issued only after the server confirms a captured Razorpay payment. The paid archive stays out of the public folder, and the download expires.";
 
 export const faqs = [
   {
@@ -86,7 +86,7 @@ export const faqs = [
     id: "delivery",
     question: "How will I receive the files?",
     answer:
-      "After Razorpay reports a captured test payment, the server checks the order id, amount, and INR currency. A matching order then gets a private download that expires in 48 hours. Live payments are not enabled.",
+      "After Razorpay reports a captured payment, the server checks the order id, amount, and INR currency. A matching order then gets a private download that expires in 48 hours.",
   },
   {
     id: "cart-limit",
@@ -98,7 +98,7 @@ export const faqs = [
     id: "payment",
     question: "Is checkout a live payment?",
     answer:
-      "No. Checkout uses Razorpay test mode. Live keys are rejected, so a test payment does not charge a real card. A download is created only after the server confirms the payment was captured.",
+      "Yes, when the store is using Razorpay live keys. Card and UPI details are entered on Razorpay. A download is created only after the server confirms the payment was captured for that order, amount, and INR.",
   },
   {
     id: "refunds",

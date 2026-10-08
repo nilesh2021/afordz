@@ -2,7 +2,7 @@ import CartView from "@/components/CartView";
 
 export const metadata = {
   title: "Cart",
-  description: "Review the digital licence in your Afordz cart before Razorpay test checkout.",
+  description: "Review the digital licence in your Afordz cart before Razorpay checkout.",
 };
 
 export default function CartPage() {

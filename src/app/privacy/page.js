@@ -3,7 +3,7 @@ import { site } from "@/data/site";
 
 export const metadata = {
   title: "Privacy",
-  description: "Draft privacy note for Afordz checkout, including the Razorpay test payment.",
+  description: "Draft privacy note for Afordz checkout, including the Razorpay payment.",
 };
 
 export default function PrivacyPage() {
@@ -22,7 +22,7 @@ export default function PrivacyPage() {
       </DraftSection>
       <DraftSection title="Payments">
         <p>
-          Card numbers, UPI ids, and bank details are entered on Razorpay, not on this site. Checkout is limited to Razorpay test keys. This draft does not authorise selling or sharing personal information.
+          Card numbers, UPI ids, and bank details are entered on Razorpay, not on this site. This draft does not authorise selling or sharing personal information.
         </p>
       </DraftSection>
       <DraftSection title="Contact">

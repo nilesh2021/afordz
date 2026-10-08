@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Checkout receipt",
-  description: "Receipt for an Afordz Razorpay test payment, with a time-limited download.",
+  description: "Receipt for an Afordz Razorpay payment, with a time-limited download.",
 };
 
 function formatExpiry(iso) {
@@ -23,9 +23,9 @@ function formatExpiry(iso) {
 function RecoveryForm({ message }) {
   return (
     <form method="post" action="/api/orders/recover" className="rounded-3xl border border-zinc-200 bg-white p-6 sm:p-8">
-      <h2 className="text-xl font-semibold text-zinc-950">Retrieve a test download</h2>
+      <h2 className="text-xl font-semibold text-zinc-950">Retrieve a download</h2>
       <p className="mt-2 text-sm leading-6 text-zinc-600">
-        Use the email from checkout and the Razorpay payment id (it starts with pay_). The server checks that the test payment was captured before it issues a new 48-hour download.
+        Use the email from checkout and the Razorpay payment id (it starts with pay_). The server checks that the payment was captured before it issues a new 48-hour download.
       </p>
       {message ? (
         <p role="alert" className="mt-4 text-sm font-medium text-red-800">
@@ -79,12 +79,12 @@ export default async function CheckoutSuccessPage({ searchParams }) {
     errorCode === "unavailable"
       ? "Payment confirmation is unavailable right now. Try again shortly."
       : errorCode === "unmatched"
-        ? "No captured test payment matched those details."
+        ? "No captured payment matched those details."
         : "";
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
-      <p className="text-sm font-semibold text-amber-950">Razorpay test mode</p>
+      <p className="text-sm font-semibold text-amber-950">Razorpay</p>
       <h1 className="mt-2 text-4xl font-semibold tracking-tight text-zinc-950">Receipt</h1>
 
       {order ? (
@@ -93,7 +93,7 @@ export default async function CheckoutSuccessPage({ searchParams }) {
           <div className="rounded-3xl border border-zinc-200 bg-white p-6 sm:p-8">
             <h2 className="text-2xl font-semibold text-zinc-950">Payment confirmed</h2>
             <p className="mt-3 text-base leading-7 text-zinc-700">
-              {order.customerName} ({order.customerEmail}). The server confirmed a captured test payment of {formatInr(order.amountPaise / 100)} INR.
+              {order.customerName} ({order.customerEmail}). The server confirmed a captured payment of {formatInr(order.amountPaise / 100)} INR.
             </p>
             <p className="mt-3 text-sm leading-6 text-zinc-600">
               This download expires at {formatExpiry(order.downloadExpiresAt)} IST. It is not a public file link.

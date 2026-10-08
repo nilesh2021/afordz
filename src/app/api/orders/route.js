@@ -8,22 +8,16 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 function paymentError(code) {
-  if (code === "live_disabled") {
-    return NextResponse.json(
-      { error: "Live payments are disabled. Add a Razorpay test key." },
-      { status: 403 },
-    );
-  }
   if (code === "not_configured") {
     return NextResponse.json(
-      { error: "Payments are not configured. Add Razorpay test keys." },
+      { error: "Payments are not configured. Add Razorpay keys." },
       { status: 503 },
     );
   }
   if (code === "auth_failed") {
     return NextResponse.json(
       {
-        error: "Razorpay test keys were rejected. Check Key id and Key secret in .env.local.",
+        error: "Razorpay keys were rejected. Check Key id and Key secret.",
       },
       { status: 503 },
     );

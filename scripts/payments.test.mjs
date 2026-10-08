@@ -12,7 +12,7 @@ process.env.RAZORPAY_KEY_SECRET = "test_secret_value";
 process.env.RAZORPAY_WEBHOOK_SECRET = "hook_secret";
 
 const { assessCapturedPayment } = await import("../src/lib/payment-check.js");
-const { getTestCredentials, verifyPaymentSignature, verifyWebhookSignature } = await import(
+const { getRazorpayCredentials, verifyPaymentSignature, verifyWebhookSignature } = await import(
   "../src/lib/razorpay.js"
 );
 const { buildCheckoutOrder } = await import("../src/lib/checkout-order.js");
@@ -105,23 +105,27 @@ test("invalid or placeholder test credentials are rejected", () => {
 
   process.env.RAZORPAY_KEY_ID = "rzp_test_";
   process.env.RAZORPAY_KEY_SECRET = "validsecret1";
-  assert.equal(getTestCredentials().code, "not_configured");
+  assert.equal(getRazorpayCredentials().code, "not_configured");
 
   process.env.RAZORPAY_KEY_ID = "rzp_test_example1234";
   process.env.RAZORPAY_KEY_SECRET = "rzp_test_looksLikeKeyId";
-  assert.equal(getTestCredentials().code, "not_configured");
+  assert.equal(getRazorpayCredentials().code, "not_configured");
 
   process.env.RAZORPAY_KEY_ID = savedId;
   process.env.RAZORPAY_KEY_SECRET = savedSecret;
-  assert.equal(getTestCredentials().ok, true);
+  assert.equal(getRazorpayCredentials().ok, true);
 });
 
-test("live keys are rejected and webhook signatures use the raw body", () => {
-  assert.equal(getTestCredentials().ok, true);
+test("live keys are accepted and webhook signatures use the raw body", () => {
+  assert.equal(getRazorpayCredentials().ok, true);
+  assert.equal(getRazorpayCredentials().live, false);
 
   const previous = process.env.RAZORPAY_KEY_ID;
+  process.env.RAZORPAY_KEY_ID = "rzp_live_example1234";
+  assert.equal(getRazorpayCredentials().ok, true);
+  assert.equal(getRazorpayCredentials().live, true);
   process.env.RAZORPAY_KEY_ID = "rzp_live_secret";
-  assert.equal(getTestCredentials().code, "live_disabled");
+  assert.equal(getRazorpayCredentials().code, "not_configured");
   assert.equal(verifyWebhookSignature("{}", "abc"), false);
   process.env.RAZORPAY_KEY_ID = previous;
 

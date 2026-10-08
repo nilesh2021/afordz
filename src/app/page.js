@@ -116,7 +116,7 @@ export default function HomePage() {
               Afordz is a digital catalogue of website resources. Prices are listed in Indian rupees. The shop currently lists an HTML website templates bundle, sold as a single digital licence.
             </p>
             <p className="mt-4 max-w-xl text-base leading-7 text-zinc-700">
-              The product page marks unconfirmed details as placeholders. Afordz checkout uses Razorpay in test mode and delivers a file only after the server confirms the captured payment. Partner offers are checked out with the vendor.
+              The product page marks unconfirmed details as placeholders. Afordz checkout uses Razorpay and delivers a file only after the server confirms the captured payment. Partner offers are checked out with the vendor.
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
@@ -189,7 +189,7 @@ export default function HomePage() {
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-indigo-700">Process</p>
           <h2 className="mt-3 font-display text-4xl tracking-tight text-zinc-950 sm:text-5xl">How an order works</h2>
           <p className="mt-4 max-w-2xl text-sm leading-6 text-zinc-600">
-            Three steps from the cart to a test download. Live payments stay off.
+            Three steps from the cart to a download.
           </p>
           <ol className="mt-10 grid gap-px overflow-hidden rounded-[1.75rem] border border-zinc-950/10 bg-zinc-950/10 md:grid-cols-3">
             {downloadSteps.map((step, index) => (
@@ -208,7 +208,7 @@ export default function HomePage() {
           <div className="lg:sticky lg:top-28">
             <h2 className="font-display text-4xl tracking-tight text-zinc-950 sm:text-5xl">FAQ</h2>
             <p className="mt-4 max-w-xs text-sm leading-6 text-zinc-600">
-              Short answers about the catalogue, delivery, and test checkout.
+              Short answers about the catalogue, delivery, and checkout.
             </p>
           </div>
           <FaqAccordion items={faqs} />

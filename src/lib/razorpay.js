@@ -1,11 +1,10 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { assessCapturedPayment } from "./payment-check.js";
 
-const TEST_KEY_PREFIX = "rzp_test_";
-const TEST_KEY_ID_PATTERN = /^rzp_test_[A-Za-z0-9]{8,}$/;
+const KEY_ID_PATTERN = /^rzp_(test|live)_[A-Za-z0-9]{8,}$/;
 const KEY_ID_IN_SECRET_PATTERN = /^rzp_(test|live)_/;
 
-export function getTestCredentials() {
+export function getRazorpayCredentials() {
   const keyId = process.env.RAZORPAY_KEY_ID?.trim() ?? "";
   const keySecret = process.env.RAZORPAY_KEY_SECRET?.trim() ?? "";
 
@@ -13,19 +12,19 @@ export function getTestCredentials() {
     return { ok: false, code: "not_configured" };
   }
 
-  if (!keyId.startsWith(TEST_KEY_PREFIX)) {
-    return { ok: false, code: "live_disabled" };
-  }
-
   if (
-    !TEST_KEY_ID_PATTERN.test(keyId) ||
+    !KEY_ID_PATTERN.test(keyId) ||
     KEY_ID_IN_SECRET_PATTERN.test(keySecret) ||
     keySecret.length < 8
   ) {
     return { ok: false, code: "not_configured" };
   }
 
-  return { ok: true, keyId, keySecret };
+  return { ok: true, keyId, keySecret, live: keyId.startsWith("rzp_live_") };
+}
+
+export function getTestCredentials() {
+  return getRazorpayCredentials();
 }
 
 function authHeader(keyId, keySecret) {
@@ -45,7 +44,7 @@ function safeEqualHex(expected, actual) {
 }
 
 export function verifyPaymentSignature({ orderId, paymentId, signature }) {
-  const creds = getTestCredentials();
+  const creds = getRazorpayCredentials();
   if (!creds.ok) {
     return false;
   }
@@ -55,7 +54,7 @@ export function verifyPaymentSignature({ orderId, paymentId, signature }) {
 
 export function verifyWebhookSignature(rawBody, signatureHeader) {
   const secret = process.env.RAZORPAY_WEBHOOK_SECRET?.trim() ?? "";
-  const creds = getTestCredentials();
+  const creds = getRazorpayCredentials();
   if (!secret || !creds.ok || typeof rawBody !== "string" || !signatureHeader) {
     return false;
   }
@@ -64,7 +63,7 @@ export function verifyWebhookSignature(rawBody, signatureHeader) {
 }
 
 async function razorpayRequest(path, { method = "GET", body } = {}) {
-  const creds = getTestCredentials();
+  const creds = getRazorpayCredentials();
   if (!creds.ok) {
     return { ok: false, code: creds.code };
   }

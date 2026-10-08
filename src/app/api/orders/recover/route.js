@@ -6,7 +6,7 @@ import {
   issueDownloadToken,
   markOrderPaid,
 } from "@/lib/orders";
-import { confirmCapturedPayment, fetchPayment, getTestCredentials } from "@/lib/razorpay";
+import { confirmCapturedPayment, fetchPayment, getRazorpayCredentials } from "@/lib/razorpay";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -20,7 +20,7 @@ function redirectTo(request, query) {
 }
 
 export async function POST(request) {
-  const creds = getTestCredentials();
+  const creds = getRazorpayCredentials();
   if (!creds.ok) {
     return redirectTo(request, "unavailable");
   }

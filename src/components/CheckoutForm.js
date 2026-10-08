@@ -108,7 +108,7 @@ export default function CheckoutForm() {
         amount: orderPayload.amount,
         currency: orderPayload.currency,
         name: "Afordz",
-        description: "Digital licence (test mode)",
+        description: "Digital licence",
         order_id: orderPayload.razorpayOrderId,
         prefill: {
           name: values.name.trim(),
@@ -168,17 +168,17 @@ export default function CheckoutForm() {
     <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)]">
       <div className="space-y-6">
         <div className="rounded-3xl border border-amber-300 bg-amber-50 p-6">
-          <p className="text-sm font-semibold tracking-wide text-amber-950">Razorpay test mode</p>
-          <h2 className="mt-2 text-xl font-semibold text-zinc-950">Live payments are off</h2>
+          <p className="text-sm font-semibold tracking-wide text-amber-950">Razorpay</p>
+          <h2 className="mt-2 text-xl font-semibold text-zinc-950">Pay on Razorpay</h2>
           <p className="mt-3 text-sm leading-6 text-zinc-800">
-            Card, UPI, and bank details are entered on Razorpay, not on this page. This store accepts Razorpay test keys only. A download is created after the server confirms the payment was captured for this order, amount, and INR.
+            Card, UPI, and bank details are entered on Razorpay, not on this page. A download is created after the server confirms the payment was captured for this order, amount, and INR.
           </p>
         </div>
 
         <form noValidate onSubmit={handleSubmit} className="rounded-3xl border border-zinc-200 bg-white p-6 sm:p-8">
           <h2 className="text-xl font-semibold text-zinc-950">Your details</h2>
           <p className="mt-2 text-sm leading-6 text-zinc-600">
-            Name and email are sent to this server and to Razorpay so the test checkout can open. They are stored with the order.
+            Name and email are sent to this server and to Razorpay so checkout can open. They are stored with the order.
           </p>
 
           <div className="mt-6 space-y-5">
@@ -267,7 +267,7 @@ export default function CheckoutForm() {
         ) : null}
         <p className="mt-4 text-sm leading-6 text-zinc-600">
           <a href="/checkout/success" className="font-semibold text-indigo-800 underline decoration-indigo-300 underline-offset-4">
-            Retrieve a test download
+            Retrieve a download
           </a>
         </p>
       </aside>
