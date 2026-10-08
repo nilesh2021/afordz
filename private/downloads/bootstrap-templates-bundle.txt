@@ -1,0 +1,10 @@
+Afordz — Bootstrap 5 and Tailwind HTML templates
+
+This file is the paid download placeholder for product id bootstrap-templates-bundle.
+
+Replace this file by adding private/downloads/bootstrap-templates-bundle.zip
+(the archive of the 1,000 HTML pages) and redeploying. Until that zip is on
+the server, buyers receive this text file instead of the templates.
+
+The zip must not be placed in /public. Checkout only serves it after the
+server confirms a captured Razorpay payment for this order.

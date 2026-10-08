@@ -152,11 +152,11 @@ test("checkout price comes from the catalogue, not the request", () => {
     name: "Test Buyer",
     email: "buyer@example.com",
     productIds: ["bootstrap-templates-bundle"],
-    amount: 1,
-    priceInr: 1,
+    amount: 999999,
+    priceInr: 999999,
   });
   assert.equal(priced.ok, true);
-  assert.equal(priced.amountPaise, 14900);
+  assert.equal(priced.amountPaise, 100);
   assert.equal(
     buildCheckoutOrder({
       name: "Test Buyer",

@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  outputFileTracingIncludes: {
+    "/api/downloads/[productId]": ["./private/downloads/**"],
+    "/checkout/success": ["./private/downloads/**"],
+  },
 };
 
 export default nextConfig;

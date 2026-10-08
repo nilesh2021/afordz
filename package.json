@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:payments": "node --test scripts/payments.test.mjs scripts/order-store.test.mjs",
+    "test:payments": "node --test scripts/payments.test.mjs scripts/order-store.test.mjs scripts/fulfillment.test.mjs",
     "health:orders": "node scripts/order-store-health.mjs"
   },
   "engines": {

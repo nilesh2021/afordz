@@ -1,20 +1,26 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const ROOT = path.join(process.cwd(), "private", "downloads");
-
 const PRODUCTS = {
   "bootstrap-templates-bundle": {
-    placeholderName: "bootstrap-templates-bundle.txt",
-    archiveName: "bootstrap-templates-bundle.zip",
+    archivePath: path.join(process.cwd(), "private", "downloads", "bootstrap-templates-bundle.zip"),
+    placeholderPath: path.join(
+      process.cwd(),
+      "private",
+      "downloads",
+      "bootstrap-templates-bundle.txt",
+    ),
     downloadName: "afordz-bootstrap-templates-bundle",
   },
 };
 
-function insideRoot(filePath) {
-  const root = path.resolve(ROOT);
+function safeExisting(filePath) {
+  const root = path.resolve(process.cwd(), "private", "downloads");
   const resolved = path.resolve(filePath);
-  return resolved === root || resolved.startsWith(`${root}${path.sep}`);
+  if (resolved !== root && !resolved.startsWith(`${root}${path.sep}`)) {
+    return false;
+  }
+  return fs.existsSync(filePath);
 }
 
 export function resolveDownload(productId) {
@@ -23,15 +29,12 @@ export function resolveDownload(productId) {
     return null;
   }
 
-  const archivePath = path.join(ROOT, entry.archiveName);
-  const placeholderPath = path.join(ROOT, entry.placeholderName);
-  const filePath = fs.existsSync(archivePath) ? archivePath : placeholderPath;
-
-  if (!insideRoot(filePath) || !fs.existsSync(filePath)) {
+  const isZip = safeExisting(entry.archivePath);
+  const filePath = isZip ? entry.archivePath : safeExisting(entry.placeholderPath) ? entry.placeholderPath : null;
+  if (!filePath) {
     return null;
   }
 
-  const isZip = filePath === archivePath;
   return {
     filePath,
     downloadName: `${entry.downloadName}${isZip ? ".zip" : ".txt"}`,

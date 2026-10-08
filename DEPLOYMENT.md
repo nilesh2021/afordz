@@ -100,6 +100,23 @@ Requires **Node.js 22.11+** for built-in `node:sqlite` (see `engines` in `packag
 
 Back up `orders.sqlite` (and `-wal` / `-shm` if present) with your normal volume snapshots.
 
+## Paid download file
+
+The receipt looks for, in order:
+
+1. `private/downloads/bootstrap-templates-bundle.zip` (the 1,000 HTML pages)
+2. `private/downloads/bootstrap-templates-bundle.txt` (committed placeholder)
+
+Keep archives out of `/public`. Zip files in `private/downloads/` stay gitignored. To ship the real bundle:
+
+```bash
+# copy the archive into private/downloads/bootstrap-templates-bundle.zip
+git add -f private/downloads/bootstrap-templates-bundle.zip
+git commit -m "Add paid template archive"
+```
+
+Then redeploy. `next.config.mjs` includes that folder in the Vercel function bundle for `/api/downloads` and `/checkout/success`.
+
 ## Local development
 
 - Copy `.env.example` to `.env.local`.

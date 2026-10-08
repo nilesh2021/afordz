@@ -23,3 +23,5 @@ npm run health:orders
 Vercel cannot write a local SQLite file. Configure **Turso** and redeploy — full steps in **[DEPLOYMENT.md](./DEPLOYMENT.md)**.
 
 Quick check after deploy: `GET /api/orders/health` should return `ok: true` and `phase: "ready"`. If it returns `code: "BLOCKED"`, Turso rejected the SQL — see **DEPLOYMENT.md**.
+
+Paid files live in `private/downloads/` (not `/public`). A placeholder `.txt` is committed so the receipt can show **Download**. Replace it with `bootstrap-templates-bundle.zip` (force-add; zips stay gitignored) and redeploy. See **DEPLOYMENT.md**.
