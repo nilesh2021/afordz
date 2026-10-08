@@ -29,36 +29,36 @@ export default function HomePage() {
   return (
     <>
       <section className="px-4 pt-6 sm:px-6 sm:pt-10">
-        <div className="relative mx-auto grid w-full max-w-6xl items-end gap-10 overflow-hidden rounded-[2.5rem] border border-zinc-950/10 bg-zinc-950 px-6 py-12 text-white shadow-[0_30px_80px_rgb(20_18_28/0.18)] sm:px-10 sm:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-8 lg:px-14 lg:py-16">
+        <div className="relative mx-auto grid w-full max-w-6xl items-end gap-10 overflow-hidden rounded-[2.5rem] border border-zinc-950/10 bg-white px-6 py-12 shadow-[0_30px_80px_rgb(20_18_28/0.08)] sm:px-10 sm:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-8 lg:px-14 lg:py-16">
           <div
-            className="pointer-events-none absolute -left-16 -top-24 size-72 rounded-full bg-indigo-500/40 blur-3xl"
+            className="pointer-events-none absolute -left-16 -top-24 size-72 rounded-full bg-indigo-200/70 blur-3xl"
             aria-hidden="true"
           />
           <div
-            className="pointer-events-none absolute -bottom-24 right-0 size-72 rounded-full bg-fuchsia-400/20 blur-3xl"
+            className="pointer-events-none absolute -bottom-24 right-0 size-72 rounded-full bg-amber-100 blur-3xl"
             aria-hidden="true"
           />
           <div className="relative">
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-indigo-100">
+            <p className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-indigo-800">
               Website resources · INR
             </p>
-            <h1 className="mt-6 max-w-xl font-display text-5xl leading-[0.95] tracking-tight sm:text-6xl lg:text-[4.5rem]">
+            <h1 className="mt-6 max-w-xl font-display text-5xl leading-[0.95] tracking-tight text-zinc-950 sm:text-6xl lg:text-[4.5rem]">
               Digital resources for your{" "}
-              <em className="not-italic text-indigo-300">next big idea</em>
+              <em className="not-italic text-indigo-700">next big idea</em>
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-7 text-zinc-300 sm:text-lg">
+            <p className="mt-6 max-w-xl text-base leading-7 text-zinc-600 sm:text-lg">
               Browse the catalogue by category, format, compatible tool, and price. Open an Afordz listing before you add one digital licence to the cart. Partner offers open on the vendor website.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Button href="/shop">Shop the catalogue</Button>
-              <Button href="/contact" variant="secondary" className="border-white/20 bg-white/10 text-white hover:border-white hover:bg-white hover:text-zinc-950">
+              <Button href="/contact" variant="secondary">
                 Contact us
               </Button>
             </div>
           </div>
 
           <div className="relative">
-            <div className="hero-stage relative rounded-[1.75rem] border border-white/10 bg-white/8 p-3 shadow-[0_24px_50px_rgb(0_0_0/0.35)] backdrop-blur-md sm:p-4">
+            <div className="hero-stage relative rounded-[1.75rem] border border-indigo-100 bg-indigo-50/70 p-3 shadow-[0_24px_50px_rgb(67_56_202/0.08)] sm:p-4">
               <div className="overflow-hidden rounded-2xl">
                 <Image
                   src="/home/workspace.jpg"
@@ -89,12 +89,12 @@ export default function HomePage() {
                     </span>
                   ) : null}
                   {featured.framework ? (
-                    <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold text-white">
+                    <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-zinc-700">
                       {featured.framework}
                     </span>
                   ) : null}
                   {hasVerifiedPrice(featured) ? (
-                    <span className="rounded-full bg-indigo-400 px-3 py-1 text-xs font-semibold text-zinc-950">
+                    <span className="rounded-full bg-indigo-700 px-3 py-1 text-xs font-semibold text-white">
                       {formatInr(featured.priceInr)}
                     </span>
                   ) : null}
@@ -191,7 +191,7 @@ export default function HomePage() {
           <p className="mt-4 max-w-2xl text-sm leading-6 text-zinc-600">
             Three steps from the cart to a download.
           </p>
-          <ol className="mt-10 grid gap-px overflow-hidden rounded-[1.75rem] border border-zinc-950/10 bg-zinc-950/10 md:grid-cols-3">
+          <ol className="mt-10 grid gap-px overflow-hidden rounded-[1.75rem] border border-zinc-200 bg-zinc-200 md:grid-cols-3">
             {downloadSteps.map((step, index) => (
               <li key={step.title} className="bg-[#f7f4ef] p-6 sm:p-8">
                 <p className="font-display text-5xl text-indigo-700">{String(index + 1).padStart(2, "0")}</p>

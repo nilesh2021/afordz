@@ -1,8 +1,7 @@
 export const site = {
   name: "Afordz",
   tagline: "Smart Finds. Great Value.",
-  email: "hello@afordz.example",
-  phone: "+91 00000 00000",
+  email: "hello@afordz.in",
   emailNote: "Placeholder address. Replace it with a mailbox you control.",
   phoneNote: "Placeholder number. Replace it with a phone you answer.",
 };

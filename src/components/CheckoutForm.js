@@ -239,36 +239,51 @@ export default function CheckoutForm() {
       </form>
 
       <aside className="lg:sticky lg:top-24">
-        <div className="overflow-hidden rounded-[2rem] border border-zinc-900/10 bg-zinc-950 text-white shadow-[0_24px_60px_rgb(20_18_28/0.18)]">
+        <div className="overflow-hidden rounded-[2rem] border border-zinc-900/10 bg-white shadow-[0_24px_60px_rgb(20_18_28/0.08)]">
           <div className="p-6 sm:p-7">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-indigo-200">Order</p>
-            <h2 className="mt-2 font-display text-2xl tracking-tight">Summary</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-indigo-700">Order</p>
+            <h2 className="mt-2 font-display text-2xl tracking-tight text-zinc-950">Summary</h2>
             <ul className="mt-6 space-y-5">
               {items.map((item) => (
                 <li key={item.id} className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="font-medium leading-6">{item.name}</p>
-                    <p className="mt-1 text-sm text-zinc-400">One digital licence</p>
+                    <p className="font-medium leading-6 text-zinc-950">{item.name}</p>
+                    <p className="mt-1 text-sm text-zinc-500">One digital licence</p>
                   </div>
-                  <p className="shrink-0 font-semibold">{formatInr(item.priceInr)}</p>
+                  <p className="shrink-0 font-semibold text-zinc-950">{formatInr(item.priceInr)}</p>
                 </li>
               ))}
             </ul>
-            <div className="mt-6 flex items-end justify-between border-t border-white/10 pt-5">
-              <span className="text-sm text-zinc-400">Total, INR</span>
-              <span className="font-display text-3xl tracking-tight">{formatInr(totalInr)}</span>
+            <div className="mt-6 flex items-end justify-between border-t border-zinc-200 pt-5">
+              <span className="text-sm text-zinc-500">Total, INR</span>
+              <span className="font-display text-3xl tracking-tight text-zinc-950">{formatInr(totalInr)}</span>
             </div>
           </div>
-          <div className="space-y-3 bg-white px-6 py-5 text-sm leading-6 text-zinc-600 sm:px-7">
-            <p>The server prices this order from the catalogue before it talks to Razorpay.</p>
+          <div className="space-y-4 border-t border-indigo-100 bg-indigo-50 px-6 py-5 sm:px-7">
+            <p className="text-sm leading-6 text-zinc-600">The server prices this order from the catalogue before it talks to Razorpay.</p>
             {priceIsDraft ? (
-              <p className="font-medium text-amber-950">Placeholder price. Edit it before you sell.</p>
+              <p className="text-sm font-medium text-amber-950">Placeholder price. Edit it before you sell.</p>
             ) : null}
-            <p>
-              <Link href="/checkout/success" className="font-semibold text-indigo-800 underline decoration-indigo-300 underline-offset-4 hover:decoration-indigo-800">
-                Retrieve a download
-              </Link>
-            </p>
+            <Link
+              href="/checkout/success"
+              className="flex items-center gap-3 rounded-2xl border border-indigo-200 bg-white px-4 py-3.5 shadow-sm transition hover:border-indigo-400"
+            >
+              <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-indigo-700 text-white">
+                <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden="true">
+                  <path
+                    d="M12 4v10m0 0 4-4m-4 4-4-4M5 18.5h14"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+              <span>
+                <span className="block text-sm font-semibold text-zinc-950">Retrieve a download</span>
+                <span className="mt-0.5 block text-xs leading-5 text-zinc-500">Already paid? Look it up with your payment id.</span>
+              </span>
+            </Link>
           </div>
         </div>
       </aside>
