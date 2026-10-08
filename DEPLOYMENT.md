@@ -20,12 +20,42 @@ or `EACCES` / `read-only file system` on `mkdir` / `open`.
 
 ## Production (Vercel + Turso)
 
-1. Create a [Turso](https://turso.tech) database (SQLite-compatible, persistent).
-2. In the Vercel project → **Settings → Environment Variables**, add for **Production** (and Preview if you test checkout there):
+### Turso (dashboard or CLI)
+
+**Dashboard:** create a database at [turso.tech](https://turso.tech), then copy the **libsql** URL and create an **auth token**.
+
+**CLI (optional):**
+
+```bash
+# Install: https://docs.turso.tech/cli
+turso auth login
+turso db create afordz-orders
+turso db show afordz-orders --url
+turso db tokens create afordz-orders
+```
+
+### Vercel environment variables
+
+1. In the Vercel project → **Settings → Environment Variables**, add for **Production** (and Preview if you test checkout there):
    - `TURSO_DATABASE_URL` — `libsql://…` from Turso
    - `TURSO_AUTH_TOKEN` — database token from Turso
-3. Keep existing Razorpay variables (`RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, `RAZORPAY_WEBHOOK_SECRET`, `NEXT_PUBLIC_SITE_URL`).
-4. Redeploy. On first order, the app runs the same `CREATE TABLE IF NOT EXISTS` migrations as local SQLite.
+2. Keep existing Razorpay variables (`RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, `RAZORPAY_WEBHOOK_SECRET`, `NEXT_PUBLIC_SITE_URL`).
+3. Redeploy. On first order, the app runs the same `CREATE TABLE IF NOT EXISTS` migrations as local SQLite.
+
+### Health check
+
+After deploy, open:
+
+`https://www.afordz.in/api/orders/health`
+
+- **200** `{"ok":true,"store":"turso"}` — checkout can save orders.
+- **503** `{"ok":false,"store":"unconfigured",...}` — add Turso env vars and redeploy.
+
+Locally (loads `.env.local`):
+
+```bash
+npm run health:orders
+```
 
 Orders then survive **restarts**, **redeploys**, and **cold starts** because they live in Turso, not on the function disk.
 

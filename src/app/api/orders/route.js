@@ -52,6 +52,8 @@ export async function POST(request) {
         {
           error:
             "Checkout is temporarily unavailable. Configure persistent order storage for this deployment.",
+          hint:
+            "On Vercel, add TURSO_DATABASE_URL and TURSO_AUTH_TOKEN in project settings, redeploy, then open /api/orders/health.",
         },
         { status: 503 },
       );

@@ -92,6 +92,37 @@ function getSqliteDatabase() {
 
 let tursoReady = false;
 
+/** Safe status for ops dashboards and GET /api/orders/health (no secrets or customer data). */
+export async function probeOrderStore() {
+  const store = getOrderStoreMode();
+  if (store === "unconfigured") {
+    return {
+      ok: false,
+      store,
+      code: "ORDER_DB_UNCONFIGURED",
+      fix: "set_turso_env_on_vercel",
+    };
+  }
+
+  try {
+    await ensureOrderDatabase();
+    if (store === "turso") {
+      await getTursoClient().execute("SELECT 1 AS ok");
+    } else {
+      getSqliteDatabase().prepare("SELECT 1 AS ok").get();
+    }
+    return { ok: true, store };
+  } catch (error) {
+    logOrderStoreError("probe", error);
+    return {
+      ok: false,
+      store,
+      code: typeof error?.code === "string" ? error.code : "ORDER_DB_PROBE_FAILED",
+      errno: error?.errno,
+    };
+  }
+}
+
 export async function ensureOrderDatabase() {
   assertStoreConfigured();
   const mode = getOrderStoreMode();

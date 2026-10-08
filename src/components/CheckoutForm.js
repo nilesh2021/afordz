@@ -93,11 +93,12 @@ export default function CheckoutForm() {
       });
       const orderPayload = await orderResponse.json().catch(() => ({}));
       if (!orderResponse.ok) {
-        setFormError(
+        const message =
           typeof orderPayload.error === "string"
             ? orderPayload.error
-            : "The payment order could not be created.",
-        );
+            : "The payment order could not be created.";
+        const hint = typeof orderPayload.hint === "string" ? orderPayload.hint : "";
+        setFormError(hint ? `${message} ${hint}` : message);
         setPaying(false);
         return;
       }
