@@ -4,12 +4,15 @@ import path from "node:path";
 // Turso's BLOCKED code when that protocol is rejected. Keep the serverless driver.
 import { createClient } from "@tursodatabase/serverless/compat";
 import { DatabaseSync } from "node:sqlite";
-import { blockedHint, logOrderStoreError } from "./order-db-log.js";
+import { blockedHint, logOrderStoreError, safeStatementId } from "./order-db-log.js";
 
-const SCHEMA_STATEMENTS = [
-  "PRAGMA journal_mode = WAL",
-  "PRAGMA foreign_keys = ON",
-  `CREATE TABLE IF NOT EXISTS orders (
+const SQLITE_PRAGMAS = ["PRAGMA journal_mode = WAL", "PRAGMA foreign_keys = ON"];
+
+const SCHEMA_STEPS = [
+  {
+    id: "create_orders",
+    sqlKind: "ddl",
+    sql: `CREATE TABLE IF NOT EXISTS orders (
     id TEXT PRIMARY KEY,
     razorpay_order_id TEXT NOT NULL UNIQUE,
     status TEXT NOT NULL CHECK (status IN ('pending', 'paid')),
@@ -24,15 +27,30 @@ const SCHEMA_STATEMENTS = [
     created_at TEXT NOT NULL,
     paid_at TEXT
   )`,
-  `CREATE TABLE IF NOT EXISTS webhook_events (
+  },
+  {
+    id: "create_webhook_events",
+    sqlKind: "ddl",
+    sql: `CREATE TABLE IF NOT EXISTS webhook_events (
     event_id TEXT PRIMARY KEY,
     processed_at TEXT NOT NULL
   )`,
-  `CREATE INDEX IF NOT EXISTS orders_download_token_hash
+  },
+  {
+    id: "create_index_download_token",
+    sqlKind: "ddl",
+    sql: `CREATE INDEX IF NOT EXISTS orders_download_token_hash
     ON orders (download_token_hash)`,
+  },
 ];
 
-const TURSO_SCHEMA = SCHEMA_STATEMENTS.filter((statement) => !statement.startsWith("PRAGMA"));
+function attachStatement(error, step) {
+  if (error && typeof error === "object") {
+    error.statement = step.id;
+    error.sqlKind = step.sqlKind;
+  }
+  return error;
+}
 
 const SQLITE_PATH =
   process.env.AFORDZ_DB_PATH || path.join(process.cwd(), "data", "orders.sqlite");
@@ -74,8 +92,11 @@ function assertStoreConfigured() {
 function openSqliteDatabase() {
   fs.mkdirSync(path.dirname(SQLITE_PATH), { recursive: true });
   const db = new DatabaseSync(SQLITE_PATH);
-  for (const statement of SCHEMA_STATEMENTS) {
+  for (const statement of SQLITE_PRAGMAS) {
     db.exec(statement);
+  }
+  for (const step of SCHEMA_STEPS) {
+    db.exec(step.sql);
   }
   return db;
 }
@@ -92,8 +113,12 @@ function getTursoClient() {
 
 async function initializeTurso() {
   const client = getTursoClient();
-  for (const statement of TURSO_SCHEMA) {
-    await client.execute(statement);
+  for (const step of SCHEMA_STEPS) {
+    try {
+      await client.execute(step.sql);
+    } catch (error) {
+      throw attachStatement(error, step);
+    }
   }
 }
 
@@ -121,15 +146,25 @@ async function countSchemaTables() {
 }
 
 async function verifySchemaTables() {
-  const row = await countSchemaTables();
-  const orders = Number(row?.orders_table ?? 0) === 1;
-  const webhooks = Number(row?.webhook_table ?? 0) === 1;
-  if (!orders || !webhooks) {
-    const error = new Error("Order schema was not initialized.");
-    error.code = "ORDER_DB_SCHEMA_MISSING";
+  try {
+    const row = await countSchemaTables();
+    const orders = Number(row?.orders_table ?? 0) === 1;
+    const webhooks = Number(row?.webhook_table ?? 0) === 1;
+    if (!orders || !webhooks) {
+      const error = new Error("Order schema was not initialized.");
+      error.code = "ORDER_DB_SCHEMA_MISSING";
+      error.statement = "verify_tables";
+      error.sqlKind = "read";
+      throw error;
+    }
+    return { orders, webhooks };
+  } catch (error) {
+    if (error && typeof error === "object" && !error.statement) {
+      error.statement = "verify_tables";
+      error.sqlKind = "read";
+    }
     throw error;
   }
-  return { orders, webhooks };
 }
 
 export async function ensureOrderDatabase() {
@@ -182,14 +217,20 @@ export async function probeOrderStore() {
       getSqliteDatabase().prepare("SELECT 1 AS ok").get();
     }
   } catch (error) {
-    logOrderStoreError("connect", error);
-    const code = typeof error?.code === "string" ? error.code : "ORDER_DB_CONNECT_FAILED";
+    const failed = attachStatement(
+      error instanceof Error ? error : new Error(String(error)),
+      { id: "select_1", sqlKind: "read" },
+    );
+    logOrderStoreError("connect", failed);
+    const code = typeof failed?.code === "string" ? failed.code : "ORDER_DB_CONNECT_FAILED";
     return {
       ok: false,
       store,
       phase: "connect",
       code,
-      errno: error?.errno,
+      statement: safeStatementId(failed.statement),
+      sqlKind: "read",
+      errno: failed?.errno,
       hint: code === "BLOCKED" ? blockedHint("connect") : undefined,
     };
   }
@@ -206,13 +247,16 @@ export async function probeOrderStore() {
   } catch (error) {
     logOrderStoreError("schema", error);
     const code = typeof error?.code === "string" ? error.code : "ORDER_DB_SCHEMA_FAILED";
+    const statement = safeStatementId(error.statement);
     return {
       ok: false,
       store,
       phase: "schema",
       code,
+      statement,
+      sqlKind: error.sqlKind === "read" ? "read" : "ddl",
       errno: error?.errno,
-      hint: code === "BLOCKED" ? blockedHint("schema") : undefined,
+      hint: code === "BLOCKED" ? blockedHint("schema", statement) : undefined,
     };
   }
 }

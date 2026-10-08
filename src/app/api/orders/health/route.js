@@ -25,6 +25,12 @@ export async function GET() {
   if (status.tables) {
     body.tables = status.tables;
   }
+  if (status.statement) {
+    body.statement = status.statement;
+  }
+  if (status.sqlKind) {
+    body.sqlKind = status.sqlKind;
+  }
 
   if (!status.ok) {
     body.code = status.code;
@@ -32,7 +38,7 @@ export async function GET() {
       body.fix = status.fix;
       body.hint = FIX_MESSAGES[status.fix];
     } else if (status.code === "BLOCKED") {
-      body.hint = status.hint || blockedHint(status.phase);
+      body.hint = status.hint || blockedHint(status.phase, status.statement);
     } else if (status.hint) {
       body.hint = status.hint;
     }

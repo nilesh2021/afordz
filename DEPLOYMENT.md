@@ -51,7 +51,7 @@ After deploy, open:
 
 - **200** `{"ok":true,"store":"turso","phase":"ready","tables":{"orders":true,"webhooks":true}}` — checkout can save orders. Tables flags only; no row data.
 - **503** `{"ok":false,"store":"unconfigured",...}` — add Turso env vars and redeploy.
-- **503** `{"ok":false,"store":"turso","code":"BLOCKED",...}` — Turso **rejected the SQL** (not a missing env var). See below.
+- **503** `{"ok":false,"store":"turso","phase":"schema","code":"BLOCKED","statement":"create_orders",...}` — Turso **rejected that SQL** (not a missing env var). `statement` is a fixed id (`create_orders`, `create_webhook_events`, `create_index_download_token`, `verify_tables`, `select_1`), never raw SQL or customer data.
 
 ### What `BLOCKED` means
 

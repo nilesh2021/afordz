@@ -41,12 +41,27 @@ export function describeTursoUrl(rawUrl) {
   return { urlPresent: true, urlScheme: scheme, urlHostKind: hostKind };
 }
 
+const SAFE_STATEMENT_IDS = new Set([
+  "select_1",
+  "create_orders",
+  "create_webhook_events",
+  "create_index_download_token",
+  "verify_tables",
+]);
+
+export function safeStatementId(value) {
+  return SAFE_STATEMENT_IDS.has(value) ? value : undefined;
+}
+
 export function describeOrderStoreError(phase, error) {
   const cause = error?.cause;
+  const statement = safeStatementId(error?.statement);
   return {
     phase,
     store: process.env.TURSO_DATABASE_URL ? "turso" : "sqlite",
     driver: process.env.TURSO_DATABASE_URL ? "tursodatabase-serverless" : "node-sqlite",
+    statement,
+    sqlKind: error?.sqlKind === "ddl" || error?.sqlKind === "read" ? error.sqlKind : undefined,
     name: typeof error?.name === "string" ? error.name : undefined,
     code: typeof error?.code === "string" ? error.code : undefined,
     extendedCode: typeof error?.extendedCode === "string" ? error.extendedCode : undefined,
@@ -65,9 +80,11 @@ export function logOrderStoreError(phase, error) {
   console.error("[afordz:orders]", JSON.stringify(describeOrderStoreError(phase, error)));
 }
 
-export function blockedHint(phase) {
+export function blockedHint(phase, statement) {
+  const step = safeStatementId(statement);
+  const stepText = step ? ` Statement ${step} was blocked.` : "";
   if (phase === "schema") {
-    return "Turso blocked schema setup. Use a full-access database token on a regular database (not read-only, not a schema-child). Redeploy after rotating the token.";
+    return `Turso blocked schema setup.${stepText} Use a full-access database token on a regular database (not read-only, not a schema-child). Redeploy after rotating the token.`;
   }
   if (phase === "connect") {
     return "Turso blocked the connection. Confirm TURSO_DATABASE_URL and a full-access TURSO_AUTH_TOKEN, then redeploy.";
