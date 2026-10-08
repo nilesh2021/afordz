@@ -1,8 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
-import { createClient } from "@libsql/client";
+// Turso Cloud (2026) speaks HTTP /v3. @libsql/client uses Hrana and surfaces
+// Turso's BLOCKED code when that protocol is rejected. Keep the serverless driver.
+import { createClient } from "@tursodatabase/serverless/compat";
 import { DatabaseSync } from "node:sqlite";
-import { logOrderStoreError } from "./order-db-log.js";
+import { blockedHint, logOrderStoreError } from "./order-db-log.js";
 
 const SCHEMA_STATEMENTS = [
   "PRAGMA journal_mode = WAL",
@@ -30,11 +32,21 @@ const SCHEMA_STATEMENTS = [
     ON orders (download_token_hash)`,
 ];
 
+const TURSO_SCHEMA = SCHEMA_STATEMENTS.filter((statement) => !statement.startsWith("PRAGMA"));
+
 const SQLITE_PATH =
   process.env.AFORDZ_DB_PATH || path.join(process.cwd(), "data", "orders.sqlite");
 
+function tursoUrl() {
+  return process.env.TURSO_DATABASE_URL?.trim() || "";
+}
+
+function tursoAuthToken() {
+  return process.env.TURSO_AUTH_TOKEN?.trim() || "";
+}
+
 export function getOrderStoreMode() {
-  if (process.env.TURSO_DATABASE_URL) {
+  if (tursoUrl()) {
     return "turso";
   }
   if (process.env.VERCEL) {
@@ -52,6 +64,11 @@ function assertStoreConfigured() {
     error.code = "ORDER_DB_UNCONFIGURED";
     throw error;
   }
+  if (mode === "turso" && !tursoAuthToken()) {
+    const error = new Error("TURSO_AUTH_TOKEN is missing. Add a full-access Turso database token.");
+    error.code = "ORDER_DB_TOKEN_MISSING";
+    throw error;
+  }
 }
 
 function openSqliteDatabase() {
@@ -66,8 +83,8 @@ function openSqliteDatabase() {
 function getTursoClient() {
   if (!globalThis.__afordzTursoClient) {
     globalThis.__afordzTursoClient = createClient({
-      url: process.env.TURSO_DATABASE_URL,
-      authToken: process.env.TURSO_AUTH_TOKEN,
+      url: tursoUrl(),
+      authToken: tursoAuthToken(),
     });
   }
   return globalThis.__afordzTursoClient;
@@ -75,10 +92,7 @@ function getTursoClient() {
 
 async function initializeTurso() {
   const client = getTursoClient();
-  for (const statement of SCHEMA_STATEMENTS) {
-    if (statement.startsWith("PRAGMA")) {
-      continue;
-    }
+  for (const statement of TURSO_SCHEMA) {
     await client.execute(statement);
   }
 }
@@ -92,35 +106,30 @@ function getSqliteDatabase() {
 
 let tursoReady = false;
 
-/** Safe status for ops dashboards and GET /api/orders/health (no secrets or customer data). */
-export async function probeOrderStore() {
-  const store = getOrderStoreMode();
-  if (store === "unconfigured") {
-    return {
-      ok: false,
-      store,
-      code: "ORDER_DB_UNCONFIGURED",
-      fix: "set_turso_env_on_vercel",
-    };
-  }
-
+async function countSchemaTables() {
+  const sql = (catalog) =>
+    `SELECT
+       SUM(CASE WHEN name = 'orders' THEN 1 ELSE 0 END) AS orders_table,
+       SUM(CASE WHEN name = 'webhook_events' THEN 1 ELSE 0 END) AS webhook_table
+     FROM ${catalog}
+     WHERE type = 'table' AND name IN ('orders', 'webhook_events')`;
   try {
-    await ensureOrderDatabase();
-    if (store === "turso") {
-      await getTursoClient().execute("SELECT 1 AS ok");
-    } else {
-      getSqliteDatabase().prepare("SELECT 1 AS ok").get();
-    }
-    return { ok: true, store };
-  } catch (error) {
-    logOrderStoreError("probe", error);
-    return {
-      ok: false,
-      store,
-      code: typeof error?.code === "string" ? error.code : "ORDER_DB_PROBE_FAILED",
-      errno: error?.errno,
-    };
+    return await dbGet(sql("sqlite_schema"));
+  } catch {
+    return await dbGet(sql("sqlite_master"));
   }
+}
+
+async function verifySchemaTables() {
+  const row = await countSchemaTables();
+  const orders = Number(row?.orders_table ?? 0) === 1;
+  const webhooks = Number(row?.webhook_table ?? 0) === 1;
+  if (!orders || !webhooks) {
+    const error = new Error("Order schema was not initialized.");
+    error.code = "ORDER_DB_SCHEMA_MISSING";
+    throw error;
+  }
+  return { orders, webhooks };
 }
 
 export async function ensureOrderDatabase() {
@@ -140,6 +149,71 @@ export async function ensureOrderDatabase() {
   } catch (error) {
     logOrderStoreError("ensure_sqlite", error);
     throw error;
+  }
+}
+
+/** Safe status for ops dashboards and GET /api/orders/health (no secrets or customer data). */
+export async function probeOrderStore() {
+  const store = getOrderStoreMode();
+  if (store === "unconfigured") {
+    return {
+      ok: false,
+      store,
+      phase: "unconfigured",
+      code: "ORDER_DB_UNCONFIGURED",
+      fix: "set_turso_env_on_vercel",
+    };
+  }
+
+  if (store === "turso" && !tursoAuthToken()) {
+    return {
+      ok: false,
+      store,
+      phase: "connect",
+      code: "ORDER_DB_TOKEN_MISSING",
+      fix: "set_turso_token",
+    };
+  }
+
+  try {
+    if (store === "turso") {
+      await getTursoClient().execute("SELECT 1 AS ok");
+    } else {
+      getSqliteDatabase().prepare("SELECT 1 AS ok").get();
+    }
+  } catch (error) {
+    logOrderStoreError("connect", error);
+    const code = typeof error?.code === "string" ? error.code : "ORDER_DB_CONNECT_FAILED";
+    return {
+      ok: false,
+      store,
+      phase: "connect",
+      code,
+      errno: error?.errno,
+      hint: code === "BLOCKED" ? blockedHint("connect") : undefined,
+    };
+  }
+
+  try {
+    if (store === "turso") {
+      await initializeTurso();
+      tursoReady = true;
+    } else {
+      getSqliteDatabase();
+    }
+    const tables = await verifySchemaTables();
+    return { ok: true, store, phase: "ready", tables };
+  } catch (error) {
+    logOrderStoreError("schema", error);
+    const code = typeof error?.code === "string" ? error.code : "ORDER_DB_SCHEMA_FAILED";
+    return {
+      ok: false,
+      store,
+      phase: "schema",
+      code,
+      errno: error?.errno,
+      hint: code === "BLOCKED" ? blockedHint("schema") : undefined,
+    };
   }
 }
 
@@ -199,7 +273,11 @@ export async function withWriteTransaction(work) {
       await tx.commit();
       return value;
     } catch (error) {
-      await tx.rollback();
+      try {
+        await tx.rollback();
+      } catch {
+        // The transaction may already be closed.
+      }
       throw error;
     }
   }
@@ -229,6 +307,13 @@ export function closeDb() {
     globalThis.__afordzOrdersDb.close();
     globalThis.__afordzOrdersDb = undefined;
   }
-  globalThis.__afordzTursoClient = undefined;
+  if (globalThis.__afordzTursoClient) {
+    try {
+      globalThis.__afordzTursoClient.close();
+    } catch {
+      // Ignore close races during tests.
+    }
+    globalThis.__afordzTursoClient = undefined;
+  }
   tursoReady = false;
 }

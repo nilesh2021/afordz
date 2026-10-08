@@ -47,19 +47,22 @@ export async function POST(request) {
     await ensureOrderDatabase();
   } catch (error) {
     logOrderStoreError("ensure", error);
-    if (error?.code === "ORDER_DB_UNCONFIGURED") {
+    if (error?.code === "ORDER_DB_UNCONFIGURED" || error?.code === "ORDER_DB_TOKEN_MISSING") {
       return NextResponse.json(
         {
           error:
             "Checkout is temporarily unavailable. Configure persistent order storage for this deployment.",
           hint:
-            "On Vercel, add TURSO_DATABASE_URL and TURSO_AUTH_TOKEN in project settings, redeploy, then open /api/orders/health.",
+            "On Vercel, add TURSO_DATABASE_URL and a full-access TURSO_AUTH_TOKEN, redeploy, then open /api/orders/health.",
         },
         { status: 503 },
       );
     }
     return NextResponse.json(
-      { error: "The order could not be saved. Nothing was charged." },
+      {
+        error: "The order could not be saved. Nothing was charged.",
+        hint: error?.code === "BLOCKED" ? "Turso blocked schema setup. Check /api/orders/health." : undefined,
+      },
       { status: 500 },
     );
   }
