@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
 import { useCart } from "@/components/CartProvider";
@@ -55,9 +56,9 @@ export default function CheckoutForm() {
 
   if (items.length === 0) {
     return (
-      <div className="rounded-3xl border border-zinc-200 bg-white p-8">
-        <h2 className="text-2xl font-semibold text-zinc-950">Your cart is empty</h2>
-        <p className="mt-3 text-zinc-600">Add the bundle before you open checkout.</p>
+      <div className="rounded-[2rem] border border-white/80 bg-white/80 p-8 shadow-[0_20px_50px_rgb(20_18_28/0.06)] sm:p-10">
+        <h2 className="font-display text-3xl tracking-tight text-zinc-950">Your cart is empty</h2>
+        <p className="mt-3 max-w-lg text-base leading-7 text-zinc-600">Add the bundle before you open checkout.</p>
         <div className="mt-6">
           <Button href="/products/bootstrap-templates-bundle">Explore the Bundle</Button>
         </div>
@@ -166,111 +167,110 @@ export default function CheckoutForm() {
   );
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)]">
-      <div className="space-y-6">
-        <div className="rounded-3xl border border-amber-300 bg-amber-50 p-6">
-          <p className="text-sm font-semibold tracking-wide text-amber-950">Razorpay</p>
-          <h2 className="mt-2 text-xl font-semibold text-zinc-950">Pay on Razorpay</h2>
-          <p className="mt-3 text-sm leading-6 text-zinc-800">
-            Card, UPI, and bank details are entered on Razorpay, not on this page. A download is created after the server confirms the payment was captured for this order, amount, and INR.
-          </p>
-        </div>
+    <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)]">
+      <form noValidate onSubmit={handleSubmit} className="rounded-[2rem] border border-white/80 bg-white/85 p-6 shadow-[0_20px_50px_rgb(20_18_28/0.06)] backdrop-blur sm:p-8">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-indigo-800">Step 2</p>
+        <h2 className="mt-2 font-display text-2xl tracking-tight text-zinc-950">Your details</h2>
+        <p className="mt-2 text-sm leading-6 text-zinc-600">
+          Name and email are sent to this server and to Razorpay so checkout can open. They are stored with the order.
+        </p>
 
-        <form noValidate onSubmit={handleSubmit} className="rounded-3xl border border-zinc-200 bg-white p-6 sm:p-8">
-          <h2 className="text-xl font-semibold text-zinc-950">Your details</h2>
-          <p className="mt-2 text-sm leading-6 text-zinc-600">
-            Name and email are sent to this server and to Razorpay so checkout can open. They are stored with the order.
-          </p>
-
-          <div className="mt-6 space-y-5">
-            <div>
-              <label htmlFor="customer-name" className="block text-sm font-semibold text-zinc-950">
-                Name
-              </label>
-              <input
-                id="customer-name"
-                name="name"
-                autoComplete="name"
-                value={values.name}
-                onChange={(event) => update("name", event.target.value)}
-                aria-invalid={Boolean(errors.name)}
-                aria-describedby={errors.name ? "customer-name-error" : undefined}
-                className={`mt-2 w-full rounded-xl border bg-white px-4 py-3 text-zinc-950 ${
-                  errors.name ? "border-red-700" : "border-zinc-300"
-                }`}
-              />
-              {errors.name ? (
-                <p id="customer-name-error" className="mt-2 text-sm font-medium text-red-800">
-                  {errors.name}
-                </p>
-              ) : null}
-            </div>
-
-            <div>
-              <label htmlFor="customer-email" className="block text-sm font-semibold text-zinc-950">
-                Email
-              </label>
-              <input
-                id="customer-email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                value={values.email}
-                onChange={(event) => update("email", event.target.value)}
-                aria-invalid={Boolean(errors.email)}
-                aria-describedby={errors.email ? "customer-email-error" : undefined}
-                className={`mt-2 w-full rounded-xl border bg-white px-4 py-3 text-zinc-950 ${
-                  errors.email ? "border-red-700" : "border-zinc-300"
-                }`}
-              />
-              {errors.email ? (
-                <p id="customer-email-error" className="mt-2 text-sm font-medium text-red-800">
-                  {errors.email}
-                </p>
-              ) : null}
-            </div>
+        <div className="mt-7 space-y-5">
+          <div>
+            <label htmlFor="customer-name" className="block text-sm font-semibold text-zinc-950">
+              Name
+            </label>
+            <input
+              id="customer-name"
+              name="name"
+              autoComplete="name"
+              value={values.name}
+              onChange={(event) => update("name", event.target.value)}
+              aria-invalid={Boolean(errors.name)}
+              aria-describedby={errors.name ? "customer-name-error" : undefined}
+              className={`mt-2 w-full rounded-2xl border bg-white px-4 py-3.5 text-zinc-950 outline-none transition ${
+                errors.name ? "border-red-700" : "border-zinc-200 focus:border-indigo-500"
+              }`}
+            />
+            {errors.name ? (
+              <p id="customer-name-error" className="mt-2 text-sm font-medium text-red-800">
+                {errors.name}
+              </p>
+            ) : null}
           </div>
 
-          {formError ? (
-            <p role="alert" className="mt-5 text-sm font-medium text-red-800">
-              {formError}
-            </p>
-          ) : null}
+          <div>
+            <label htmlFor="customer-email" className="block text-sm font-semibold text-zinc-950">
+              Email
+            </label>
+            <input
+              id="customer-email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              value={values.email}
+              onChange={(event) => update("email", event.target.value)}
+              aria-invalid={Boolean(errors.email)}
+              aria-describedby={errors.email ? "customer-email-error" : undefined}
+              className={`mt-2 w-full rounded-2xl border bg-white px-4 py-3.5 text-zinc-950 outline-none transition ${
+                errors.email ? "border-red-700" : "border-zinc-200 focus:border-indigo-500"
+              }`}
+            />
+            {errors.email ? (
+              <p id="customer-email-error" className="mt-2 text-sm font-medium text-red-800">
+                {errors.email}
+              </p>
+            ) : null}
+          </div>
+        </div>
 
-          <Button type="submit" className="mt-6 w-full sm:w-auto" disabled={paying}>
-            {paying ? "Opening Razorpay" : "Pay with Razorpay"}
-          </Button>
-        </form>
-      </div>
-
-      <aside className="h-fit rounded-3xl border border-zinc-200 bg-white p-6">
-        <h2 className="text-lg font-semibold text-zinc-950">Order summary</h2>
-        <ul className="mt-4 space-y-4">
-          {items.map((item) => (
-            <li key={item.id} className="flex items-start justify-between gap-4">
-              <div>
-                <p className="font-medium text-zinc-950">{item.name}</p>
-                <p className="text-sm text-zinc-600">One digital licence</p>
-              </div>
-              <p className="font-semibold text-zinc-950">{formatInr(item.priceInr)}</p>
-            </li>
-          ))}
-        </ul>
-        <p className="mt-6 flex items-center justify-between border-t border-zinc-200 pt-4 text-lg font-semibold text-zinc-950">
-          <span>Total</span>
-          <span>{formatInr(totalInr)}</span>
-        </p>
-        <p className="mt-3 text-sm leading-6 text-zinc-600">
-          The server prices this order from the catalogue before it talks to Razorpay.
-        </p>
-        {priceIsDraft ? (
-          <p className="mt-3 text-sm leading-6 text-amber-950">Placeholder price. Edit it before you sell.</p>
+        {formError ? (
+          <p role="alert" className="mt-5 rounded-2xl bg-red-50 px-4 py-3 text-sm font-medium text-red-800">
+            {formError}
+          </p>
         ) : null}
-        <p className="mt-4 text-sm leading-6 text-zinc-600">
-          <a href="/checkout/success" className="font-semibold text-indigo-800 underline decoration-indigo-300 underline-offset-4">
-            Retrieve a download
-          </a>
+
+        <Button type="submit" className="mt-7 w-full" disabled={paying}>
+          {paying ? "Opening Razorpay" : `Pay ${formatInr(totalInr)} with Razorpay`}
+        </Button>
+        <p className="mt-4 text-center text-xs leading-5 text-zinc-500">
+          Payment methods open in the Razorpay window. Nothing is charged until that payment is captured.
         </p>
+      </form>
+
+      <aside className="lg:sticky lg:top-24">
+        <div className="overflow-hidden rounded-[2rem] border border-zinc-900/10 bg-zinc-950 text-white shadow-[0_24px_60px_rgb(20_18_28/0.18)]">
+          <div className="p-6 sm:p-7">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-indigo-200">Order</p>
+            <h2 className="mt-2 font-display text-2xl tracking-tight">Summary</h2>
+            <ul className="mt-6 space-y-5">
+              {items.map((item) => (
+                <li key={item.id} className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="font-medium leading-6">{item.name}</p>
+                    <p className="mt-1 text-sm text-zinc-400">One digital licence</p>
+                  </div>
+                  <p className="shrink-0 font-semibold">{formatInr(item.priceInr)}</p>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6 flex items-end justify-between border-t border-white/10 pt-5">
+              <span className="text-sm text-zinc-400">Total, INR</span>
+              <span className="font-display text-3xl tracking-tight">{formatInr(totalInr)}</span>
+            </div>
+          </div>
+          <div className="space-y-3 bg-white px-6 py-5 text-sm leading-6 text-zinc-600 sm:px-7">
+            <p>The server prices this order from the catalogue before it talks to Razorpay.</p>
+            {priceIsDraft ? (
+              <p className="font-medium text-amber-950">Placeholder price. Edit it before you sell.</p>
+            ) : null}
+            <p>
+              <Link href="/checkout/success" className="font-semibold text-indigo-800 underline decoration-indigo-300 underline-offset-4 hover:decoration-indigo-800">
+                Retrieve a download
+              </Link>
+            </p>
+          </div>
+        </div>
       </aside>
     </div>
   );
