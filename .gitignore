@@ -32,6 +32,13 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+
+# orders database and paid archives
+/data/*.sqlite
+/data/*.sqlite-wal
+/data/*.sqlite-shm
+/private/downloads/*.zip
 
 # vercel
 .vercel

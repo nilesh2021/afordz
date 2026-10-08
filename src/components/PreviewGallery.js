@@ -1,0 +1,86 @@
+"use client";
+
+import { useRef, useState } from "react";
+import TemplateMockup from "@/components/TemplateMockup";
+
+export default function PreviewGallery({ images, note }) {
+  const [activeId, setActiveId] = useState(images[0]?.id ?? "");
+  const tabs = useRef({});
+  const active = images.find((image) => image.id === activeId) ?? images[0];
+
+  if (!active) {
+    return null;
+  }
+
+  function selectRelative(offset) {
+    const index = images.findIndex((image) => image.id === active.id);
+    const next = images[(index + offset + images.length) % images.length];
+    setActiveId(next.id);
+    tabs.current[next.id]?.focus();
+  }
+
+  function onKeyDown(event) {
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      selectRelative(1);
+    }
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      selectRelative(-1);
+    }
+  }
+
+  const previewNote =
+    note ||
+    "These previews are original CSS mockups. They are not screenshots of the downloadable files.";
+
+  return (
+    <div id="gallery">
+      <div
+        role="tabpanel"
+        id={`panel-${active.id}`}
+        aria-labelledby={`tab-${active.id}`}
+        className="rounded-3xl bg-zinc-50 p-4 sm:p-6"
+      >
+        <TemplateMockup variant={active.variant} src={active.src} alt={active.alt} />
+        <p className="mt-4 text-sm font-medium text-zinc-800">{active.label}</p>
+        <p className="mt-1 text-sm leading-6 text-zinc-600">{active.summary}</p>
+      </div>
+
+      <div
+        role="tablist"
+        aria-label="Product previews"
+        className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3"
+        onKeyDown={onKeyDown}
+      >
+        {images.map((image) => {
+          const selected = image.id === active.id;
+          return (
+            <button
+              key={image.id}
+              ref={(node) => {
+                tabs.current[image.id] = node;
+              }}
+              id={`tab-${image.id}`}
+              type="button"
+              role="tab"
+              aria-selected={selected}
+              aria-controls={`panel-${image.id}`}
+              tabIndex={selected ? 0 : -1}
+              onClick={() => setActiveId(image.id)}
+              className={`rounded-2xl p-2 text-left ${
+                selected ? "ring-2 ring-indigo-700 ring-offset-2" : "hover:bg-white"
+              }`}
+            >
+              <TemplateMockup variant={image.variant} src={image.src} alt="" />
+              <span className="mt-2 block text-sm font-semibold text-zinc-900">
+                {image.label}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+      <p className="mt-4 text-sm leading-6 text-zinc-600">{previewNote}</p>
+    </div>
+  );
+}
