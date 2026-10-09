@@ -6,7 +6,7 @@ test("paid bundle resolves to a file under private/downloads", () => {
   const file = resolveDownload("bootstrap-templates-bundle");
   assert.ok(file);
   assert.match(file.filePath.replaceAll("\\", "/"), /private\/downloads\/bootstrap-templates-bundle\.(zip|txt)$/);
-  assert.equal(file.downloadName.startsWith("afordz-bootstrap-templates-bundle"), true);
+  assert.equal(file.downloadName.startsWith("bootstrap-templates-bundle"), true);
 });
 
 test("unknown products have no download", () => {

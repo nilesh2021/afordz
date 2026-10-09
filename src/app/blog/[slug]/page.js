@@ -309,7 +309,7 @@ export default async function BlogPostPage({ params }) {
                 </Link>
                 . The catalogue price is {price ?? "shown on that page"}. The cart keeps one digital licence and will not add a second copy.
               </li>
-              <li>Pay through checkout. After the server confirms a captured Razorpay payment for that order, it opens a private download named afordz-bootstrap-templates-bundle.zip. The link expires in 48 hours.</li>
+              <li>Pay through checkout. After the server confirms a captured Razorpay payment for that order, it opens a private download named bootstrap-templates-bundle.zip. The link expires in 48 hours.</li>
               <li>Extract the ZIP. You should see the folder “1000 Website Templates Mega Bundle”, then BS500DEAL and TW500DEAL.</li>
               <li>Open one index file in a current browser while you are online. If the CSS does not appear, the CDN request failed or the file was opened without a network connection. The pages are not an offline kit.</li>
               <li>Duplicate the file before you edit it, then change the title, headings, and body copy. Replace dummyimage.com URLs with images you have the right to use. Remove the YouTube embed if you do not want that video.</li>

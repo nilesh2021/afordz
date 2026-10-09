@@ -10,7 +10,7 @@ const PRODUCTS = {
       "downloads",
       "bootstrap-templates-bundle.txt",
     ),
-    downloadName: "afordz-bootstrap-templates-bundle",
+    downloadName: "bootstrap-templates-bundle",
   },
 };
 
