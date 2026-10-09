@@ -13,6 +13,21 @@ export const posts = [
     },
     productSlug: "bootstrap-templates-bundle",
   },
+  {
+    slug: "canva-subscription",
+    title: "What Canva is useful for",
+    description:
+      "How Canva helps with social posts, presentations, posters, and simple layouts in the browser, and what the Afordz one-year listing does and does not confirm.",
+    published: "2026-10-09",
+    image: {
+      src: "/home/workspace.jpg",
+      alt: "A laptop on a desk, used as the article image. It is not a Canva screenshot.",
+      width: 960,
+      height: 540,
+    },
+    productSlug: "canva-subscription",
+    articleSection: "Design Tools",
+  },
 ];
 
 export function getPostBySlug(slug) {

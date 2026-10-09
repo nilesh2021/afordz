@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useSyncExternalStore } from "react";
-import { getProductById, isAffiliateProduct, isCatalogueVisible } from "@/data/products";
+import { getProductById, isPurchasable } from "@/data/products";
 
 const STORAGE_KEY = "afordz-cart";
 const EMPTY_CART = [];
@@ -34,7 +34,7 @@ function normalize(items) {
       continue;
     }
     const product = getProductById(item.id);
-    if (!product || isAffiliateProduct(product) || !isCatalogueVisible(product)) {
+    if (!isPurchasable(product)) {
       continue;
     }
     seen.add(item.id);
@@ -139,7 +139,7 @@ export function CartProvider({ children }) {
   );
 
   const addItem = useCallback((product) => {
-    if (!product || isAffiliateProduct(product) || !isCatalogueVisible(product)) {
+    if (!isPurchasable(product)) {
       return false;
     }
     const current = getSnapshot();

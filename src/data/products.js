@@ -7,8 +7,8 @@
  *
  * Fields the catalogue reads:
  * - saleType: "direct" (Afordz products) or "affiliate" (partner offers)
- * - status: "live" listings appear in the catalogue. "draft" listings are hidden
- *   until you set status back to "live".
+ * - status: "live" listings can be purchased. "coming-soon" listings appear in
+ *   the catalogue without add to cart or checkout. "draft" listings are hidden.
  * - category, format, and framework: shop filters
  * - priceInr: INR price for direct products with a verified numeric amount
  * - addedAt: YYYY-MM-DD date used by the Newest sort
@@ -37,8 +37,8 @@ export const products = [
     saleType: "direct",
     status: "live",
     type: "digital",
-    name: "500 Bootstrap 5 and 500 Tailwind HTML Templates",
-    title: "5500 Bootstrap 5 + 500 Tailwind HTML Templates",
+    name: "500 Bootstrap5 and 500 Tailwind HTML Templates",
+    title: "500 Bootstrap 5 + 500 Tailwind HTML Templates",
     category: "Website Templates",
     format: "Digital download",
     language: "English",
@@ -242,7 +242,7 @@ export const products = [
     id: "canva-subscription",
     slug: "canva-subscription",
     saleType: "direct",
-    status: "draft",
+    status: "coming-soon",
     type: "digital",
     name: "Canva Subscription",
     title: "Canva Subscription",
@@ -255,14 +255,14 @@ export const products = [
     framework: "Canva",
     addedAt: "2026-10-06",
     subscriptionTerm: "one year",
-    tagline: "One year of Canva access for ₹149. Plan name, seats, and how access is delivered are still placeholders.",
+    tagline: "One year of Canva access for ₹99. Plan name, seats, and how access is delivered are not confirmed.",
     description:
-      "A one-year Canva subscription listed at ₹149. This page is not an official Canva storefront. Confirm the plan, the number of seats, and how you will give the buyer access before you accept orders. The preview is an original CSS mockup, not a Canva screenshot.",
-    priceInr: 149,
+      "A one-year Canva subscription listed at ₹99. This page is not an official Canva storefront. The plan name, the number of seats, and how access is delivered are not confirmed. The preview is an original CSS mockup, not a Canva screenshot. This listing does not include a download file.",
+    priceInr: 99,
     currency: "INR",
     detailsStatus: "placeholder",
     placeholderNote:
-      "Plan name, seat count, delivery method, licence, and support window are drafts. Confirm each one before you accept orders. The ₹149 price and one-year term are the amounts listed in the catalogue.",
+      "Plan name, seat count, and how access is delivered are not confirmed. The listed price is ₹99 for one year. This listing does not include a download file.",
     previewNote:
       "This preview is an original CSS placeholder for a design-tool subscription. It is not a Canva screenshot and it does not use Canva brand assets.",
     placeholders: {
@@ -414,8 +414,16 @@ export function isDraftProduct(product) {
   return product?.status === "draft";
 }
 
+export function isComingSoon(product) {
+  return product?.status === "coming-soon";
+}
+
 export function isCatalogueVisible(product) {
-  return product?.status === "live";
+  return product?.status === "live" || isComingSoon(product);
+}
+
+export function isPurchasable(product) {
+  return product?.status === "live" && !isAffiliateProduct(product);
 }
 
 export function getVisibleProducts() {

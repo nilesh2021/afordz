@@ -22,6 +22,40 @@ export const metadata = {
     "Afordz lists digital website resources with prices in INR. Shop the catalogue, then review a listing before you add it to the cart.",
 };
 
+function StepIcon({ index }) {
+  if (index === 1) {
+    return (
+      <svg viewBox="0 0 48 48" className="size-12" aria-hidden="true">
+        <rect x="6" y="12" width="36" height="26" rx="4" fill="#4f46e5" />
+        <rect x="6" y="12" width="36" height="8" fill="#312e81" />
+        <rect x="10" y="24" width="10" height="7" rx="1.5" fill="#fbbf24" />
+        <path d="M14 24v2.2a2 2 0 0 0 2 2 2 2 0 0 0 2-2V24" fill="none" stroke="#92400e" strokeWidth="1.2" />
+        <rect x="24" y="25" width="14" height="2" rx="1" fill="#c7d2fe" />
+        <rect x="24" y="29" width="10" height="2" rx="1" fill="#a5b4fc" />
+      </svg>
+    );
+  }
+
+  if (index === 2) {
+    return (
+      <svg viewBox="0 0 48 48" className="size-12" aria-hidden="true">
+        <path d="M14 8h14l8 8v24a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4V12a4 4 0 0 1 4-4z" fill="#e0e7ff" stroke="#4338ca" strokeWidth="1.6" />
+        <path d="M28 8v8h8" fill="#c7d2fe" stroke="#4338ca" strokeWidth="1.6" />
+        <path d="M24 22v12" fill="none" stroke="#4f46e5" strokeWidth="2.2" strokeLinecap="round" />
+        <path d="M19 30l5 5 5-5" fill="none" stroke="#4f46e5" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 48 48" className="size-12" aria-hidden="true">
+      <path d="M14 18h8.5a2 2 0 0 0 1.6-.8L26 14.5A2 2 0 0 1 27.6 14H34a3 3 0 0 1 3 3v16a3 3 0 0 1-3 3H14a3 3 0 0 1-3-3V21a3 3 0 0 1 3-3z" fill="#4f46e5" />
+      <path d="M11 22h26v14a3 3 0 0 1-3 3H14a3 3 0 0 1-3-3V22z" fill="#6366f1" />
+      <path d="M16 18c0-4 2.2-7 8-7s8 3 8 7" fill="none" stroke="#312e81" strokeWidth="2.2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 export default function HomePage() {
   const featured = getVisibleProducts()[0];
   const preview = featured?.images?.[0];
@@ -113,10 +147,10 @@ export default function HomePage() {
               About Afordz
             </h2>
             <p className="mt-5 max-w-xl text-base leading-7 text-zinc-700">
-              Afordz is a digital catalogue of website resources. Prices are listed in Indian rupees. The shop currently lists an HTML website templates bundle, sold as a single digital licence.
+              Afordz is a digital catalogue with prices in Indian rupees. Each product is sold as one digital licence.
             </p>
             <p className="mt-4 max-w-xl text-base leading-7 text-zinc-700">
-              The product page marks unconfirmed details as placeholders. Afordz checkout uses Razorpay and delivers a file only after the server confirms the captured payment. Partner offers are checked out with the vendor.
+              Unconfirmed details stay marked on the product page. File products are available as a private download after a captured Razorpay payment. A subscription includes only the details confirmed on its listing. Partner offers are checked out with the vendor.
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
@@ -189,13 +223,14 @@ export default function HomePage() {
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-indigo-700">Process</p>
           <h2 className="mt-3 font-display text-4xl tracking-tight text-zinc-950 sm:text-5xl">How an order works</h2>
           <p className="mt-4 max-w-2xl text-sm leading-6 text-zinc-600">
-            Three steps from the cart to a download.
+            Three steps from the catalogue to checkout.
           </p>
           <ol className="mt-10 grid gap-px overflow-hidden rounded-[1.75rem] border border-zinc-200 bg-zinc-200 md:grid-cols-3">
             {downloadSteps.map((step, index) => (
               <li key={step.title} className="bg-[#f7f4ef] p-6 sm:p-8">
-                <p className="font-display text-5xl text-indigo-700">{String(index + 1).padStart(2, "0")}</p>
-                <h3 className="mt-6 font-display text-2xl text-zinc-950">{step.title}</h3>
+                <StepIcon index={index} />
+                <p className="mt-5 text-sm font-semibold text-indigo-700">Step {index + 1}</p>
+                <h3 className="mt-1 font-display text-2xl text-zinc-950">{step.title}</h3>
                 <p className="mt-2 text-sm leading-6 text-zinc-600">{step.body}</p>
               </li>
             ))}
@@ -212,6 +247,13 @@ export default function HomePage() {
             </p>
           </div>
           <FaqAccordion items={faqs} />
+        </div>
+      </section>
+
+      <section className="px-4 pb-20 sm:px-6">
+        <div className="mx-auto flex w-full max-w-6xl flex-col items-start gap-4 rounded-2xl border border-zinc-200 bg-white px-6 py-8 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="font-display text-2xl tracking-tight text-zinc-950">Browse the catalogue</h2>
+          <Button href="/shop">Shop</Button>
         </div>
       </section>
     </>

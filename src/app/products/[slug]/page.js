@@ -10,6 +10,7 @@ import {
   getVisibleProducts,
   hasPlaceholders,
   isAffiliateProduct,
+  isComingSoon,
   isDraftProduct,
   productTitle,
 } from "@/data/products";
@@ -82,7 +83,13 @@ function DirectProductPage({ product }) {
               {product.placeholderNote}
             </p>
           ) : null}
-          <AddToCartControls product={product} />
+          {isComingSoon(product) ? (
+            <p className="mt-6 rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm font-semibold leading-6 text-amber-950">
+              Coming soon. This listing is not available to purchase yet.
+            </p>
+          ) : (
+            <AddToCartControls product={product} />
+          )}
         </div>
       </div>
 

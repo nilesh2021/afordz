@@ -8,7 +8,7 @@ function fieldId(prefix, group, value) {
 
 function Choice({ id, label, checked, onChange }) {
   return (
-    <label className="flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl px-2 text-sm text-zinc-800 hover:bg-violet-50">
+    <label className="flex min-h-9 cursor-pointer items-center gap-2 rounded-lg px-1.5 text-sm text-zinc-800 hover:bg-violet-50">
       <input
         id={id}
         type="checkbox"
@@ -31,9 +31,9 @@ function priceHint(options) {
     return `Prices are in Indian rupees. ${rangeNote}`;
   }
   if (options.priceMin === options.priceMax) {
-    return `Current catalogue price: ${formatInr(options.priceMin)}. ${rangeNote}`;
+    return `Listed price ${formatInr(options.priceMin)}. ${rangeNote}`;
   }
-  return `Catalogue prices range from ${formatInr(options.priceMin)} to ${formatInr(options.priceMax)}. ${rangeNote}`;
+  return `${formatInr(options.priceMin)}–${formatInr(options.priceMax)}. ${rangeNote}`;
 }
 
 export default function FilterFields({
@@ -54,20 +54,20 @@ export default function FilterFields({
   const invalid = minNumber != null && maxNumber != null && minNumber > maxNumber;
   const describedBy = [hintId, invalid ? errorId : null].filter(Boolean).join(" ");
   const inputClass =
-    "mt-1.5 w-full min-h-11 rounded-2xl border border-indigo-100 bg-white/90 px-3 text-sm text-zinc-950 shadow-sm";
+    "mt-1 w-full min-h-9 rounded-lg border border-indigo-100 bg-white px-2.5 text-sm text-zinc-950";
   const formats = options.formats ?? [];
   const selectedFormats = values.formats ?? [];
   const purchase = values.purchase ?? "";
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <fieldset>
-        <legend className="px-2 text-sm font-semibold text-zinc-950">Purchase type</legend>
-        <div className="mt-2 space-y-1">
+        <legend className="px-1.5 text-sm font-semibold text-zinc-950">Purchase type</legend>
+        <div className="mt-1">
           {PURCHASE_OPTIONS.map((option) => (
             <label
               key={option.value || "all"}
-              className="flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl px-2 text-sm text-zinc-800 hover:bg-violet-50"
+              className="flex min-h-9 cursor-pointer items-center gap-2 rounded-lg px-1.5 text-sm text-zinc-800 hover:bg-violet-50"
             >
               <input
                 id={fieldId(idPrefix, "purchase", option.value || "all")}
@@ -85,8 +85,8 @@ export default function FilterFields({
 
       {options.categories.length > 0 ? (
         <fieldset>
-          <legend className="px-2 text-sm font-semibold text-zinc-950">Category</legend>
-          <div className="mt-2 space-y-1">
+          <legend className="px-1.5 text-sm font-semibold text-zinc-950">Category</legend>
+          <div className="mt-1">
             {options.categories.map((category) => (
               <Choice
                 key={category}
@@ -102,8 +102,8 @@ export default function FilterFields({
 
       {formats.length > 0 ? (
         <fieldset>
-          <legend className="px-2 text-sm font-semibold text-zinc-950">Format</legend>
-          <div className="mt-2 space-y-1">
+          <legend className="px-1.5 text-sm font-semibold text-zinc-950">Format</legend>
+          <div className="mt-1">
             {formats.map((format) => (
               <Choice
                 key={format}
@@ -119,8 +119,8 @@ export default function FilterFields({
 
       {options.frameworks.length > 0 ? (
         <fieldset>
-          <legend className="px-2 text-sm font-semibold text-zinc-950">Compatible tool</legend>
-          <div className="mt-2 space-y-1">
+          <legend className="px-1.5 text-sm font-semibold text-zinc-950">Compatible tool</legend>
+          <div className="mt-1">
             {options.frameworks.map((framework) => (
               <Choice
                 key={framework}
@@ -135,11 +135,11 @@ export default function FilterFields({
       ) : null}
 
       <fieldset>
-        <legend className="px-2 text-sm font-semibold text-zinc-950">Price range (INR)</legend>
-        <p id={hintId} className="mt-2 px-2 text-sm leading-6 text-zinc-600">
+        <legend className="px-1.5 text-sm font-semibold text-zinc-950">Price (INR)</legend>
+        <p id={hintId} className="mt-1 px-1.5 text-xs leading-5 text-zinc-600">
           {priceHint(options)}
         </p>
-        <div className="mt-3 grid gap-3 px-2">
+        <div className="mt-2 grid grid-cols-2 gap-2 px-1.5">
           <label htmlFor={`${idPrefix}-min`} className="block text-sm font-medium text-zinc-800">
             Minimum
             <input

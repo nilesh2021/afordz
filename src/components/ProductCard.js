@@ -9,6 +9,7 @@ import {
   formatInr,
   hasVerifiedPrice,
   isAffiliateProduct,
+  isComingSoon,
   productTitle,
 } from "@/data/products";
 
@@ -16,6 +17,7 @@ export default function ProductCard({ product }) {
   const preview = product.images?.[0];
   const summary = product.tagline || product.description;
   const affiliate = isAffiliateProduct(product);
+  const comingSoon = isComingSoon(product);
   const priceIsPlaceholder = !affiliate && fieldIsPlaceholder(product, "price");
   const title = productTitle(product);
 
@@ -56,6 +58,11 @@ export default function ProductCard({ product }) {
                 Partner offer
               </p>
             ) : null}
+            {comingSoon ? (
+              <p className="w-fit rounded-full bg-amber-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-amber-950">
+                Coming soon
+              </p>
+            ) : null}
           </div>
           <h3 className="mt-3 font-display text-[1.7rem] leading-snug tracking-tight text-zinc-950">
             <Link href={`/products/${product.slug}`} className="hover:text-indigo-800">
@@ -86,7 +93,7 @@ export default function ProductCard({ product }) {
           <Button href={`/products/${product.slug}`} variant="secondary" className="w-full">
             View Details
           </Button>
-          {affiliate ? null : <AddToCartButton product={product} />}
+          {affiliate || comingSoon ? null : <AddToCartButton product={product} />}
         </div>
       </div>
     </article>

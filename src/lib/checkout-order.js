@@ -1,4 +1,4 @@
-import { hasVerifiedPrice, getProductById, isAffiliateProduct, isCatalogueVisible } from "../data/products.js";
+import { hasVerifiedPrice, getProductById, isPurchasable } from "../data/products.js";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -31,8 +31,7 @@ export function buildCheckoutOrder(body) {
     const product = getProductById(productId);
     if (
       !product ||
-      isAffiliateProduct(product) ||
-      !isCatalogueVisible(product) ||
+      !isPurchasable(product) ||
       !hasVerifiedPrice(product) ||
       !Number.isInteger(product.priceInr) ||
       product.priceInr < 1

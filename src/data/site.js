@@ -58,16 +58,16 @@ export const footerLinks = [
 
 export const downloadSteps = [
   {
-    title: "Add one licence",
-    body: "Add the bundle to the cart. The cart keeps a single digital licence and will not add a second copy.",
+    title: "Choose a product",
+    body: "Open a listing, then add it to the cart. Each product is one digital licence, and adding it again leaves the cart unchanged.",
   },
   {
     title: "Pay with Razorpay",
-    body: "Checkout asks for a name and an email address. Card and UPI details are entered on Razorpay.",
+    body: "Checkout asks for a name and an email address. Card and UPI details are entered on Razorpay for the catalogue price in INR.",
   },
   {
-    title: "Download after a captured payment",
-    body: "The server confirms the captured payment, order id, amount, and INR currency, then opens a private download that expires in 48 hours.",
+    title: "Receive what the listing includes",
+    body: "After the payment is captured, a file product gets a private download for 48 hours. A subscription is limited to the details confirmed on its listing and does not include a download file.",
   },
 ];
 
@@ -79,42 +79,41 @@ export const faqs = [
     id: "what-you-buy",
     question: "What am I buying?",
     answer:
-      "One digital licence for an Afordz product in the shop, or a partner offer fulfilled by the vendor. Open the listing to see what is included. Counts, file lists, and other details on Afordz product pages are placeholders until they are confirmed.",
+      "One digital licence for a product in the shop, or a partner offer fulfilled by the vendor. Open the listing to see what is included. Details marked as unconfirmed on a product page are not part of the offer.",
   },
   {
     id: "delivery",
     question: "How will I receive the files?",
     answer:
-      "After Razorpay reports a captured payment, the server checks the order id, amount, and INR currency. A matching order then gets a private download that expires in 48 hours.",
+      "For a file product, a captured Razorpay payment for that order, amount, and INR opens a private download that expires in 48 hours. The templates listing is a ZIP of 1,000 standalone HTML pages. A subscription listing does not include a download file.",
   },
   {
     id: "cart-limit",
-    question: "Can I add the bundle more than once?",
+    question: "Can I add a product more than once?",
     answer:
       "No. Each order includes one digital licence per product. Adding that product again leaves the cart as it is.",
   },
   {
     id: "payment",
-    question: "Is checkout a live payment?",
+    question: "How do I pay?",
     answer:
-      "Yes, when the store is using Razorpay live keys. Card and UPI details are entered on Razorpay. A download is created only after the server confirms the payment was captured for that order, amount, and INR.",
+      "Checkout asks for your name and email. Card and UPI details are entered on Razorpay for the catalogue price in INR.",
   },
   {
     id: "refunds",
-    question: "What is the refund position?",
+    question: "What is the refund policy?",
     answer:
-      "The refund page is an editable draft. It does not promise a refund. Replace it with terms that match how you will sell the files.",
+      "The refund policy does not promise a refund, exchange, replacement, or credit.",
   },
   {
     id: "partner-offers",
     question: "What is a partner offer?",
     answer:
-      "A partner offer is sold on the vendor website, not through the Afordz cart. Checkout, delivery, and support are handled by the vendor. We may earn a commission if you purchase through a configured affiliate link. Partner listings do not include a local download.",
+      "A partner offer is sold on the vendor website, not through the Afordz cart. Checkout, delivery, and support are handled by the vendor. Afordz may earn a commission if you purchase through a configured affiliate link. Partner listings do not include a local download.",
   },
   {
     id: "contact",
     question: "How do I ask a question?",
-    answer:
-      "Use the contact page. The email address and phone number there are placeholders until you replace them.",
+    answer: "Use the contact page and email hello@afordz.in. The listings do not include a support window.",
   },
 ];

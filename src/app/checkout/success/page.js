@@ -126,9 +126,15 @@ export default async function CheckoutSuccessPage({ searchParams }) {
             <p className="mt-3 text-base leading-7 text-zinc-700">
               {order.customerName} ({order.customerEmail}). The server confirmed a captured payment of {formatInr(order.amountPaise / 100)} INR.
             </p>
-            <p className="mt-3 text-sm leading-6 text-zinc-600">
-              This download expires at {formatExpiry(order.downloadExpiresAt)} IST. It is not a public file link.
-            </p>
+            {order.items.some((item) => resolveDownload(item.id)) ? (
+              <p className="mt-3 text-sm leading-6 text-zinc-600">
+                A file download expires at {formatExpiry(order.downloadExpiresAt)} IST. It is not a public file link.
+              </p>
+            ) : (
+              <p className="mt-3 text-sm leading-6 text-zinc-600">
+                This order does not include a download file.
+              </p>
+            )}
             <ul className="mt-6 space-y-4">
               {order.items.map((item) => {
                 const file = resolveDownload(item.id);
@@ -146,7 +152,7 @@ export default async function CheckoutSuccessPage({ searchParams }) {
                         Download
                       </a>
                     ) : (
-                      <p className="text-sm text-zinc-600">The file for this licence is not on the server yet.</p>
+                      <p className="text-sm text-zinc-600">This listing does not include a download file.</p>
                     )}
                   </li>
                 );

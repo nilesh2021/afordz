@@ -58,9 +58,9 @@ export default function CheckoutForm() {
     return (
       <div className="rounded-[2rem] border border-white/80 bg-white/80 p-8 shadow-[0_20px_50px_rgb(20_18_28/0.06)] sm:p-10">
         <h2 className="font-display text-3xl tracking-tight text-zinc-950">Your cart is empty</h2>
-        <p className="mt-3 max-w-lg text-base leading-7 text-zinc-600">Add the bundle before you open checkout.</p>
+        <p className="mt-3 max-w-lg text-base leading-7 text-zinc-600">Add a product before you open checkout.</p>
         <div className="mt-6">
-          <Button href="/products/bootstrap-templates-bundle">Explore the Bundle</Button>
+          <Button href="/shop">Browse the catalogue</Button>
         </div>
       </div>
     );

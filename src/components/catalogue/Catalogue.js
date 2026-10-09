@@ -75,7 +75,7 @@ export default function Catalogue({ initialQuery }) {
       <h2 id="catalogue-heading" className="sr-only">
         Product catalogue
       </h2>
-      <div className="grid items-start gap-8 lg:grid-cols-[19rem_minmax(0,1fr)]">
+      <div className="grid items-start gap-6 lg:grid-cols-[15rem_minmax(0,1fr)]">
         <div className="hidden lg:sticky lg:top-24 lg:block">
           <FilterPanel
             values={query}

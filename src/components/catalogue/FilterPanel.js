@@ -44,19 +44,19 @@ export default function FilterPanel({
   }
 
   return (
-    <aside className="rounded-[2rem] border border-white/80 bg-white/80 shadow-[0_18px_40px_rgb(20_18_28/0.07)] backdrop-blur-sm">
-      <div className="flex items-center justify-between gap-3 rounded-t-[2rem] border-b border-indigo-50 bg-indigo-50/70 px-4 py-3">
+    <aside className="rounded-2xl border border-zinc-200 bg-white shadow-sm">
+      <div className="flex items-center justify-between gap-3 border-b border-zinc-100 px-3 py-2">
         <h2 className="text-base font-semibold text-indigo-950">Filters</h2>
         <button
           type="button"
           onClick={handleClear}
           disabled={!canClear}
-          className="inline-flex min-h-11 items-center text-sm font-semibold text-indigo-800 underline decoration-indigo-300 underline-offset-4 hover:decoration-indigo-800 disabled:cursor-not-allowed disabled:text-zinc-400 disabled:no-underline"
+          className="inline-flex min-h-9 items-center text-sm font-semibold text-indigo-800 underline decoration-indigo-300 underline-offset-4 hover:decoration-indigo-800 disabled:cursor-not-allowed disabled:text-zinc-400 disabled:no-underline"
         >
           Clear all
         </button>
       </div>
-      <div className="p-4">
+      <div className="p-3">
         <FilterFields
           idPrefix="desktop-filters"
           values={{ ...values, min, max }}

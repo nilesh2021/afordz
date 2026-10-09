@@ -2,8 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Button from "@/components/Button";
+import CanvaSubscriptionArticle from "@/components/blog/CanvaSubscriptionArticle";
 import { getPostBySlug, posts } from "@/data/posts";
-import { formatInr, getVisibleProductBySlug, productTitle } from "@/data/products";
+import { formatInr, getVisibleProductBySlug, isComingSoon, productTitle } from "@/data/products";
 import { getSiteUrl, site } from "@/data/site";
 
 const toc = [
@@ -96,7 +97,7 @@ function jsonLd(post, product) {
     datePublished: post.published,
     dateModified: post.published,
     inLanguage: "en",
-    articleSection: "Website Templates",
+    articleSection: post.articleSection || "Website Templates",
     author: {
       "@type": "Organization",
       name: site.name,
@@ -109,7 +110,7 @@ function jsonLd(post, product) {
     image: siteUrl ? `${siteUrl}${post.image.src}` : post.image.src,
   };
 
-  if (product && Number.isFinite(product.priceInr)) {
+  if (product && Number.isFinite(product.priceInr) && !isComingSoon(product)) {
     data.about = {
       "@type": "Product",
       name: productTitle(product),
@@ -141,6 +142,18 @@ export default async function BlogPostPage({ params }) {
     year: "numeric",
     timeZone: "UTC",
   }).format(new Date(`${post.published}T00:00:00Z`));
+
+  if (post.slug === "canva-subscription") {
+    return (
+      <CanvaSubscriptionArticle
+        post={post}
+        product={product}
+        price={price}
+        publishedLabel={publishedLabel}
+        jsonLd={jsonLd(post, product)}
+      />
+    );
+  }
 
   return (
     <article className="px-4 py-12 sm:px-6 sm:py-16">
