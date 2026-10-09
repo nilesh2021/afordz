@@ -136,23 +136,23 @@ export default async function BlogPostPage({ params }) {
     <article className="px-4 py-12 sm:px-6 sm:py-16">
       <JsonLd data={jsonLd(post, product)} />
       <div className="mx-auto w-full max-w-3xl">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-indigo-700">
-          <Link href="/blog" className="hover:text-indigo-900">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent-strong">
+          <Link href="/blog" className="hover:text-ink">
             Journal
           </Link>
         </p>
-        <h1 className="mt-4 font-display text-4xl tracking-tight text-balance text-zinc-950 sm:text-5xl">
+        <h1 className="mt-4 font-display text-4xl tracking-tight text-balance text-ink sm:text-5xl">
           {post.title}
         </h1>
-        <p className="mt-4 text-sm text-zinc-600">
+        <p className="mt-4 text-sm text-muted">
           {publishedLabel} · {site.name}
         </p>
-        <p className="mt-6 text-lg leading-8 text-zinc-600">
+        <p className="mt-6 text-lg leading-8 text-muted">
           The Afordz HTML website template bundle is a ZIP of 1,000 standalone pages: 500 Bootstrap 5 files and 500 Tailwind CSS files. It is listed at{" "}
-          {price ? <strong className="font-semibold text-zinc-950">{price}</strong> : "the price on the product page"}. This article describes the archive that ships with that listing, including what the files do not contain.
+          {price ? <strong className="font-semibold text-ink">{price}</strong> : "the price on the product page"}. This article describes the archive that ships with that listing, including what the files do not contain.
         </p>
 
-        <figure className="mt-8 overflow-hidden rounded-[1.75rem] border border-white/80 shadow-[0_18px_40px_rgb(20_18_28/0.08)]">
+        <figure className="mt-8 overflow-hidden rounded-[1.75rem] border border-border shadow-[0_18px_40px_rgb(20_18_28/0.08)]">
           <Image
             src={post.image.src}
             alt={post.image.alt}
@@ -163,21 +163,21 @@ export default async function BlogPostPage({ params }) {
             fetchPriority="high"
             loading="eager"
           />
-          <figcaption className="bg-white/80 px-4 py-3 text-sm leading-6 text-zinc-600">
+          <figcaption className="bg-surface/90 px-4 py-3 text-sm leading-6 text-muted">
             This photograph is an article image. It is not a screenshot of a file in the download. The{" "}
-            <Link href="/products/bootstrap-templates-bundle" className="font-semibold text-indigo-800 hover:text-indigo-950">
+            <Link href="/products/bootstrap-templates-bundle" className="font-semibold text-ink underline decoration-accent underline-offset-4 hover:decoration-accent-strong">
               product page
             </Link>{" "}
             shows screenshots of six HTML files from the ZIP.
           </figcaption>
         </figure>
 
-        <nav aria-label="On this page" className="mt-10 rounded-[1.75rem] border border-white/80 bg-white/75 p-6">
-          <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-600">On this page</h2>
+        <nav aria-label="On this page" className="mt-10 rounded-[1.75rem] border border-border bg-surface/90 p-6">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-muted">On this page</h2>
           <ol className="mt-4 space-y-2 text-sm leading-6">
             {toc.map((item, index) => (
               <li key={item.id}>
-                <a href={`#${item.id}`} className="text-indigo-800 hover:text-indigo-950">
+                <a href={`#${item.id}`} className="text-ink underline decoration-accent underline-offset-4 hover:decoration-accent-strong">
                   {index + 1}. {item.label}
                 </a>
               </li>
@@ -185,9 +185,9 @@ export default async function BlogPostPage({ params }) {
           </ol>
         </nav>
 
-        <div className="mt-12 space-y-12 text-base leading-7 text-zinc-700">
+        <div className="mt-12 space-y-12 text-base leading-7 text-muted">
           <section id="the-split" className="scroll-mt-24">
-            <h2 className="font-display text-3xl tracking-tight text-zinc-950">The 500 + 500 split</h2>
+            <h2 className="font-display text-3xl tracking-tight text-ink">The 500 + 500 split</h2>
             <p className="mt-4">
               Bootstrap 5 and Tailwind CSS templates are both in this download, and they are kept apart. The outer folder is named “1000 Website Templates Mega Bundle”. That folder name does not mean every page is a Bootstrap website template. Inside it, BS500DEAL holds the Bootstrap files and TW500DEAL holds the Tailwind HTML templates.
             </p>
@@ -197,7 +197,7 @@ export default async function BlogPostPage({ params }) {
           </section>
 
           <section id="whats-inside" className="scroll-mt-24">
-            <h2 className="font-display text-3xl tracking-tight text-zinc-950">What the bundle includes</h2>
+            <h2 className="font-display text-3xl tracking-tight text-ink">What the bundle includes</h2>
             <p className="mt-4">
               The ZIP contains 1,000 HTML files, plus three short text files and one editor settings file under the Tailwind folder. Counted from the archive: 500 files in BS500DEAL and 500 files in TW500DEAL. Styles, icons, and fonts are loaded from the network.
             </p>
@@ -215,16 +215,16 @@ export default async function BlogPostPage({ params }) {
           </section>
 
           <section id="bootstrap-vs-tailwind" className="scroll-mt-24">
-            <h2 className="font-display text-3xl tracking-tight text-zinc-950">Bootstrap 5 vs Tailwind CSS</h2>
+            <h2 className="font-display text-3xl tracking-tight text-ink">Bootstrap 5 vs Tailwind CSS</h2>
             <p className="mt-4">
               Both halves are responsive website templates in the sense that the sampled files include a viewport meta tag and use a framework that is built for flexible layouts. That is not a test result for every breakpoint, every browser, or every one of the 1,000 files. The practical difference is how you change the design.
             </p>
-            <div className="mt-6 overflow-x-auto rounded-2xl border border-zinc-200 bg-white">
+            <div className="mt-6 overflow-x-auto rounded-2xl border border-border bg-surface">
               <table className="w-full min-w-[36rem] text-left text-sm leading-6">
                 <caption className="sr-only">
                   Comparison of styling approach, components, and customisation for the Bootstrap 5 files and the Tailwind CSS files in this bundle
                 </caption>
-                <thead className="bg-indigo-50 text-zinc-950">
+                <thead className="bg-background text-ink">
                   <tr>
                     <th scope="col" className="px-4 py-3 font-semibold">Topic</th>
                     <th scope="col" className="px-4 py-3 font-semibold">Bootstrap 5 files</th>
@@ -232,18 +232,18 @@ export default async function BlogPostPage({ params }) {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="border-t border-zinc-200">
-                    <th scope="row" className="px-4 py-3 align-top font-semibold text-zinc-950">Styling approach</th>
+                  <tr className="border-t border-border">
+                    <th scope="row" className="px-4 py-3 align-top font-semibold text-ink">Styling approach</th>
                     <td className="px-4 py-3 align-top">Named component and layout classes, such as containers, grids, and buttons, from the Bootstrap stylesheet.</td>
                     <td className="px-4 py-3 align-top">Utility classes written on the elements. The Play CDN script generates the CSS in the browser.</td>
                   </tr>
-                  <tr className="border-t border-zinc-200">
-                    <th scope="row" className="px-4 py-3 align-top font-semibold text-zinc-950">Components</th>
+                  <tr className="border-t border-border">
+                    <th scope="row" className="px-4 py-3 align-top font-semibold text-ink">Components</th>
                     <td className="px-4 py-3 align-top">Bootstrap’s prebuilt components. Interactive pieces need Bootstrap’s JavaScript as well as the CSS. Check the script tags in the file you open.</td>
                     <td className="px-4 py-3 align-top">No separate component library in the CDN script. Sections are ordinary HTML styled with utilities. Icons still come from Font Awesome.</td>
                   </tr>
-                  <tr className="border-t border-zinc-200">
-                    <th scope="row" className="px-4 py-3 align-top font-semibold text-zinc-950">Customisation</th>
+                  <tr className="border-t border-border">
+                    <th scope="row" className="px-4 py-3 align-top font-semibold text-ink">Customisation</th>
                     <td className="px-4 py-3 align-top">Edit the HTML and the inline font styles. Broader visual changes mean extra CSS or different Bootstrap classes. There is no local Bootstrap source to recompile.</td>
                     <td className="px-4 py-3 align-top">Edit the utility classes in the HTML. There is no tailwind.config file in the ZIP. The Play CDN is a preview tool, not a production build step.</td>
                   </tr>
@@ -253,34 +253,34 @@ export default async function BlogPostPage({ params }) {
           </section>
 
           <section id="choosing-a-layout" className="scroll-mt-24">
-            <h2 className="font-display text-3xl tracking-tight text-zinc-950">Choosing a layout</h2>
+            <h2 className="font-display text-3xl tracking-tight text-ink">Choosing a layout</h2>
             <p className="mt-4">
               The readme at the root of the ZIP says the package includes business, agency, portfolio, SaaS, ecommerce, and landing-page layouts. The product gallery does not use those six labels. It shows screenshots of six files whose visible tops are a dark hero, a photo cover, a marketing page, a product page, a landing page, and a feature list. Pick a file by opening it.
             </p>
-            <h3 className="mt-6 text-xl font-semibold text-zinc-950">Business, agency, and portfolio</h3>
+            <h3 className="mt-6 text-xl font-semibold text-ink">Business, agency, and portfolio</h3>
             <p className="mt-2">
               Look for a clear company or personal name, a short services or project list, and a contact block you can replace. A business page usually leads with what the organisation does. An agency page often leads with the studio itself. A portfolio page should make the work samples the main content. Swap the placeholder Latin text and any stock-style copy before you show the page to anyone else.
             </p>
-            <h3 className="mt-6 text-xl font-semibold text-zinc-950">SaaS and landing pages</h3>
+            <h3 className="mt-6 text-xl font-semibold text-ink">SaaS and landing pages</h3>
             <p className="mt-2">
               A SaaS-style page in this kind of set is a marketing layout: a product headline, a feature row, and a signup or call-to-action area. A landing page is narrower, with one offer and one next step. The HTML can collect nothing by itself. A form that only has markup will not store enquiries until you connect it to a service you control.
             </p>
-            <h3 className="mt-6 text-xl font-semibold text-zinc-950">Ecommerce layouts</h3>
+            <h3 className="mt-6 text-xl font-semibold text-ink">Ecommerce layouts</h3>
             <p className="mt-2">
               An ecommerce file here is a frontend design: product tiles, prices written into the HTML, and links between pages you choose to keep. Checkout, payments, stock, tax, and customer accounts are not included and need a separate build. Do not treat a static product grid as a shop.
             </p>
           </section>
 
           <section id="download-and-customise" className="scroll-mt-24">
-            <h2 className="font-display text-3xl tracking-tight text-zinc-950">Download, preview, and customise</h2>
+            <h2 className="font-display text-3xl tracking-tight text-ink">Download, preview, and customise</h2>
             <ol className="mt-4 list-decimal space-y-3 pl-5">
               <li>
                 Open the{" "}
-                <Link href="/products/bootstrap-templates-bundle" className="font-semibold text-indigo-800 hover:text-indigo-950">
+                <Link href="/products/bootstrap-templates-bundle" className="font-semibold text-ink underline decoration-accent underline-offset-4 hover:decoration-accent-strong">
                   bundle listing
                 </Link>{" "}
                 from the{" "}
-                <Link href="/shop" className="font-semibold text-indigo-800 hover:text-indigo-950">
+                <Link href="/shop" className="font-semibold text-ink underline decoration-accent underline-offset-4 hover:decoration-accent-strong">
                   shop
                 </Link>
                 . The catalogue price is {price ?? "shown on that page"}. The cart keeps one digital licence and will not add a second copy.
@@ -294,27 +294,27 @@ export default async function BlogPostPage({ params }) {
           </section>
 
           <section id="what-to-check" className="scroll-mt-24">
-            <h2 className="font-display text-3xl tracking-tight text-zinc-950">What to check before you publish</h2>
-            <h3 className="mt-6 text-xl font-semibold text-zinc-950">Dependencies</h3>
+            <h2 className="font-display text-3xl tracking-tight text-ink">What to check before you publish</h2>
+            <h3 className="mt-6 text-xl font-semibold text-ink">Dependencies</h3>
             <p className="mt-2">
               Bootstrap CSS, the Tailwind Play CDN, Font Awesome, Google Fonts, dummyimage.com, and any embedded video all require a network. If one host is blocked, that part of the page will not render. Favicon links that point at favicon.ico will 404 until you add an icon yourself.
             </p>
-            <h3 className="mt-6 text-xl font-semibold text-zinc-950">Browser compatibility</h3>
+            <h3 className="mt-6 text-xl font-semibold text-ink">Browser compatibility</h3>
             <p className="mt-2">
               The product page says you need a current browser that can open HTML. The sampled files set a viewport. Nothing in the store listing is a browser matrix, and alpha Bootstrap is not the same promise as a current stable release. Click through the page you actually want, including the width you care about.
             </p>
-            <h3 className="mt-6 text-xl font-semibold text-zinc-950">Accessibility</h3>
+            <h3 className="mt-6 text-xl font-semibold text-ink">Accessibility</h3>
             <p className="mt-2">
               The included readmes talk about accessible interfaces. That sentence is not an audit of these 1,000 files. Check headings, button names, colour contrast, keyboard use, and form labels on the page you will publish. Empty description and author meta tags, which appear in the sampled Bootstrap head, do not make a page SEO-ready.
             </p>
-            <h3 className="mt-6 text-xl font-semibold text-zinc-950">Licence and support</h3>
+            <h3 className="mt-6 text-xl font-semibold text-ink">Licence and support</h3>
             <p className="mt-2">
               No usage licence is published on the product page. The{" "}
-              <Link href="/terms" className="font-semibold text-indigo-800 hover:text-indigo-950">
+              <Link href="/terms" className="font-semibold text-ink underline decoration-accent underline-offset-4 hover:decoration-accent-strong">
                 terms
               </Link>{" "}
               are a draft and do not grant rights to copy, adapt, resell, or redistribute the files. The ZIP readmes reserve NSL Digital Lab branding and original material, and they note that third-party libraries stay under their own licences. Support hours and a support window are not listed for this product. The{" "}
-              <Link href="/contact" className="font-semibold text-indigo-800 hover:text-indigo-950">
+              <Link href="/contact" className="font-semibold text-ink underline decoration-accent underline-offset-4 hover:decoration-accent-strong">
                 contact page
               </Link>{" "}
               still shows placeholder contact details.
@@ -322,7 +322,7 @@ export default async function BlogPostPage({ params }) {
           </section>
 
           <section id="who-it-suits" className="scroll-mt-24">
-            <h2 className="font-display text-3xl tracking-tight text-zinc-950">Who it suits</h2>
+            <h2 className="font-display text-3xl tracking-tight text-ink">Who it suits</h2>
             <p className="mt-4">
               The bundle suits someone who wants a large folder of single-page HTML starting points and is comfortable editing markup. It is a useful reference if you already work in Bootstrap or Tailwind and want more layouts to adapt by hand.
             </p>
@@ -332,19 +332,19 @@ export default async function BlogPostPage({ params }) {
           </section>
 
           <section id="faqs" className="scroll-mt-24">
-            <h2 className="font-display text-3xl tracking-tight text-zinc-950">FAQs</h2>
+            <h2 className="font-display text-3xl tracking-tight text-ink">FAQs</h2>
             <div className="mt-6 space-y-6">
               {faqs.map((item) => (
                 <div key={item.question}>
-                  <h3 className="text-lg font-semibold text-zinc-950">{item.question}</h3>
+                  <h3 className="text-lg font-semibold text-ink">{item.question}</h3>
                   <p className="mt-2">{item.answer}</p>
                 </div>
               ))}
             </div>
           </section>
 
-          <section className="rounded-[1.75rem] border border-white/80 bg-white/80 p-6 sm:p-8">
-            <h2 className="font-display text-3xl tracking-tight text-zinc-950">See the listing</h2>
+          <section className="rounded-[1.75rem] border border-border bg-surface/90 p-6 sm:p-8">
+            <h2 className="font-display text-3xl tracking-tight text-ink">See the listing</h2>
             <p className="mt-4">
               The product page is the record of the price, the file list, and the preview note. It is the page to use before you add the licence to the cart.
             </p>

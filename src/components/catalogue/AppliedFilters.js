@@ -8,7 +8,7 @@ function Chip({ children, onRemove, label }) {
         type="button"
         onClick={onRemove}
         aria-label={`Remove ${label} filter`}
-        className="inline-flex min-h-11 max-w-full items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 text-sm font-medium text-indigo-950"
+        className="inline-flex min-h-11 max-w-full items-center gap-2 rounded-full border border-accent/40 bg-accent/15 px-3 text-sm font-medium text-ink"
       >
         <span className="truncate">{children}</span>
         <span aria-hidden="true">×</span>

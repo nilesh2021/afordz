@@ -47,13 +47,13 @@ export default function AddToCartControls({ product }) {
           Buy Now
         </Button>
       </div>
-      <p role="status" className="mt-3 min-h-6 text-sm font-medium text-indigo-950">
+      <p role="status" className="mt-3 min-h-6 text-sm font-medium text-ink">
         {message ||
           (inCart
             ? "Already in cart. One digital licence is included per order."
             : "One digital licence per order.")}
       </p>
-      <p className="text-sm leading-6 text-zinc-600">
+      <p className="text-sm leading-6 text-muted">
         Adding this licence does not download the archive. The file is released only after the server confirms a captured payment.
       </p>
     </div>

@@ -56,8 +56,8 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40">
       <div className="px-3 pt-3 sm:px-6">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 rounded-[1.75rem] border border-white/70 bg-white/70 px-3 shadow-[0_12px_40px_rgb(20_18_28/0.08)] backdrop-blur-xl md:rounded-full md:px-5">
-          <Link href="/" aria-label={`${site.name}, ${site.tagline}`} className="text-zinc-950">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 rounded-[1.75rem] border border-accent/35 bg-surface/75 px-3 shadow-[0_12px_40px_rgb(22_20_16/0.08)] backdrop-blur-xl md:rounded-full md:px-5">
+          <Link href="/" aria-label={`${site.name}, ${site.tagline}`} className="text-ink">
             <Logo size="sm" />
           </Link>
 
@@ -71,8 +71,8 @@ export default function Header() {
                   aria-current={current ? "page" : undefined}
                   className={
                     current
-                      ? "rounded-full bg-indigo-700 px-4 py-2 text-sm font-semibold text-white"
-                      : "rounded-full px-4 py-2 text-sm font-medium text-zinc-600 hover:bg-white hover:text-indigo-900"
+                      ? "rounded-full bg-accent-strong px-4 py-2 text-sm font-semibold text-surface"
+                      : "rounded-full px-4 py-2 text-sm font-medium text-muted hover:bg-accent/15 hover:text-ink"
                   }
                 >
                   {link.label}
@@ -86,14 +86,14 @@ export default function Header() {
               href="/cart"
               aria-label={cartLabel}
               onClick={closeMenu}
-              className="relative inline-flex size-11 items-center justify-center rounded-full border border-indigo-100 bg-white text-zinc-950 hover:border-indigo-700"
+              className="relative inline-flex size-11 items-center justify-center rounded-full border border-accent/40 bg-surface text-ink hover:border-accent-strong"
             >
               <svg viewBox="0 0 24 24" className="size-5" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8">
                 <path d="M6.5 8h11l-.8 11H7.3L6.5 8z" />
                 <path d="M9 8V6.5a3 3 0 0 1 6 0V8" />
               </svg>
               {ready && count > 0 ? (
-                <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-indigo-700 px-1 text-xs font-semibold text-white">
+                <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-accent-strong px-1 text-xs font-semibold text-surface">
                   {count}
                 </span>
               ) : null}
@@ -101,7 +101,7 @@ export default function Header() {
 
             <button
               type="button"
-              className="inline-flex size-11 items-center justify-center rounded-full border border-indigo-100 bg-white text-zinc-950 md:hidden"
+              className="inline-flex size-11 items-center justify-center rounded-full border border-accent/40 bg-surface text-ink md:hidden"
               aria-expanded={open}
               aria-controls="mobile-nav"
               onClick={() => setOpenPath(open ? null : pathname)}
@@ -115,7 +115,7 @@ export default function Header() {
 
       <div id="mobile-nav" hidden={!open} className="px-3 pt-2 md:hidden">
         <nav
-          className="mx-auto flex max-w-6xl flex-col gap-1 rounded-[1.5rem] border border-white/70 bg-white/90 p-2 shadow-[0_16px_40px_rgb(20_18_28/0.1)] backdrop-blur-xl"
+          className="mx-auto flex max-w-6xl flex-col gap-1 rounded-[1.5rem] border border-accent/35 bg-surface/92 p-2 shadow-[0_16px_40px_rgb(22_20_16/0.1)] backdrop-blur-xl"
           aria-label="Mobile"
         >
           {navLinks.map((link) => {
@@ -128,8 +128,8 @@ export default function Header() {
                 onClick={closeMenu}
                 className={
                   current
-                    ? "rounded-2xl bg-indigo-700 px-4 py-3 text-base font-semibold text-white"
-                    : "rounded-2xl px-4 py-3 text-base font-medium text-zinc-800 hover:bg-indigo-50"
+                    ? "rounded-2xl bg-accent-strong px-4 py-3 text-base font-semibold text-surface"
+                    : "rounded-2xl px-4 py-3 text-base font-medium text-ink hover:bg-accent/15"
                 }
               >
                 {link.label}

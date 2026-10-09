@@ -51,12 +51,12 @@ function productBreadcrumbs(product) {
 
 function Spec({ title, placeholder, children }) {
   return (
-    <section className="rounded-3xl border border-zinc-200 bg-white p-6">
+    <section className="rounded-3xl border border-border bg-surface p-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-lg font-semibold text-zinc-950">{title}</h2>
+        <h2 className="text-lg font-semibold text-ink">{title}</h2>
         {placeholder ? <PlaceholderLabel /> : null}
       </div>
-      <div className="mt-4 space-y-3 text-sm leading-6 text-zinc-700">{children}</div>
+      <div className="mt-4 space-y-3 text-sm leading-6 text-muted">{children}</div>
     </section>
   );
 }
@@ -82,17 +82,17 @@ function DirectProductPage({ product }) {
       {isIndexableProduct(product) ? <JsonLd data={productJsonLd(product)} /> : null}
       <JsonLd data={breadcrumbJsonLd(crumbs)} />
       <Breadcrumbs items={crumbs} />
-      <p className="mt-4 text-sm font-semibold text-indigo-800">
+      <p className="mt-4 text-sm font-semibold text-accent-strong">
         {product.category || "Digital product"}
       </p>
       <div className="mt-6 grid items-start gap-10 lg:grid-cols-2">
         <PreviewGallery images={product.images} note={product.previewNote} />
 
         <div>
-          <h1 className="font-display text-4xl tracking-tight text-balance text-zinc-950 sm:text-5xl">
+          <h1 className="font-display text-4xl tracking-tight text-balance text-ink sm:text-5xl">
             {productTitle(product)}
           </h1>
-          <p className="mt-4 text-lg leading-8 text-zinc-600">{product.description}</p>
+          <p className="mt-4 text-lg leading-8 text-muted">{product.description}</p>
           <div className="mt-6">
             <PriceTag
               amount={product.priceInr}
@@ -114,9 +114,9 @@ function DirectProductPage({ product }) {
             <AddToCartControls product={product} />
           )}
           {guide ? (
-            <p className="mt-6 text-sm leading-6 text-zinc-700">
+            <p className="mt-6 text-sm leading-6 text-muted">
               Read the{" "}
-              <Link href={`/blog/${guide.slug}`} className="font-semibold text-indigo-800 underline decoration-indigo-300 underline-offset-4 hover:text-indigo-950">
+              <Link href={`/blog/${guide.slug}`} className="font-semibold text-ink underline decoration-accent underline-offset-4 hover:decoration-accent-strong">
                 {guide.title}
               </Link>{" "}
               guide for what this listing includes.
@@ -135,7 +135,7 @@ function DirectProductPage({ product }) {
               <ul className="space-y-4">
                 {contents.map((item) => (
                   <li key={item.title}>
-                    <p className="font-semibold text-zinc-950">{item.title}</p>
+                    <p className="font-semibold text-ink">{item.title}</p>
                     <p>{item.detail}</p>
                   </li>
                 ))}
@@ -145,7 +145,7 @@ function DirectProductPage({ product }) {
 
           {product.subscriptionTerm ? (
             <Spec title="Subscription term" placeholder={fieldIsPlaceholder(product, "plan")}>
-              <p className="text-2xl font-semibold text-zinc-950">{product.subscriptionTerm}</p>
+              <p className="text-2xl font-semibold text-ink">{product.subscriptionTerm}</p>
               <p>Listed catalogue term. Confirm when the year starts after a verified payment.</p>
             </Spec>
           ) : null}
@@ -155,7 +155,7 @@ function DirectProductPage({ product }) {
               title="Bootstrap version"
               placeholder={fieldIsPlaceholder(product, "bootstrapVersion")}
             >
-              <p className="text-2xl font-semibold text-zinc-950">Bootstrap {product.bootstrapVersion}</p>
+              <p className="text-2xl font-semibold text-ink">Bootstrap {product.bootstrapVersion}</p>
               <p>{product.bootstrapVersionNote}</p>
               {fieldIsPlaceholder(product, "templateCount") ? (
                 <p>
@@ -167,7 +167,7 @@ function DirectProductPage({ product }) {
 
           {product.fileFormat ? (
             <Spec title="File format" placeholder={fieldIsPlaceholder(product, "fileFormat")}>
-              <p className="text-2xl font-semibold text-zinc-950">{product.fileFormat}</p>
+              <p className="text-2xl font-semibold text-ink">{product.fileFormat}</p>
               <p>{product.fileFormatNote}</p>
               {fieldIsPlaceholder(product, "recordCount") ? (
                 <p>The number of contact records is still a placeholder.</p>
@@ -225,10 +225,10 @@ function AffiliateProductPage({ product }) {
       <JsonLd data={breadcrumbJsonLd(crumbs)} />
       <Breadcrumbs items={crumbs} />
       <div className="mt-4 flex flex-wrap items-center gap-2">
-        <p className="text-sm font-semibold text-indigo-800">
+        <p className="text-sm font-semibold text-accent-strong">
           {product.category || "Partner offer"}
         </p>
-        <span className="rounded-full bg-violet-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-violet-900">
+        <span className="rounded-full bg-ink px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
           Partner offer
         </span>
       </div>
@@ -237,10 +237,10 @@ function AffiliateProductPage({ product }) {
         <PreviewGallery images={product.images} note={product.previewNote} />
 
         <div>
-          <h1 className="font-display text-4xl tracking-tight text-balance text-zinc-950 sm:text-5xl">
+          <h1 className="font-display text-4xl tracking-tight text-balance text-ink sm:text-5xl">
             {productTitle(product)}
           </h1>
-          <p className="mt-4 text-lg leading-8 text-zinc-600">{product.description}</p>
+          <p className="mt-4 text-lg leading-8 text-muted">{product.description}</p>
           {isDraftProduct(product) ? (
             <p className="mt-6 rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950">
               Draft listing. It is available in local development for review and is excluded from

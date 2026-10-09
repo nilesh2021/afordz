@@ -41,24 +41,24 @@ export default function CanvaSubscriptionArticle({ post, price, publishedLabel, 
     <article className="px-4 py-12 sm:px-6 sm:py-16">
       <JsonLd data={jsonLd} />
       <div className="mx-auto w-full max-w-3xl">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-indigo-700">
-          <Link href="/blog" className="hover:text-indigo-900">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent-strong">
+          <Link href="/blog" className="hover:text-ink">
             Journal
           </Link>
         </p>
-        <h1 className="mt-4 font-display text-4xl tracking-tight text-balance text-zinc-950 sm:text-5xl">
+        <h1 className="mt-4 font-display text-4xl tracking-tight text-balance text-ink sm:text-5xl">
           {post.title}
         </h1>
-        <p className="mt-4 text-sm text-zinc-600">
+        <p className="mt-4 text-sm text-muted">
           {publishedLabel} · {site.name}
         </p>
-        <p className="mt-6 text-lg leading-8 text-zinc-600">
+        <p className="mt-6 text-lg leading-8 text-muted">
           Canva is a browser design tool for people who need finished-looking graphics without building every layout from a blank file. This article is about that work. The Afordz listing, at{" "}
-          {price ? <strong className="font-semibold text-zinc-950">{price}</strong> : "the price on the product page"}{" "}
+          {price ? <strong className="font-semibold text-ink">{price}</strong> : "the price on the product page"}{" "}
           for one year, is covered at the end.
         </p>
 
-        <figure className="mt-8 overflow-hidden rounded-[1.75rem] border border-white/80 shadow-[0_18px_40px_rgb(20_18_28/0.08)]">
+        <figure className="mt-8 overflow-hidden rounded-[1.75rem] border border-border shadow-[0_18px_40px_rgb(20_18_28/0.08)]">
           <Image
             src={post.image.src}
             alt={post.image.alt}
@@ -69,17 +69,17 @@ export default function CanvaSubscriptionArticle({ post, price, publishedLabel, 
             fetchPriority="high"
             loading="eager"
           />
-          <figcaption className="bg-white/80 px-4 py-3 text-sm leading-6 text-zinc-600">
+          <figcaption className="bg-surface/90 px-4 py-3 text-sm leading-6 text-muted">
             This photograph is an article image. It is not a Canva screenshot.
           </figcaption>
         </figure>
 
-        <nav aria-label="On this page" className="mt-10 rounded-[1.75rem] border border-white/80 bg-white/75 p-6">
-          <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-600">On this page</h2>
+        <nav aria-label="On this page" className="mt-10 rounded-[1.75rem] border border-border bg-surface/90 p-6">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-muted">On this page</h2>
           <ol className="mt-4 space-y-2 text-sm leading-6">
             {toc.map((item, index) => (
               <li key={item.id}>
-                <a href={`#${item.id}`} className="text-indigo-800 hover:text-indigo-950">
+                <a href={`#${item.id}`} className="text-ink underline decoration-accent underline-offset-4 hover:decoration-accent-strong">
                   {index + 1}. {item.label}
                 </a>
               </li>
@@ -87,9 +87,9 @@ export default function CanvaSubscriptionArticle({ post, price, publishedLabel, 
           </ol>
         </nav>
 
-        <div className="mt-12 space-y-12 text-base leading-7 text-zinc-700">
+        <div className="mt-12 space-y-12 text-base leading-7 text-muted">
           <section id="what-canva-is" className="scroll-mt-24">
-            <h2 className="font-display text-3xl tracking-tight text-zinc-950">What Canva is</h2>
+            <h2 className="font-display text-3xl tracking-tight text-ink">What Canva is</h2>
             <p className="mt-4">
               Canva is an online editor. You open it in a current browser, pick a size or a template, and edit on the canvas. Text, photos, shapes, and icons sit on the page so you can move them instead of writing layout code.
             </p>
@@ -99,7 +99,7 @@ export default function CanvaSubscriptionArticle({ post, price, publishedLabel, 
           </section>
 
           <section id="social-and-marketing" className="scroll-mt-24">
-            <h2 className="font-display text-3xl tracking-tight text-zinc-950">Social and marketing graphics</h2>
+            <h2 className="font-display text-3xl tracking-tight text-ink">Social and marketing graphics</h2>
             <p className="mt-4">
               Social sizes are where Canva saves the most time. A square post, a story, and a cover are different frames. Templates already match those frames, so you are not guessing pixel sizes for each network.
             </p>
@@ -114,7 +114,7 @@ export default function CanvaSubscriptionArticle({ post, price, publishedLabel, 
           </section>
 
           <section id="presentations-and-docs" className="scroll-mt-24">
-            <h2 className="font-display text-3xl tracking-tight text-zinc-950">Presentations, posters, and docs</h2>
+            <h2 className="font-display text-3xl tracking-tight text-ink">Presentations, posters, and docs</h2>
             <p className="mt-4">
               The same editor covers slides, posters, flyers, and simple documents. A presentation template gives you a title slide and a content slide you can duplicate. A poster template gives you a hierarchy: a large title, a short line of detail, and a place for a date or a price.
             </p>
@@ -124,7 +124,7 @@ export default function CanvaSubscriptionArticle({ post, price, publishedLabel, 
           </section>
 
           <section id="why-it-helps" className="scroll-mt-24">
-            <h2 className="font-display text-3xl tracking-tight text-zinc-950">Why it helps</h2>
+            <h2 className="font-display text-3xl tracking-tight text-ink">Why it helps</h2>
             <ul className="mt-4 list-disc space-y-2 pl-5">
               <li>You work in the browser, so there is no design application to install for ordinary graphics.</li>
               <li>Templates reduce the blank-page problem. You edit a structure that already fits the format.</li>
@@ -137,13 +137,13 @@ export default function CanvaSubscriptionArticle({ post, price, publishedLabel, 
           </section>
 
           <section id="afordz-listing" className="scroll-mt-24">
-            <h2 className="font-display text-3xl tracking-tight text-zinc-950">The Afordz listing</h2>
+            <h2 className="font-display text-3xl tracking-tight text-ink">The Afordz listing</h2>
             <p className="mt-4">
               Afordz lists a Canva Subscription at {price ?? "the catalogue price"} for one year, in Design Tools. The page is not an official Canva storefront. It is marked coming soon, so it cannot be added to the cart.
             </p>
             <p className="mt-4">
               The plan name, the number of seats, and how access would be delivered are not confirmed. The listing does not include a download file. The{" "}
-              <Link href="/products/canva-subscription" className="font-semibold text-indigo-800 hover:text-indigo-950">
+              <Link href="/products/canva-subscription" className="font-semibold text-ink underline decoration-accent underline-offset-4 hover:decoration-accent-strong">
                 product page
               </Link>{" "}
               is the place to check those fields before the listing is available to buy.
@@ -151,19 +151,19 @@ export default function CanvaSubscriptionArticle({ post, price, publishedLabel, 
           </section>
 
           <section id="faqs" className="scroll-mt-24">
-            <h2 className="font-display text-3xl tracking-tight text-zinc-950">FAQs</h2>
+            <h2 className="font-display text-3xl tracking-tight text-ink">FAQs</h2>
             <div className="mt-6 space-y-6">
               {faqs.map((item) => (
                 <div key={item.question}>
-                  <h3 className="text-lg font-semibold text-zinc-950">{item.question}</h3>
+                  <h3 className="text-lg font-semibold text-ink">{item.question}</h3>
                   <p className="mt-2">{item.answer}</p>
                 </div>
               ))}
             </div>
           </section>
 
-          <section className="rounded-[1.75rem] border border-white/80 bg-white/80 p-6 sm:p-8">
-            <h2 className="font-display text-3xl tracking-tight text-zinc-950">See the listing</h2>
+          <section className="rounded-[1.75rem] border border-border bg-surface/90 p-6 sm:p-8">
+            <h2 className="font-display text-3xl tracking-tight text-ink">See the listing</h2>
             <p className="mt-4">
               The product page records the one-year price and the fields that are still open. It is marked coming soon.
             </p>

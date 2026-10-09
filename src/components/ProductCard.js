@@ -22,8 +22,8 @@ export default function ProductCard({ product }) {
   const title = productTitle(product);
 
   return (
-    <article className="flex h-full flex-col rounded-3xl border border-white/80 bg-white/90 shadow-[0_18px_40px_rgb(20_18_28/0.08)] sm:flex-row sm:rounded-[2rem]">
-      <div className="shrink-0 overflow-hidden rounded-t-3xl bg-linear-to-br from-violet-50 via-white to-emerald-50 p-2 sm:w-64 sm:rounded-l-[2rem] sm:rounded-tr-none sm:p-4 lg:w-72">
+    <article className="flex h-full flex-col rounded-3xl border border-border bg-surface/90 shadow-[0_18px_40px_rgb(22_20_16/0.08)] sm:flex-row sm:rounded-[2rem]">
+      <div className="shrink-0 overflow-hidden rounded-t-3xl bg-linear-to-br from-[#f3eef8] via-surface to-[#e4dcf0] p-2 sm:w-64 sm:rounded-l-[2rem] sm:rounded-tr-none sm:p-4 lg:w-72">
         {preview?.src ? (
           <TemplateMockup
             variant={preview.variant}
@@ -32,7 +32,7 @@ export default function ProductCard({ product }) {
             sizes="(min-width: 1024px) 18rem, (min-width: 640px) 16rem, 100vw"
           />
         ) : preview ? (
-          <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-zinc-200">
+          <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-border">
             <Image
               src="/home/browse.jpg"
               alt="A tablet showing a grid of website template thumbnails"
@@ -42,19 +42,19 @@ export default function ProductCard({ product }) {
             />
           </div>
         ) : (
-          <div className="aspect-[16/10] rounded-2xl border border-dashed border-indigo-200 bg-white" />
+          <div className="aspect-[16/10] rounded-2xl border border-dashed border-accent/50 bg-surface" />
         )}
       </div>
       <div className="flex min-w-0 flex-1 flex-col justify-between gap-3 p-4 sm:gap-5 sm:px-6 sm:py-5">
         <div>
           <div className="flex flex-wrap items-center gap-2">
             {product.category ? (
-              <p className="w-fit rounded-full bg-indigo-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-indigo-800">
+              <p className="w-fit rounded-full border border-accent/40 bg-accent/15 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink">
                 {product.category}
               </p>
             ) : null}
             {affiliate ? (
-              <p className="w-fit rounded-full bg-violet-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-violet-900">
+              <p className="w-fit rounded-full bg-ink px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
                 Partner offer
               </p>
             ) : null}
@@ -64,14 +64,14 @@ export default function ProductCard({ product }) {
               </p>
             ) : null}
           </div>
-          <h3 className="mt-2 font-display text-2xl leading-snug tracking-tight text-zinc-950 sm:mt-3 sm:text-[1.7rem]">
-            <Link href={`/products/${product.slug}`} className="hover:text-indigo-800">
+          <h3 className="mt-2 font-display text-2xl leading-snug tracking-tight text-ink sm:mt-3 sm:text-[1.7rem]">
+            <Link href={`/products/${product.slug}`} className="hover:text-accent-strong">
               {title}
             </Link>
           </h3>
-          <p className="mt-2 max-w-xl text-sm leading-6 text-zinc-600">{summary}</p>
+          <p className="mt-2 max-w-xl text-sm leading-6 text-muted">{summary}</p>
           <div className="mt-3 flex flex-wrap items-center gap-2 sm:mt-4">
-            <p className="font-display text-xl tracking-tight text-zinc-950 sm:text-2xl">
+            <p className="font-display text-xl tracking-tight text-ink sm:text-2xl">
               <span className="sr-only">Price: </span>
               {affiliate || !hasVerifiedPrice(product) ? (
                 "Check current price"
@@ -79,7 +79,7 @@ export default function ProductCard({ product }) {
                 <>
                   {formatInr(product.priceInr)}
                   {product.subscriptionTerm ? (
-                    <span className="ml-2 text-base font-medium tracking-normal text-zinc-600">
+                    <span className="ml-2 text-base font-medium tracking-normal text-muted">
                       for {product.subscriptionTerm}
                     </span>
                   ) : null}

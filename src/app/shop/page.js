@@ -24,36 +24,37 @@ export default async function ShopPage({ searchParams }) {
   return (
     <>
       <section>
-        <div className="mx-auto grid w-full max-w-6xl items-center gap-8 px-4 pt-10 sm:px-6 sm:pt-14 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-indigo-700">Catalogue</p>
-            <h1 className="mt-3 max-w-3xl font-display text-5xl tracking-tight text-balance text-zinc-950 sm:text-6xl">
-              Digital resources and website template bundles
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 pt-6 sm:flex-row sm:items-end sm:justify-between sm:gap-8 sm:px-6 sm:pt-8">
+          <div className="min-w-0 max-w-2xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent-strong">Catalogue</p>
+            <h1 className="mt-2 font-display text-3xl tracking-tight text-balance text-ink sm:text-4xl">
+              Smart tools and digital resources
             </h1>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-600">
-              Browse website template bundles and digital resources, including Bootstrap 5 templates and Tailwind CSS HTML templates, by category, format, compatible tool, and price in INR. Partner offers are fulfilled on the vendor website.
+            <p className="mt-2 max-w-xl text-sm leading-6 text-muted">
+              Filter by category, format, tool, and price in INR. Partner offers check out on the vendor site.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div className="overflow-hidden rounded-[1.75rem] border border-white/80 shadow-[0_16px_40px_rgb(20_18_28/0.08)]">
+          <div className="hidden shrink-0 grid-cols-2 gap-2 sm:grid sm:w-56 lg:w-64">
+            <div className="overflow-hidden rounded-2xl border border-border shadow-[0_12px_28px_rgb(22_20_16/0.08)]">
               <Image
                 src="/home/browse.jpg"
                 alt="A tablet showing a grid of website template thumbnails"
                 width={960}
                 height={540}
-                className="aspect-[4/5] w-full object-cover sm:aspect-[16/11]"
-                sizes="(min-width: 1024px) 280px, 45vw"
+                className="aspect-[5/4] w-full object-cover"
+                sizes="8rem"
                 fetchPriority="high"
                 loading="eager"
               />
             </div>
-            <div className="overflow-hidden rounded-[1.75rem] border border-white/80 shadow-[0_16px_40px_rgb(20_18_28/0.08)]">
+            <div className="overflow-hidden rounded-2xl border border-border shadow-[0_12px_28px_rgb(22_20_16/0.08)]">
               <Image
                 src="/home/templates.jpg"
                 alt="Printed website layout cards stacked on a desk"
                 width={1024}
                 height={768}
-                className="aspect-[4/5] w-full object-cover sm:aspect-[16/11]"
+                className="aspect-[5/4] w-full object-cover"
+                sizes="8rem"
               />
             </div>
           </div>

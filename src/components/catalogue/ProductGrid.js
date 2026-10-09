@@ -4,11 +4,11 @@ import ProductCard from "@/components/ProductCard";
 export default function ProductGrid({ products, totalCount, priceInvalid, onReset }) {
   if (products.length === 0) {
     return (
-      <div className="rounded-3xl border border-dashed border-indigo-200 bg-white px-6 py-10">
-        <p className="text-lg font-semibold text-zinc-950">
+      <div className="rounded-3xl border border-dashed border-accent/50 bg-surface px-6 py-10">
+        <p className="text-lg font-semibold text-ink">
           {totalCount === 0 ? "No products yet" : "No matching products"}
         </p>
-        <p className="mt-2 max-w-md text-sm leading-6 text-zinc-600">
+        <p className="mt-2 max-w-md text-sm leading-6 text-muted">
           {totalCount === 0
             ? "Products added to the catalogue data file will show up here."
             : priceInvalid

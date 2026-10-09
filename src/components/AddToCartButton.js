@@ -24,7 +24,7 @@ export default function AddToCartButton({ product }) {
       {inCart ? (
         <Button
           href="/cart"
-          className="w-full shadow-md shadow-indigo-700/25"
+          className="w-full shadow-md shadow-accent-strong/25"
           aria-label={`View cart, ${product.name} already added`}
         >
           View cart
@@ -33,7 +33,7 @@ export default function AddToCartButton({ product }) {
         <Button
           type="button"
           onClick={handleAdd}
-          className="w-full shadow-md shadow-indigo-700/25"
+          className="w-full shadow-md shadow-accent-strong/25"
           disabled={!ready}
           aria-label={`Add ${product.name} to cart`}
         >
@@ -44,7 +44,7 @@ export default function AddToCartButton({ product }) {
         role="status"
         className={
           status
-            ? "absolute left-0 top-full z-10 mt-1 w-max max-w-full text-sm font-medium text-indigo-950"
+            ? "absolute left-0 top-full z-10 mt-1 w-max max-w-full text-sm font-medium text-ink"
             : "sr-only"
         }
       >

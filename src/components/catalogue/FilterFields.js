@@ -8,11 +8,11 @@ function fieldId(prefix, group, value) {
 
 function Choice({ id, label, checked, onChange }) {
   return (
-    <label className="flex min-h-9 cursor-pointer items-center gap-2 rounded-lg px-1.5 text-sm text-zinc-800 hover:bg-violet-50">
+    <label className="flex min-h-9 cursor-pointer items-center gap-2 rounded-lg px-1.5 text-sm text-ink hover:bg-accent/15">
       <input
         id={id}
         type="checkbox"
-        className="size-4 shrink-0 accent-indigo-700"
+        className="size-4 shrink-0 accent-accent-strong"
         checked={checked}
         onChange={(event) => onChange(event.target.checked)}
       />
@@ -54,7 +54,7 @@ export default function FilterFields({
   const invalid = minNumber != null && maxNumber != null && minNumber > maxNumber;
   const describedBy = [hintId, invalid ? errorId : null].filter(Boolean).join(" ");
   const inputClass =
-    "mt-1 w-full min-h-9 rounded-lg border border-indigo-100 bg-white px-2.5 text-sm text-zinc-950";
+    "mt-1 w-full min-h-9 rounded-lg border border-border bg-surface px-2.5 text-sm text-ink";
   const formats = options.formats ?? [];
   const selectedFormats = values.formats ?? [];
   const purchase = values.purchase ?? "";
@@ -62,18 +62,18 @@ export default function FilterFields({
   return (
     <div className="space-y-4">
       <fieldset>
-        <legend className="px-1.5 text-sm font-semibold text-zinc-950">Purchase type</legend>
+        <legend className="px-1.5 text-sm font-semibold text-ink">Purchase type</legend>
         <div className="mt-1">
           {PURCHASE_OPTIONS.map((option) => (
             <label
               key={option.value || "all"}
-              className="flex min-h-9 cursor-pointer items-center gap-2 rounded-lg px-1.5 text-sm text-zinc-800 hover:bg-violet-50"
+              className="flex min-h-9 cursor-pointer items-center gap-2 rounded-lg px-1.5 text-sm text-ink hover:bg-accent/15"
             >
               <input
                 id={fieldId(idPrefix, "purchase", option.value || "all")}
                 type="radio"
                 name={`${idPrefix}-purchase`}
-                className="size-4 shrink-0 accent-indigo-700"
+                className="size-4 shrink-0 accent-accent-strong"
                 checked={purchase === option.value}
                 onChange={() => onPurchaseChange(option.value)}
               />
@@ -85,7 +85,7 @@ export default function FilterFields({
 
       {options.categories.length > 0 ? (
         <fieldset>
-          <legend className="px-1.5 text-sm font-semibold text-zinc-950">Category</legend>
+          <legend className="px-1.5 text-sm font-semibold text-ink">Category</legend>
           <div className="mt-1">
             {options.categories.map((category) => (
               <Choice
@@ -102,7 +102,7 @@ export default function FilterFields({
 
       {formats.length > 0 ? (
         <fieldset>
-          <legend className="px-1.5 text-sm font-semibold text-zinc-950">Format</legend>
+          <legend className="px-1.5 text-sm font-semibold text-ink">Format</legend>
           <div className="mt-1">
             {formats.map((format) => (
               <Choice
@@ -119,7 +119,7 @@ export default function FilterFields({
 
       {options.frameworks.length > 0 ? (
         <fieldset>
-          <legend className="px-1.5 text-sm font-semibold text-zinc-950">Compatible tool</legend>
+          <legend className="px-1.5 text-sm font-semibold text-ink">Compatible tool</legend>
           <div className="mt-1">
             {options.frameworks.map((framework) => (
               <Choice
@@ -135,12 +135,12 @@ export default function FilterFields({
       ) : null}
 
       <fieldset>
-        <legend className="px-1.5 text-sm font-semibold text-zinc-950">Price (INR)</legend>
-        <p id={hintId} className="mt-1 px-1.5 text-xs leading-5 text-zinc-600">
+        <legend className="px-1.5 text-sm font-semibold text-ink">Price (INR)</legend>
+        <p id={hintId} className="mt-1 px-1.5 text-xs leading-5 text-muted">
           {priceHint(options)}
         </p>
         <div className="mt-2 grid grid-cols-2 gap-2 px-1.5">
-          <label htmlFor={`${idPrefix}-min`} className="block text-sm font-medium text-zinc-800">
+          <label htmlFor={`${idPrefix}-min`} className="block text-sm font-medium text-ink">
             Minimum
             <input
               id={`${idPrefix}-min`}
@@ -153,7 +153,7 @@ export default function FilterFields({
               className={inputClass}
             />
           </label>
-          <label htmlFor={`${idPrefix}-max`} className="block text-sm font-medium text-zinc-800">
+          <label htmlFor={`${idPrefix}-max`} className="block text-sm font-medium text-ink">
             Maximum
             <input
               id={`${idPrefix}-max`}

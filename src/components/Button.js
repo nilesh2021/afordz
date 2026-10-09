@@ -2,9 +2,9 @@ import Link from "next/link";
 
 const variants = {
   primary:
-    "bg-indigo-700 text-white shadow-[0_12px_28px_rgb(67_56_202/0.32)] hover:bg-indigo-800",
+    "bg-accent-strong text-surface shadow-[0_12px_28px_rgb(109_40_217/0.35)] hover:bg-[#5b21b6] active:bg-[#4c1d95]",
   secondary:
-    "border border-indigo-200/80 bg-white/80 text-zinc-950 backdrop-blur hover:border-indigo-700 hover:text-indigo-900",
+    "border border-accent-strong/40 bg-surface/90 text-accent-strong backdrop-blur hover:border-accent-strong hover:bg-accent/15 hover:text-ink",
 };
 
 export default function Button({

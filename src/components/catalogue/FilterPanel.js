@@ -44,14 +44,14 @@ export default function FilterPanel({
   }
 
   return (
-    <aside className="rounded-2xl border border-zinc-200 bg-white shadow-sm">
-      <div className="flex items-center justify-between gap-3 border-b border-zinc-100 px-3 py-2">
-        <h2 className="text-base font-semibold text-indigo-950">Filters</h2>
+    <aside className="rounded-2xl border border-border bg-surface shadow-sm">
+      <div className="flex items-center justify-between gap-3 border-b border-border px-3 py-2">
+        <h2 className="text-base font-semibold text-ink">Filters</h2>
         <button
           type="button"
           onClick={handleClear}
           disabled={!canClear}
-          className="inline-flex min-h-9 items-center text-sm font-semibold text-indigo-800 underline decoration-indigo-300 underline-offset-4 hover:decoration-indigo-800 disabled:cursor-not-allowed disabled:text-zinc-400 disabled:no-underline"
+          className="inline-flex min-h-9 items-center text-sm font-semibold text-ink underline decoration-accent underline-offset-4 hover:decoration-accent-strong disabled:cursor-not-allowed disabled:text-muted/60 disabled:no-underline"
         >
           Clear all
         </button>

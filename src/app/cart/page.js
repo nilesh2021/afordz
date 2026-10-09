@@ -11,8 +11,8 @@ export const metadata = pageMetadata({
 export default function CartPage() {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-      <h1 className="text-4xl font-semibold tracking-tight text-zinc-950">Cart</h1>
-      <p className="mt-3 max-w-2xl text-base leading-7 text-zinc-600">
+      <h1 className="font-display text-4xl font-semibold tracking-tight text-ink">Cart</h1>
+      <p className="mt-3 max-w-2xl text-base leading-7 text-muted">
         One digital licence per order. The cart is saved in this browser and is not an account.
       </p>
       <div className="mt-8">

@@ -106,7 +106,7 @@ export default function FilterDrawer({ query, options, onApply }) {
     <>
       <button
         type="button"
-        className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-indigo-700 px-5 text-sm font-semibold text-white hover:bg-indigo-800 lg:hidden"
+        className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-accent-strong px-5 text-sm font-semibold text-surface hover:bg-[#5b21b6] lg:hidden"
         aria-expanded={open}
         aria-controls={dialogId}
         aria-haspopup="dialog"
@@ -117,7 +117,7 @@ export default function FilterDrawer({ query, options, onApply }) {
         </svg>
         Filters
         {activeCount > 0 ? (
-          <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-white px-1.5 text-xs font-semibold text-indigo-800">
+          <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-surface px-1.5 text-xs font-semibold text-ink">
             {activeCount}
             <span className="sr-only"> active</span>
           </span>
@@ -133,19 +133,19 @@ export default function FilterDrawer({ query, options, onApply }) {
         onClose={() => setOpen(false)}
       >
         <div className="flex h-full w-full flex-row-reverse">
-          <form className="flex h-full w-full max-w-sm shrink-0 flex-col bg-white shadow-2xl" onSubmit={applyDraft}>
-            <div className="flex items-start justify-between gap-3 border-b border-indigo-50 bg-indigo-50/80 px-5 py-4">
+          <form className="flex h-full w-full max-w-sm shrink-0 flex-col bg-surface shadow-2xl" onSubmit={applyDraft}>
+            <div className="flex items-start justify-between gap-3 border-b border-border bg-background px-5 py-4">
               <div>
-                <h2 id={titleId} className="text-lg font-semibold text-indigo-950">
+                <h2 id={titleId} className="text-lg font-semibold text-ink">
                   Filters
                 </h2>
-                <p id={descriptionId} className="mt-1 text-sm leading-6 text-zinc-600">
+                <p id={descriptionId} className="mt-1 text-sm leading-6 text-muted">
                   Apply updates the catalogue. Clear removes the choices in this panel.
                 </p>
               </div>
               <button
                 type="button"
-                className="inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-zinc-300 text-zinc-950"
+                className="inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-border text-ink"
                 onClick={closeDrawer}
               >
                 <span className="sr-only">Close filters</span>
@@ -169,8 +169,8 @@ export default function FilterDrawer({ query, options, onApply }) {
               />
             </div>
 
-            <div className="shrink-0 border-t border-indigo-50 bg-indigo-50/50 px-5 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
-              <p className="mb-3 text-sm font-medium text-zinc-700" aria-live="polite">
+            <div className="shrink-0 border-t border-border bg-background px-5 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+              <p className="mb-3 text-sm font-medium text-ink" aria-live="polite">
                 {productCountLabel(matchCount)} match{matchCount === 1 ? "es" : ""} these filters.
               </p>
               <div className="flex gap-3">

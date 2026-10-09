@@ -26,11 +26,11 @@ export default function RefundPolicyPage() {
       <DraftSection title="How to send a question">
         <p>
           Write to {site.email}. You can also read the{" "}
-          <Link className="font-semibold text-indigo-800 underline decoration-indigo-300 underline-offset-4" href="/contact">
+          <Link className="font-semibold text-ink underline decoration-accent underline-offset-4" href="/contact">
             contact page
           </Link>{" "}
           and the{" "}
-          <Link className="font-semibold text-indigo-800 underline decoration-indigo-300 underline-offset-4" href="/terms">
+          <Link className="font-semibold text-ink underline decoration-accent underline-offset-4" href="/terms">
             terms
           </Link>
           .

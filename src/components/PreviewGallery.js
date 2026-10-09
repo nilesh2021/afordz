@@ -40,7 +40,7 @@ export default function PreviewGallery({ images, note }) {
         role="tabpanel"
         id={`panel-${active.id}`}
         aria-labelledby={`tab-${active.id}`}
-        className="rounded-2xl bg-zinc-50 p-2 sm:p-3"
+        className="rounded-2xl border border-border bg-background p-2 sm:p-3"
       >
         <TemplateMockup
           variant={active.variant}
@@ -49,9 +49,9 @@ export default function PreviewGallery({ images, note }) {
           eager
           sizes="(min-width: 1024px) 560px, 100vw"
         />
-        <p className="mt-2 text-sm font-medium text-zinc-800">{active.label}</p>
+        <p className="mt-2 text-sm font-medium text-ink">{active.label}</p>
         {active.summary ? (
-          <p className="mt-0.5 line-clamp-2 text-xs leading-5 text-zinc-600">{active.summary}</p>
+          <p className="mt-0.5 line-clamp-2 text-xs leading-5 text-muted">{active.summary}</p>
         ) : null}
       </div>
 
@@ -77,7 +77,7 @@ export default function PreviewGallery({ images, note }) {
               tabIndex={selected ? 0 : -1}
               onClick={() => setActiveId(image.id)}
               className={`rounded-xl p-1 text-left ${
-                selected ? "ring-2 ring-indigo-700 ring-offset-1" : "hover:bg-zinc-50"
+                selected ? "ring-2 ring-accent-strong ring-offset-1" : "hover:bg-background"
               }`}
             >
               <TemplateMockup
@@ -86,14 +86,14 @@ export default function PreviewGallery({ images, note }) {
                 alt=""
                 sizes="(min-width: 640px) 10rem, 30vw"
               />
-              <span className="mt-1 block truncate text-xs font-medium text-zinc-800">
+              <span className="mt-1 block truncate text-xs font-medium text-ink">
                 {image.label}
               </span>
             </button>
           );
         })}
       </div>
-      <p className="mt-2 text-xs leading-5 text-zinc-600">{previewNote}</p>
+      <p className="mt-2 text-xs leading-5 text-muted">{previewNote}</p>
     </div>
   );
 }

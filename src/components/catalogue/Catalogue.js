@@ -71,7 +71,7 @@ export default function Catalogue({ initialQuery }) {
   }
 
   return (
-    <section id="shop" aria-labelledby="catalogue-heading" className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
+    <section id="shop" aria-labelledby="catalogue-heading" className="mx-auto w-full max-w-6xl px-4 py-5 sm:px-6 sm:py-7">
       <h2 id="catalogue-heading" className="sr-only">
         Product catalogue
       </h2>
@@ -108,7 +108,7 @@ export default function Catalogue({ initialQuery }) {
           <FilterDrawer query={query} options={options} onApply={commitFilters} />
 
           <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between lg:mt-0">
-            <p className="text-sm font-semibold text-indigo-950" aria-live="polite" aria-atomic="true">
+            <p className="text-sm font-semibold text-ink" aria-live="polite" aria-atomic="true">
               {productCountLabel(results.length)}
               {results.length === 0 && products.length > 0 ? (
                 <span className="sr-only">. Nothing matches these filters.</span>
@@ -119,7 +119,7 @@ export default function Catalogue({ initialQuery }) {
 
           <AppliedFilters query={query} onChange={commit} />
 
-          <div className="mt-5 rounded-[2rem] bg-linear-to-br from-emerald-50/90 via-white/40 to-violet-50 p-4 shadow-[0_16px_40px_rgb(16_185_129/0.08)] sm:p-6">
+          <div className="mt-5 rounded-[2rem] bg-linear-to-br from-[#f3eef8] via-surface/70 to-[#e4dcf0] p-4 shadow-[0_16px_40px_rgb(26_18_37/0.06)] sm:p-6">
             <ProductGrid
               products={results}
               totalCount={products.length}
