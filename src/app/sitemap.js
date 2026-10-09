@@ -1,14 +1,14 @@
 import { posts } from "@/data/posts";
-import { getVisibleProducts } from "@/data/products";
-import { getSiteUrl } from "@/data/site";
+import { getIndexableProducts } from "@/data/products";
+import { canonicalUrl, getSiteUrl, staticPageUpdatedAt } from "@/data/site";
 
 export default function sitemap() {
-  const siteUrl = getSiteUrl() ?? "http://localhost:3000";
-  const staticPaths = ["", "/shop", "/blog", "/contact", "/privacy", "/terms", "/refund-policy"];
+  const siteUrl = getSiteUrl();
+  const staticPaths = ["/", "/shop", "/blog", "/contact", "/privacy", "/terms", "/refund-policy"];
 
   const staticEntries = staticPaths.map((path) => ({
-    url: `${siteUrl}${path || "/"}`,
-    lastModified: new Date("2026-10-07"),
+    url: canonicalUrl(path),
+    lastModified: new Date(`${staticPageUpdatedAt[path]}T00:00:00Z`),
   }));
 
   const postEntries = posts.map((post) => ({
@@ -16,7 +16,7 @@ export default function sitemap() {
     lastModified: new Date(`${post.published}T00:00:00Z`),
   }));
 
-  const productEntries = getVisibleProducts().map((product) => ({
+  const productEntries = getIndexableProducts().map((product) => ({
     url: `${siteUrl}/products/${product.slug}`,
     lastModified: new Date(`${product.addedAt}T00:00:00Z`),
   }));

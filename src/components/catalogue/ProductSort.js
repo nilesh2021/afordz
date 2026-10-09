@@ -3,7 +3,7 @@ import { SORT_OPTIONS } from "@/data/catalogue";
 export default function ProductSort({ value, onChange, className = "" }) {
   return (
     <div className={`flex items-center gap-2.5 ${className}`.trim()}>
-      <label htmlFor="catalogue-sort" className="shrink-0 text-sm text-zinc-500">
+      <label htmlFor="catalogue-sort" className="shrink-0 text-sm text-zinc-600">
         Sort by
       </label>
       <select

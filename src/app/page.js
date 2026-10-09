@@ -1,9 +1,12 @@
 import Image from "next/image";
+import Link from "next/link";
 import Button from "@/components/Button";
 import FaqAccordion from "@/components/FaqAccordion";
+import JsonLd from "@/components/JsonLd";
 import TemplateMockup from "@/components/TemplateMockup";
 import { downloadSteps, faqs, homeFeatures } from "@/data/site";
-import { formatInr, getVisibleProducts, hasVerifiedPrice } from "@/data/products";
+import { formatInr, getVisibleProductBySlug, hasVerifiedPrice, productTitle } from "@/data/products";
+import { organizationJsonLd, pageMetadata } from "@/lib/seo";
 
 const featurePhotos = {
   "Filter the shop": {
@@ -16,11 +19,20 @@ const featurePhotos = {
   },
 };
 
-export const metadata = {
-  title: { absolute: "Afordz — Digital resources" },
+export const metadata = pageMetadata({
+  title: { absolute: "Website Templates & Digital Resources | Afordz" },
   description:
-    "Afordz lists digital website resources with prices in INR. Shop the catalogue, then review a listing before you add it to the cart.",
-};
+    "Afordz sells digital resources and website template bundles in INR, including Bootstrap 5 templates and Tailwind CSS HTML templates. Browse the catalogue, then review a listing before checkout.",
+  path: "/",
+  images: [
+    {
+      src: "/home/workspace.jpg",
+      alt: "Laptop on a desk showing a website layout",
+      width: 640,
+      height: 480,
+    },
+  ],
+});
 
 function StepIcon({ index }) {
   if (index === 1) {
@@ -57,11 +69,13 @@ function StepIcon({ index }) {
 }
 
 export default function HomePage() {
-  const featured = getVisibleProducts()[0];
+  const featured = getVisibleProductBySlug("bootstrap-templates-bundle");
   const preview = featured?.images?.[0];
+  const featuredHref = featured ? `/products/${featured.slug}` : "/shop";
 
   return (
     <>
+      <JsonLd data={organizationJsonLd()} />
       <section className="px-4 pt-6 sm:px-6 sm:pt-10">
         <div className="relative mx-auto grid w-full max-w-6xl items-end gap-6 overflow-hidden rounded-[1.75rem] border border-zinc-950/10 bg-white px-5 py-8 shadow-[0_30px_80px_rgb(20_18_28/0.08)] sm:gap-10 sm:rounded-[2.5rem] sm:px-10 sm:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-8 lg:px-14 lg:py-16">
           <div
@@ -77,17 +91,23 @@ export default function HomePage() {
               Website resources · INR
             </p>
             <h1 className="mt-4 max-w-xl font-display text-4xl leading-[0.95] tracking-tight text-zinc-950 sm:mt-6 sm:text-6xl lg:text-[4.5rem]">
-              Digital resources for your{" "}
-              <em className="not-italic text-indigo-700">next big idea</em>
+              Website templates and digital resources for your{" "}
+              <em className="not-italic text-indigo-700">next project</em>
             </h1>
             <p className="mt-4 max-w-xl text-sm leading-6 text-zinc-600 sm:mt-6 sm:text-lg sm:leading-7">
-              Browse the catalogue by category, format, compatible tool, and price. Open an Afordz listing before you add one digital licence to the cart. Partner offers open on the vendor website.
+              Browse Bootstrap 5 templates, Tailwind CSS HTML templates, website template bundles, and other digital resources. Filter by category, format, compatible tool, and price in INR. Open a listing before you add one digital licence to the cart. Partner offers open on the vendor website.
             </p>
             <div className="mt-6 flex flex-wrap gap-3 sm:mt-9">
               <Button href="/shop">Shop the catalogue</Button>
-              <Button href="/contact" variant="secondary">
-                Contact us
-              </Button>
+              {featured ? (
+                <Button href={featuredHref} variant="secondary">
+                  View the template bundle
+                </Button>
+              ) : (
+                <Button href="/contact" variant="secondary">
+                  Contact us
+                </Button>
+              )}
             </div>
           </div>
 
@@ -99,8 +119,10 @@ export default function HomePage() {
                   alt="Laptop on a desk showing a website layout"
                   width={640}
                   height={480}
+                  sizes="(min-width: 1024px) 560px, (min-width: 640px) 80vw, 100vw"
                   className="aspect-[16/8] w-full object-cover"
-                  priority
+                  fetchPriority="high"
+                  loading="eager"
                 />
               </div>
               <div className="mt-3 rounded-2xl bg-white p-2 text-zinc-950">
@@ -116,7 +138,10 @@ export default function HomePage() {
                 )}
               </div>
               {featured ? (
-                <div className="mt-3 flex flex-wrap gap-2">
+                <Link href={featuredHref} className="mt-3 flex flex-wrap items-center gap-2">
+                  <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-zinc-950 underline decoration-indigo-300 underline-offset-2">
+                    {productTitle(featured)}
+                  </span>
                   {featured.category ? (
                     <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-indigo-800">
                       {featured.category}
@@ -132,7 +157,7 @@ export default function HomePage() {
                       {formatInr(featured.priceInr)}
                     </span>
                   ) : null}
-                </div>
+                </Link>
               ) : null}
             </div>
           </div>
@@ -147,7 +172,7 @@ export default function HomePage() {
               About Afordz
             </h2>
             <p className="mt-5 max-w-xl text-base leading-7 text-zinc-700">
-              Afordz is a digital catalogue with prices in Indian rupees. Each product is sold as one digital licence.
+              Afordz is a growing catalogue of digital resources with prices in Indian rupees. Each Afordz product is sold as one digital licence.
             </p>
             <p className="mt-4 max-w-xl text-base leading-7 text-zinc-700">
               Unconfirmed details stay marked on the product page. File products are available as a private download after a captured Razorpay payment. A subscription includes only the details confirmed on its listing. Partner offers are checked out with the vendor.

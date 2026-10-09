@@ -34,7 +34,7 @@ export default function Logo({ size = "sm" }) {
           {site.name}
         </span>
         {compact ? null : (
-          <span className="mt-1 text-xs leading-none text-zinc-500">{site.tagline}</span>
+          <span className="mt-1 text-xs leading-none text-zinc-600">{site.tagline}</span>
         )}
       </span>
     </span>

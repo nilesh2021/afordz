@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button";
+import JsonLd from "@/components/JsonLd";
 import { site } from "@/data/site";
 
 const toc = [
@@ -38,7 +39,7 @@ const faqs = [
 export default function CanvaSubscriptionArticle({ post, price, publishedLabel, jsonLd }) {
   return (
     <article className="px-4 py-12 sm:px-6 sm:py-16">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <div className="mx-auto w-full max-w-3xl">
         <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-indigo-700">
           <Link href="/blog" className="hover:text-indigo-900">
@@ -48,7 +49,7 @@ export default function CanvaSubscriptionArticle({ post, price, publishedLabel, 
         <h1 className="mt-4 font-display text-4xl tracking-tight text-balance text-zinc-950 sm:text-5xl">
           {post.title}
         </h1>
-        <p className="mt-4 text-sm text-zinc-500">
+        <p className="mt-4 text-sm text-zinc-600">
           {publishedLabel} · {site.name}
         </p>
         <p className="mt-6 text-lg leading-8 text-zinc-600">
@@ -64,7 +65,9 @@ export default function CanvaSubscriptionArticle({ post, price, publishedLabel, 
             width={post.image.width}
             height={post.image.height}
             className="aspect-[16/9] w-full object-cover"
-            priority
+            sizes="(min-width: 768px) 768px, 100vw"
+            fetchPriority="high"
+            loading="eager"
           />
           <figcaption className="bg-white/80 px-4 py-3 text-sm leading-6 text-zinc-600">
             This photograph is an article image. It is not a Canva screenshot.
@@ -72,7 +75,7 @@ export default function CanvaSubscriptionArticle({ post, price, publishedLabel, 
         </figure>
 
         <nav aria-label="On this page" className="mt-10 rounded-[1.75rem] border border-white/80 bg-white/75 p-6">
-          <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">On this page</h2>
+          <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-600">On this page</h2>
           <ol className="mt-4 space-y-2 text-sm leading-6">
             {toc.map((item, index) => (
               <li key={item.id}>

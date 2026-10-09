@@ -1,9 +1,12 @@
 import CartView from "@/components/CartView";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Cart",
   description: "Review the digital licence in your Afordz cart before Razorpay checkout.",
-};
+  path: "/cart",
+  index: false,
+});
 
 export default function CartPage() {
   return (

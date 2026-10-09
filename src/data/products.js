@@ -297,12 +297,12 @@ export const products = [
       {
         title: "How access is delivered",
         detail:
-          "Placeholder. Confirm the method you will use after a verified payment. This demo does not create an account or send login details.",
+          "Placeholder. Confirm the method you will use after a verified payment. This listing does not create an account or send login details.",
       },
     ],
     compatibility: [
       "A current web browser that can open Canva. Placeholder — confirm the devices you will support.",
-      "This demo does not include a Canva login or a download.",
+      "This listing does not include a Canva login or a download.",
     ],
     licence: {
       summary:
@@ -310,7 +310,7 @@ export const products = [
       points: [
         "This is not a licence grant from Canva and it is not legal advice.",
         "Replace it with terms that match how you will actually deliver access.",
-        "The demo checkout does not create a paid Canva subscription.",
+        "This listing cannot be purchased yet and does not create a paid Canva subscription.",
       ],
     },
     support: {
@@ -318,8 +318,8 @@ export const products = [
         "Draft only: a placeholder window of 30 days for questions about access that was not granted after a verified payment. That window is not a promise.",
       points: [
         "Support hours are not confirmed.",
-        "This demo does not open a support ticket.",
-        "Publish a real contact address before you offer help.",
+        "This listing does not open a support ticket.",
+        "Questions can be sent from the contact page.",
       ],
     },
   },
@@ -424,6 +424,15 @@ export function isCatalogueVisible(product) {
 
 export function isPurchasable(product) {
   return product?.status === "live" && !isAffiliateProduct(product);
+}
+
+/** Live listings with confirmed details may be indexed and listed in the sitemap. */
+export function isIndexableProduct(product) {
+  return product?.status === "live" && product?.detailsStatus === "confirmed";
+}
+
+export function getIndexableProducts() {
+  return products.filter(isIndexableProduct);
 }
 
 export function getVisibleProducts() {

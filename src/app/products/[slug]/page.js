@@ -1,9 +1,13 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import AddToCartControls from "@/components/AddToCartControls";
 import AffiliateOfferCta from "@/components/AffiliateOfferCta";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import JsonLd from "@/components/JsonLd";
 import PlaceholderLabel from "@/components/PlaceholderLabel";
 import PreviewGallery from "@/components/PreviewGallery";
 import PriceTag from "@/components/PriceTag";
+import { getPostByProductSlug } from "@/data/posts";
 import {
   fieldIsPlaceholder,
   getVisibleProductBySlug,
@@ -12,8 +16,10 @@ import {
   isAffiliateProduct,
   isComingSoon,
   isDraftProduct,
+  isIndexableProduct,
   productTitle,
 } from "@/data/products";
+import { breadcrumbJsonLd, pageMetadata, productJsonLd, productShareImage } from "@/lib/seo";
 
 export function generateStaticParams() {
   return getVisibleProducts().map((product) => ({ slug: product.slug }));
@@ -25,10 +31,22 @@ export async function generateMetadata({ params }) {
   if (!product) {
     return { title: "Product" };
   }
-  return {
-    title: productTitle(product),
+  const title = productTitle(product);
+  return pageMetadata({
+    title,
     description: product.tagline,
-  };
+    path: `/products/${product.slug}`,
+    images: [productShareImage(product)],
+    index: isIndexableProduct(product),
+  });
+}
+
+function productBreadcrumbs(product) {
+  return [
+    { name: "Home", path: "/" },
+    { name: "Shop", path: "/shop" },
+    { name: productTitle(product), path: `/products/${product.slug}` },
+  ];
 }
 
 function Spec({ title, placeholder, children }) {
@@ -48,6 +66,8 @@ function DirectProductPage({ product }) {
   const compatibility = Array.isArray(product.compatibility) ? product.compatibility : [];
   const licencePoints = Array.isArray(product.licence?.points) ? product.licence.points : [];
   const supportPoints = Array.isArray(product.support?.points) ? product.support.points : [];
+  const guide = getPostByProductSlug(product.slug);
+  const crumbs = productBreadcrumbs(product);
   const hasSpecs =
     contents.length > 0 ||
     Boolean(product.subscriptionTerm) ||
@@ -59,7 +79,10 @@ function DirectProductPage({ product }) {
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-      <p className="text-sm font-semibold text-indigo-800">
+      {isIndexableProduct(product) ? <JsonLd data={productJsonLd(product)} /> : null}
+      <JsonLd data={breadcrumbJsonLd(crumbs)} />
+      <Breadcrumbs items={crumbs} />
+      <p className="mt-4 text-sm font-semibold text-indigo-800">
         {product.category || "Digital product"}
       </p>
       <div className="mt-6 grid items-start gap-10 lg:grid-cols-2">
@@ -90,6 +113,15 @@ function DirectProductPage({ product }) {
           ) : (
             <AddToCartControls product={product} />
           )}
+          {guide ? (
+            <p className="mt-6 text-sm leading-6 text-zinc-700">
+              Read the{" "}
+              <Link href={`/blog/${guide.slug}`} className="font-semibold text-indigo-800 underline decoration-indigo-300 underline-offset-4 hover:text-indigo-950">
+                {guide.title}
+              </Link>{" "}
+              guide for what this listing includes.
+            </p>
+          ) : null}
         </div>
       </div>
 
@@ -186,10 +218,13 @@ function DirectProductPage({ product }) {
 
 function AffiliateProductPage({ product }) {
   const topics = product.topics ?? [];
+  const crumbs = productBreadcrumbs(product);
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-      <div className="flex flex-wrap items-center gap-2">
+      <JsonLd data={breadcrumbJsonLd(crumbs)} />
+      <Breadcrumbs items={crumbs} />
+      <div className="mt-4 flex flex-wrap items-center gap-2">
         <p className="text-sm font-semibold text-indigo-800">
           {product.category || "Partner offer"}
         </p>

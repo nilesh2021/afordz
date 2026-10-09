@@ -18,6 +18,10 @@ or `EACCES` / `read-only file system` on `mkdir` / `open`.
 
 **Do not** point SQLite at `/tmp` on Vercel: it is not shared across regions or invocations and is wiped on redeploy.
 
+## Production domain
+
+Set **www.afordz.in** as the primary production domain in the Vercel project. `NEXT_PUBLIC_SITE_URL` should be `https://www.afordz.in`. The app also 308-redirects `afordz.in` to www. Collapsing `http://afordz.in` to a single hop still depends on that Vercel primary-domain setting.
+
 ## Production (Vercel + Turso)
 
 ### Turso (dashboard or CLI)

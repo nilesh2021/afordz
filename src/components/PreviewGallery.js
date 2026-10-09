@@ -42,7 +42,13 @@ export default function PreviewGallery({ images, note }) {
         aria-labelledby={`tab-${active.id}`}
         className="rounded-2xl bg-zinc-50 p-2 sm:p-3"
       >
-        <TemplateMockup variant={active.variant} src={active.src} alt={active.alt} />
+        <TemplateMockup
+          variant={active.variant}
+          src={active.src}
+          alt={active.alt}
+          eager
+          sizes="(min-width: 1024px) 560px, 100vw"
+        />
         <p className="mt-2 text-sm font-medium text-zinc-800">{active.label}</p>
         {active.summary ? (
           <p className="mt-0.5 line-clamp-2 text-xs leading-5 text-zinc-600">{active.summary}</p>
@@ -74,7 +80,12 @@ export default function PreviewGallery({ images, note }) {
                 selected ? "ring-2 ring-indigo-700 ring-offset-1" : "hover:bg-zinc-50"
               }`}
             >
-              <TemplateMockup variant={image.variant} src={image.src} alt="" />
+              <TemplateMockup
+                variant={image.variant}
+                src={image.src}
+                alt=""
+                sizes="(min-width: 640px) 10rem, 30vw"
+              />
               <span className="mt-1 block truncate text-xs font-medium text-zinc-800">
                 {image.label}
               </span>
@@ -82,7 +93,7 @@ export default function PreviewGallery({ images, note }) {
           );
         })}
       </div>
-      <p className="mt-2 text-xs leading-5 text-zinc-500">{previewNote}</p>
+      <p className="mt-2 text-xs leading-5 text-zinc-600">{previewNote}</p>
     </div>
   );
 }

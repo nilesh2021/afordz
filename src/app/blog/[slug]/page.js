@@ -3,9 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Button from "@/components/Button";
 import CanvaSubscriptionArticle from "@/components/blog/CanvaSubscriptionArticle";
+import JsonLd from "@/components/JsonLd";
 import { getPostBySlug, posts } from "@/data/posts";
 import { formatInr, getVisibleProductBySlug, isComingSoon, productTitle } from "@/data/products";
-import { getSiteUrl, site } from "@/data/site";
+import { site } from "@/data/site";
+import { absoluteUrl, canonicalUrl, pageMetadata } from "@/lib/seo";
 
 const toc = [
   { id: "the-split", label: "The 500 + 500 split" },
@@ -52,43 +54,18 @@ export async function generateMetadata({ params }) {
     return { title: "Blog" };
   }
 
-  const path = `/blog/${post.slug}`;
-  const siteUrl = getSiteUrl();
-  const canonical = siteUrl ? `${siteUrl}${path}` : path;
-  const imageUrl = siteUrl ? `${siteUrl}${post.image.src}` : post.image.src;
-
-  return {
+  return pageMetadata({
     title: post.title,
     description: post.description,
-    alternates: { canonical },
-    openGraph: {
-      type: "article",
-      title: post.title,
-      description: post.description,
-      url: canonical,
-      publishedTime: post.published,
-      images: [
-        {
-          url: imageUrl,
-          alt: post.image.alt,
-          width: post.image.width,
-          height: post.image.height,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.description,
-      images: [imageUrl],
-    },
-  };
+    path: `/blog/${post.slug}`,
+    type: "article",
+    publishedTime: post.published,
+    images: [post.image],
+  });
 }
 
 function jsonLd(post, product) {
-  const siteUrl = getSiteUrl();
-  const path = `/blog/${post.slug}`;
-  const url = siteUrl ? `${siteUrl}${path}` : path;
+  const url = canonicalUrl(`/blog/${post.slug}`);
   const data = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -107,7 +84,7 @@ function jsonLd(post, product) {
       name: site.name,
     },
     mainEntityOfPage: url,
-    image: siteUrl ? `${siteUrl}${post.image.src}` : post.image.src,
+    image: absoluteUrl(post.image.src),
   };
 
   if (product && Number.isFinite(product.priceInr) && !isComingSoon(product)) {
@@ -119,7 +96,7 @@ function jsonLd(post, product) {
         "@type": "Offer",
         priceCurrency: product.currency || "INR",
         price: product.priceInr,
-        url: siteUrl ? `${siteUrl}/products/${product.slug}` : `/products/${product.slug}`,
+        url: canonicalUrl(`/products/${product.slug}`),
       },
     };
   }
@@ -157,10 +134,7 @@ export default async function BlogPostPage({ params }) {
 
   return (
     <article className="px-4 py-12 sm:px-6 sm:py-16">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(post, product)) }}
-      />
+      <JsonLd data={jsonLd(post, product)} />
       <div className="mx-auto w-full max-w-3xl">
         <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-indigo-700">
           <Link href="/blog" className="hover:text-indigo-900">
@@ -170,7 +144,7 @@ export default async function BlogPostPage({ params }) {
         <h1 className="mt-4 font-display text-4xl tracking-tight text-balance text-zinc-950 sm:text-5xl">
           {post.title}
         </h1>
-        <p className="mt-4 text-sm text-zinc-500">
+        <p className="mt-4 text-sm text-zinc-600">
           {publishedLabel} · {site.name}
         </p>
         <p className="mt-6 text-lg leading-8 text-zinc-600">
@@ -185,7 +159,9 @@ export default async function BlogPostPage({ params }) {
             width={post.image.width}
             height={post.image.height}
             className="aspect-[16/9] w-full object-cover"
-            priority
+            sizes="(min-width: 768px) 768px, 100vw"
+            fetchPriority="high"
+            loading="eager"
           />
           <figcaption className="bg-white/80 px-4 py-3 text-sm leading-6 text-zinc-600">
             This photograph is an article image. It is not a screenshot of a file in the download. The{" "}
@@ -197,7 +173,7 @@ export default async function BlogPostPage({ params }) {
         </figure>
 
         <nav aria-label="On this page" className="mt-10 rounded-[1.75rem] border border-white/80 bg-white/75 p-6">
-          <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">On this page</h2>
+          <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-600">On this page</h2>
           <ol className="mt-4 space-y-2 text-sm leading-6">
             {toc.map((item, index) => (
               <li key={item.id}>

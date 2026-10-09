@@ -233,7 +233,7 @@ export default function CheckoutForm() {
         <Button type="submit" className="mt-7 w-full" disabled={paying}>
           {paying ? "Opening Razorpay" : `Pay ${formatInr(totalInr)} with Razorpay`}
         </Button>
-        <p className="mt-4 text-center text-xs leading-5 text-zinc-500">
+        <p className="mt-4 text-center text-xs leading-5 text-zinc-600">
           Payment methods open in the Razorpay window. Nothing is charged until that payment is captured.
         </p>
       </form>
@@ -248,14 +248,14 @@ export default function CheckoutForm() {
                 <li key={item.id} className="flex items-start justify-between gap-4">
                   <div>
                     <p className="font-medium leading-6 text-zinc-950">{item.name}</p>
-                    <p className="mt-1 text-sm text-zinc-500">One digital licence</p>
+                    <p className="mt-1 text-sm text-zinc-600">One digital licence</p>
                   </div>
                   <p className="shrink-0 font-semibold text-zinc-950">{formatInr(item.priceInr)}</p>
                 </li>
               ))}
             </ul>
             <div className="mt-6 flex items-end justify-between border-t border-zinc-200 pt-5">
-              <span className="text-sm text-zinc-500">Total, INR</span>
+              <span className="text-sm text-zinc-600">Total, INR</span>
               <span className="font-display text-3xl tracking-tight text-zinc-950">{formatInr(totalInr)}</span>
             </div>
           </div>
@@ -281,7 +281,7 @@ export default function CheckoutForm() {
               </span>
               <span>
                 <span className="block text-sm font-semibold text-zinc-950">Retrieve a download</span>
-                <span className="mt-0.5 block text-xs leading-5 text-zinc-500">Already paid? Look it up with your payment id.</span>
+                <span className="mt-0.5 block text-xs leading-5 text-zinc-600">Already paid? Look it up with your payment id.</span>
               </span>
             </Link>
           </div>

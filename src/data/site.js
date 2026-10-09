@@ -2,25 +2,75 @@ export const site = {
   name: "Afordz",
   tagline: "Smart Finds. Great Value.",
   email: "hello@afordz.in",
-  emailNote: "Placeholder address. Replace it with a mailbox you control.",
-  phoneNote: "Placeholder number. Replace it with a phone you answer.",
+  emailNote: "Published contact address. Confirm that this mailbox is monitored before treating it as a support SLA.",
 };
 
-/** Absolute origin from NEXT_PUBLIC_SITE_URL, or null when it is unset or invalid. */
+export const PRODUCTION_ORIGIN = "https://www.afordz.in";
+
+/** Dates used as sitemap lastmod for pages edited in this SEO pass. */
+export const staticPageUpdatedAt = {
+  "/": "2026-10-09",
+  "/shop": "2026-10-09",
+  "/blog": "2026-10-09",
+  "/contact": "2026-10-09",
+  "/privacy": "2026-10-09",
+  "/terms": "2026-10-09",
+  "/refund-policy": "2026-10-09",
+};
+
+const PRODUCTION_HOSTS = new Set(["afordz.in", "www.afordz.in"]);
+
+/**
+ * Absolute origin for canonicals, sitemap, Open Graph, and JSON-LD.
+ * Production always uses https://www.afordz.in. Localhost and preview hosts are kept.
+ */
 export function getSiteUrl() {
   const value = process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/$/, "");
   if (!value) {
-    return null;
+    return PRODUCTION_ORIGIN;
   }
   try {
     const url = new URL(value);
-    if (url.protocol === "http:" || url.protocol === "https:") {
-      return url.origin;
+    if (url.protocol !== "http:" && url.protocol !== "https:") {
+      return PRODUCTION_ORIGIN;
     }
+    if (PRODUCTION_HOSTS.has(url.hostname.toLowerCase())) {
+      return PRODUCTION_ORIGIN;
+    }
+    return url.origin;
   } catch {
-    return null;
+    return PRODUCTION_ORIGIN;
   }
-  return null;
+}
+
+const TRACKING_PARAM_NAMES = new Set(["gclid", "fbclid", "ref", "_ga", "mc_cid", "mc_eid"]);
+
+function isTrackingParam(name) {
+  const key = name.toLowerCase();
+  return key.startsWith("utm_") || TRACKING_PARAM_NAMES.has(key);
+}
+
+/** Absolute URL for a site path. Tracking-only query keys are dropped. */
+export function absoluteUrl(path = "/") {
+  const origin = getSiteUrl();
+  const url = new URL(path || "/", `${origin}/`);
+  for (const key of [...url.searchParams.keys()]) {
+    if (isTrackingParam(key)) {
+      url.searchParams.delete(key);
+    }
+  }
+  url.hash = "";
+  const pathname = url.pathname === "/" ? "" : url.pathname.replace(/\/$/, "");
+  const search = url.searchParams.toString();
+  return `${url.origin}${pathname}${search ? `?${search}` : ""}`;
+}
+
+/** Page-specific canonical: origin + path, with no query string. */
+export function canonicalUrl(path = "/") {
+  const origin = getSiteUrl();
+  const url = new URL((path || "/").split("?")[0] || "/", `${origin}/`);
+  const pathname = url.pathname === "/" ? "" : url.pathname.replace(/\/$/, "");
+  return `${url.origin}${pathname}`;
 }
 
 export const navLinks = [

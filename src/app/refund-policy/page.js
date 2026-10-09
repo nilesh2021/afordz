@@ -1,37 +1,44 @@
 import Link from "next/link";
 import DraftPage, { DraftSection } from "@/components/DraftPage";
 import { site } from "@/data/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Refund Policy",
-  description: "Editable draft refund note for Afordz. This page does not promise a refund.",
-};
+  description: "Afordz does not promise a refund, exchange, replacement, or credit after a Razorpay payment.",
+  path: "/refund-policy",
+});
 
 export default function RefundPolicyPage() {
   return (
     <DraftPage
       title="Refund Policy"
-      lede="This refund page is an editable draft. It does not promise a refund, exchange, replacement, or credit."
+      lede="This refund page does not promise a refund, exchange, replacement, or credit. It is not legal advice."
     >
-      <DraftSection title="Nothing is confirmed yet">
+      <DraftSection title="Payments and downloads">
         <p>
-          Digital files are not delivered by this demo, and no payment is taken. Because of that, this page cannot describe a refund that has been agreed. Decide the rule that fits the way you will sell the archive, then replace this text.
+          Checkout takes payment through Razorpay for the catalogue amount in INR. After this server confirms a captured payment for that order, a file product receives a private download that expires in 48 hours.
         </p>
         <p>
-          Some sellers limit refunds after a download link has been used. Some offer a short window for damaged files. Either choice has to be written by you. This draft does not choose one.
+          Because the files are digital, this store does not offer a refund, exchange, replacement, or credit after a captured payment.
         </p>
       </DraftSection>
-      <DraftSection title="How a request would be sent">
+      <DraftSection title="How to send a question">
         <p>
-          When you publish a real address, customers can write to {site.email}. That address is a placeholder, and sending mail there will not reach Afordz. The phone number {site.phone} is also a placeholder.
-        </p>
-        <p>
-          You can also read the <Link className="font-semibold text-indigo-800 underline decoration-indigo-300 underline-offset-4" href="/contact">contact page</Link> and the <Link className="font-semibold text-indigo-800 underline decoration-indigo-300 underline-offset-4" href="/terms">terms</Link>.
+          Write to {site.email}. You can also read the{" "}
+          <Link className="font-semibold text-indigo-800 underline decoration-indigo-300 underline-offset-4" href="/contact">
+            contact page
+          </Link>{" "}
+          and the{" "}
+          <Link className="font-semibold text-indigo-800 underline decoration-indigo-300 underline-offset-4" href="/terms">
+            terms
+          </Link>
+          .
         </p>
       </DraftSection>
       <DraftSection title="Not a guarantee">
         <p>
-          Publishing this page does not create a legal guarantee. Have the final policy reviewed for the places where you sell before you rely on it.
+          Publishing this page does not create a legal guarantee beyond what is written here.
         </p>
       </DraftSection>
     </DraftPage>

@@ -274,6 +274,7 @@ export default function TemplateMockup({
   alt = "",
   className = "",
   sizes = "(min-width: 1024px) 640px, 100vw",
+  eager = false,
 }) {
   if (src) {
     return (
@@ -286,6 +287,7 @@ export default function TemplateMockup({
           fill
           sizes={sizes}
           className="object-cover"
+          {...(eager ? { fetchPriority: "high", loading: "eager" } : { loading: "lazy" })}
         />
       </div>
     );

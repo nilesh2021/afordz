@@ -1,9 +1,11 @@
 import { site } from "@/data/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Contact",
-  description: "Contact Afordz about a listing or an order.",
-};
+  description: "Email Afordz about a listing or an order. Card details are not collected on this page.",
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

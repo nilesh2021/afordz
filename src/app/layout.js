@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import { CartProvider } from "@/components/CartProvider";
-import { getSiteUrl } from "@/data/site";
+import { getSiteUrl, site } from "@/data/site";
 import "./globals.css";
 
 const siteUrl = getSiteUrl();
@@ -25,13 +25,21 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata = {
-  ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Afordz — Smart Finds. Great Value.",
     template: "%s · Afordz",
   },
   description:
     "Smart Finds. Great Value. Afordz is a digital catalogue. Filter Afordz products and partner offers by category, format, and price in INR.",
+  openGraph: {
+    siteName: site.name,
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({ children }) {

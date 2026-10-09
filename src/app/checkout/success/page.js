@@ -4,13 +4,16 @@ import { DOWNLOAD_COOKIE } from "@/lib/download-cookie";
 import { resolveDownload } from "@/lib/fulfillment";
 import { getPaidOrderByToken } from "@/lib/orders";
 import { formatInr } from "@/data/products";
+import { pageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Checkout receipt",
   description: "Receipt for an Afordz Razorpay payment, with a time-limited download.",
-};
+  path: "/checkout/success",
+  index: false,
+});
 
 function formatExpiry(iso) {
   return new Intl.DateTimeFormat("en-IN", {

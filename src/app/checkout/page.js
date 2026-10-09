@@ -1,10 +1,13 @@
 import CheckoutForm from "@/components/CheckoutForm";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Checkout",
   description:
     "Afordz checkout with Razorpay. Card details stay on Razorpay. A download opens after the server confirms the captured payment.",
-};
+  path: "/checkout",
+  index: false,
+});
 
 export default function CheckoutPage() {
   return (
@@ -17,11 +20,11 @@ export default function CheckoutPage() {
         </p>
       </div>
       <ol className="mt-8 flex flex-wrap items-center gap-2 text-sm font-semibold">
-        <li className="rounded-full bg-white/80 px-3 py-1.5 text-zinc-500 ring-1 ring-zinc-200">1. Cart</li>
+        <li className="rounded-full bg-white/80 px-3 py-1.5 text-zinc-600 ring-1 ring-zinc-200">1. Cart</li>
         <li aria-hidden="true" className="text-zinc-400">/</li>
         <li className="rounded-full bg-indigo-700 px-3 py-1.5 text-white">2. Details</li>
         <li aria-hidden="true" className="text-zinc-400">/</li>
-        <li className="rounded-full bg-white/80 px-3 py-1.5 text-zinc-500 ring-1 ring-zinc-200">3. Razorpay</li>
+        <li className="rounded-full bg-white/80 px-3 py-1.5 text-zinc-600 ring-1 ring-zinc-200">3. Razorpay</li>
       </ol>
       <div className="mt-8">
         <CheckoutForm />

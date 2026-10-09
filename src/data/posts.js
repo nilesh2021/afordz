@@ -33,3 +33,7 @@ export const posts = [
 export function getPostBySlug(slug) {
   return posts.find((post) => post.slug === slug) ?? null;
 }
+
+export function getPostByProductSlug(productSlug) {
+  return posts.find((post) => post.productSlug === productSlug) ?? null;
+}
