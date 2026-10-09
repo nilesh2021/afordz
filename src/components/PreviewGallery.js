@@ -40,17 +40,19 @@ export default function PreviewGallery({ images, note }) {
         role="tabpanel"
         id={`panel-${active.id}`}
         aria-labelledby={`tab-${active.id}`}
-        className="rounded-3xl bg-zinc-50 p-4 sm:p-6"
+        className="rounded-2xl bg-zinc-50 p-2 sm:p-3"
       >
         <TemplateMockup variant={active.variant} src={active.src} alt={active.alt} />
-        <p className="mt-4 text-sm font-medium text-zinc-800">{active.label}</p>
-        <p className="mt-1 text-sm leading-6 text-zinc-600">{active.summary}</p>
+        <p className="mt-2 text-sm font-medium text-zinc-800">{active.label}</p>
+        {active.summary ? (
+          <p className="mt-0.5 line-clamp-2 text-xs leading-5 text-zinc-600">{active.summary}</p>
+        ) : null}
       </div>
 
       <div
         role="tablist"
         aria-label="Product previews"
-        className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3"
+        className="mt-2 grid grid-cols-3 gap-1.5 sm:grid-cols-4"
         onKeyDown={onKeyDown}
       >
         {images.map((image) => {
@@ -68,19 +70,19 @@ export default function PreviewGallery({ images, note }) {
               aria-controls={`panel-${image.id}`}
               tabIndex={selected ? 0 : -1}
               onClick={() => setActiveId(image.id)}
-              className={`rounded-2xl p-2 text-left ${
-                selected ? "ring-2 ring-indigo-700 ring-offset-2" : "hover:bg-white"
+              className={`rounded-xl p-1 text-left ${
+                selected ? "ring-2 ring-indigo-700 ring-offset-1" : "hover:bg-zinc-50"
               }`}
             >
               <TemplateMockup variant={image.variant} src={image.src} alt="" />
-              <span className="mt-2 block text-sm font-semibold text-zinc-900">
+              <span className="mt-1 block truncate text-xs font-medium text-zinc-800">
                 {image.label}
               </span>
             </button>
           );
         })}
       </div>
-      <p className="mt-4 text-sm leading-6 text-zinc-600">{previewNote}</p>
+      <p className="mt-2 text-xs leading-5 text-zinc-500">{previewNote}</p>
     </div>
   );
 }

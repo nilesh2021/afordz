@@ -51,7 +51,7 @@ export const products = [
       "1,000 single-page HTML files: 500 Bootstrap 5 pages and 500 Tailwind CSS pages that load styles from a CDN.",
     description:
       "A ZIP of 1,000 standalone HTML pages: 500 Bootstrap 5 files and 500 Tailwind CSS files. Each page is a single HTML file. Styles and icons load from a CDN, so an internet connection is required to view them as designed. The download does not include local CSS, JavaScript, or image assets, and it is not a set of 1,000 separate multi-file website kits.",
-    priceInr: 1,
+    priceInr: 99,
     currency: "INR",
     detailsStatus: "confirmed",
     previewNote:
