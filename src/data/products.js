@@ -369,15 +369,16 @@ export const products = [
     id: "start-affiliate-marketing",
     slug: "start-affiliate-marketing",
     saleType: "affiliate",
-    status: "draft",
+    status: "live",
     // Operator note only. Never construct a tracking or checkout URL from marketplaceId.
     marketplaceId: "47713",
     name: "Start Affiliate Marketing like a Pro",
     title: "Start Affiliate Marketing like a Pro",
-    category: "Marketing Ebooks",
+    category: "Ebooks",
     format: "Ebook",
     language: "English",
     vendor: "HeikoBoos",
+    // Digistore redir/597360 was pasted for this title in error (that ID is the Busy Moms guide).
     affiliateUrl: "http://heikoboos.com/start-am-like-a-pro/#aff=nlsweb27",
     addedAt: "2026-10-06",
     tagline: "A beginner-focused ebook introducing affiliate marketing, funnels, traffic strategies and email sequences.",
@@ -401,6 +402,194 @@ export const products = [
         src: "",
         alt: "Original CSS placeholder for an ebook listing",
         summary: "An original placeholder graphic for this partner listing. It is not a vendor screenshot.",
+      },
+    ],
+  },
+  {
+    id: "forbidden-keto-code",
+    slug: "forbidden-keto-code",
+    saleType: "affiliate",
+    status: "live",
+    // Operator note only. Never construct a tracking or checkout URL from marketplaceId.
+    marketplaceId: "630881",
+    name: "Unlock the Forbidden Keto Secrets to Accelerate Your Fat Loss",
+    title: "Unlock the Forbidden Keto Secrets to Accelerate Your Fat Loss",
+    category: "Ebooks",
+    format: "Downloads",
+    language: "English",
+    vendor: "Digistore24 partner",
+    affiliateUrl: "https://www.checkout-ds24.com/redir/630881/nlsweb27/",
+    addedAt: "2026-10-09",
+    tagline:
+      "A vendor keto guide with eat/avoid food lists, ketosis tips, and PDF, PNG, and video formats.",
+    description:
+      "A Digistore24 partner offer described as The Forbidden Keto Code: step-by-step keto food lists, daily tips to stay in ketosis, and guidance on common mistakes that kick people out of keto. Formats include PDF, PNG, and video. These contents are vendor-described, not independently tested. Checkout, delivery, and support are handled by the vendor.",
+    topics: ["Keto", "Fat loss", "Meal guidance", "Low-carb"],
+    audience:
+      "People looking for a digital keto guide with food lists and practical tips for staying in ketosis.",
+    previewNote:
+      "This preview is the authorised vendor product image from Digistore24. It is not a sample of the downloadable files.",
+    images: [
+      {
+        id: "cover",
+        label: "Cover",
+        variant: "ebook",
+        src: "/previews/forbidden-keto-code.webp",
+        alt: "Cover for Unlock the Forbidden Keto Secrets to Accelerate Your Fat Loss",
+        summary: "Vendor product cover from Digistore24 for this partner listing.",
+      },
+    ],
+  },
+  {
+    id: "busy-moms-make-money-online",
+    slug: "busy-moms-make-money-online",
+    saleType: "affiliate",
+    status: "live",
+    // Operator note only. Never construct a tracking or checkout URL from marketplaceId.
+    marketplaceId: "597360",
+    name: "10 Easy Ways for Busy Moms to Make Money Online",
+    title: "10 Easy Ways for Busy Moms to Make Money Online",
+    category: "Ebooks",
+    format: "Downloads",
+    language: "English",
+    vendor: "Digistore24 partner",
+    affiliateUrl: "https://www.checkout-ds24.com/redir/597360/nlsweb27/",
+    addedAt: "2026-10-09",
+    tagline: "Discover the Perfect Roadmap for Busy Moms!",
+    description:
+      "Learn 10 simple and effective ways to make money online while balancing motherhood. Whether you are a stay-at-home mom or juggling a busy schedule, this roadmap gives you actionable strategies to start earning from home, even with little time or experience. Perfect for moms who want flexibility, freedom, and financial independence. Delivered as a downloadable PDF. These contents are vendor-described, not independently tested. Checkout, delivery, and support are handled by the vendor.",
+    topics: ["Make money online", "Side income", "Work from home", "Busy moms"],
+    audience:
+      "Stay-at-home and busy moms who want flexible ways to earn online with limited time or experience.",
+    previewNote:
+      "This preview is the authorised vendor product image from Digistore24. It is not a sample of the downloadable PDF.",
+    images: [
+      {
+        id: "cover",
+        label: "Cover",
+        variant: "ebook",
+        src: "/previews/busy-moms-make-money-online.png",
+        alt: "Cover for 10 Easy Ways for Busy Moms to Make Money Online",
+        summary: "Vendor product cover from Digistore24 for this partner listing.",
+      },
+    ],
+  },
+  {
+    id: "power-of-positive-thinking",
+    slug: "power-of-positive-thinking",
+    saleType: "affiliate",
+    status: "live",
+    // Operator note only. Never construct a tracking or checkout URL from marketplaceId.
+    marketplaceId: "566028",
+    name: "The Power of Positive Thinking",
+    title: "The Power of Positive Thinking",
+    category: "Ebooks",
+    format: "Ebook",
+    language: "English",
+    vendor: "Digistore24 partner",
+    affiliateUrl: "https://www.checkout-ds24.com/redir/566028/nlsweb27/",
+    addedAt: "2026-10-09",
+    tagline:
+      "A PDF ebook on attitude, positive thinking, creative ideas, and problem-solving.",
+    description:
+      "This Digistore24 partner ebook is delivered in PDF format. Vendor-described contents include: how to make your attitude your ally; the power of positive thinking and turning frustrating moments into a productive environment; secrets of innovative thinking; how to adopt creative thinking; and the art of solving problems. These contents are vendor-described, not independently tested. Checkout, delivery, and support are handled by the vendor.",
+    topics: [
+      "Positive thinking",
+      "Attitude",
+      "Creative thinking",
+      "Problem solving",
+    ],
+    audience:
+      "Readers looking for a short PDF guide on attitude, positive thinking, creativity, and handling obstacles.",
+    previewNote:
+      "This preview is the authorised vendor product image from Digistore24. It is not a sample of the ebook.",
+    images: [
+      {
+        id: "cover",
+        label: "Cover",
+        variant: "ebook",
+        src: "/previews/power-of-positive-thinking.webp",
+        alt: "Cover for The Power of Positive Thinking ebook",
+        summary: "Vendor product cover from Digistore24 for this partner listing.",
+      },
+    ],
+  },
+  {
+    id: "freelancer-productivity-action-kit",
+    slug: "freelancer-productivity-action-kit",
+    saleType: "affiliate",
+    status: "live",
+    // Operator note only. Never construct a tracking or checkout URL from marketplaceId.
+    marketplaceId: "630882",
+    name: "Boost Your Freelance Productivity – All-in-One Action Kit",
+    title: "Boost Your Freelance Productivity – All-in-One Action Kit",
+    category: "Ebooks",
+    format: "Downloads",
+    language: "English",
+    vendor: "Digistore24 partner",
+    affiliateUrl: "https://www.checkout-ds24.com/redir/630882/nlsweb27/",
+    addedAt: "2026-10-09",
+    tagline: "Boost Focus, Plan Smarter, Win as a Freelancer",
+    description:
+      "A Digistore24 partner toolkit described as the Freelancer Productivity Action Kit: weekly planners, mini-project templates, and social media content ideas in PDF and PNG formats. These contents are vendor-described, not independently tested. Checkout, delivery, and support are handled by the vendor.",
+    topics: [
+      "Freelance productivity",
+      "Weekly planners",
+      "Project templates",
+      "Social media ideas",
+    ],
+    audience:
+      "Freelancers who want a simple planning and content system to stay organised and focused.",
+    previewNote:
+      "This preview is the authorised vendor product image from Digistore24. It is not a sample of the downloadable files.",
+    images: [
+      {
+        id: "cover",
+        label: "Cover",
+        variant: "ebook",
+        src: "/previews/freelancer-productivity-action-kit.webp",
+        alt: "Cover for Boost Your Freelance Productivity All-in-One Action Kit",
+        summary: "Vendor product cover from Digistore24 for this partner listing.",
+      },
+    ],
+  },
+  {
+    id: "tshirt-typography-printing-designs",
+    slug: "tshirt-typography-printing-designs",
+    saleType: "affiliate",
+    status: "live",
+    // Operator note only. Never construct a tracking or checkout URL from marketplaceId.
+    marketplaceId: "626667",
+    name: "T-shirt Typography Printing Designs",
+    title: "T-shirt Typography Printing Designs",
+    category: "Ebooks",
+    format: "Downloads",
+    language: "English",
+    vendor: "Digistore24 partner",
+    affiliateUrl: "https://www.checkout-ds24.com/redir/626667/nlsweb27/",
+    addedAt: "2026-10-09",
+    tagline:
+      "250+ editable typography designs for print-on-demand and t-shirt stores.",
+    description:
+      "A Digistore24 partner bundle of 250+ typography t-shirt designs as editable vector EPS files for print-on-demand and apparel. Vendor-described features include diverse styles and quotes, commercial use, and instant download. These contents are vendor-described, not independently tested. Checkout, delivery, and support are handled by the vendor.",
+    topics: [
+      "T-shirt designs",
+      "Typography",
+      "Print-on-demand",
+      "EPS vectors",
+    ],
+    audience:
+      "Print-on-demand sellers and apparel creators who want ready-to-edit typography designs for t-shirts and related merch.",
+    previewNote:
+      "This preview is the authorised vendor product image from Digistore24. It is not a sample of the downloadable design files.",
+    images: [
+      {
+        id: "cover",
+        label: "Cover",
+        variant: "ebook",
+        src: "/previews/tshirt-typography-printing-designs.webp",
+        alt: "Cover for T-shirt Typography Printing Designs bundle",
+        summary: "Vendor product cover from Digistore24 for this partner listing.",
       },
     ],
   },

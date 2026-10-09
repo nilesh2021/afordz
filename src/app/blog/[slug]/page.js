@@ -3,7 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Button from "@/components/Button";
 import CanvaSubscriptionArticle from "@/components/blog/CanvaSubscriptionArticle";
+import PartnerOfferArticle from "@/components/blog/PartnerOfferArticle";
 import JsonLd from "@/components/JsonLd";
+import { getBlogArticle } from "@/data/blogArticles";
 import { getPostBySlug, posts } from "@/data/posts";
 import { formatInr, getVisibleProductBySlug, isComingSoon, productTitle } from "@/data/products";
 import { site } from "@/data/site";
@@ -128,6 +130,19 @@ export default async function BlogPostPage({ params }) {
         price={price}
         publishedLabel={publishedLabel}
         jsonLd={jsonLd(post, product)}
+      />
+    );
+  }
+
+  const partnerArticle = getBlogArticle(post.slug);
+  if (partnerArticle) {
+    return (
+      <PartnerOfferArticle
+        post={post}
+        product={product}
+        publishedLabel={publishedLabel}
+        jsonLd={jsonLd(post, product)}
+        article={partnerArticle}
       />
     );
   }

@@ -219,6 +219,7 @@ function DirectProductPage({ product }) {
 function AffiliateProductPage({ product }) {
   const topics = product.topics ?? [];
   const crumbs = productBreadcrumbs(product);
+  const guide = getPostByProductSlug(product.slug);
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
@@ -248,6 +249,18 @@ function AffiliateProductPage({ product }) {
             </p>
           ) : null}
           <AffiliateOfferCta product={product} />
+          {guide ? (
+            <p className="mt-6 text-sm leading-6 text-muted">
+              Read the{" "}
+              <Link
+                href={`/blog/${guide.slug}`}
+                className="font-semibold text-ink underline decoration-accent underline-offset-4 hover:decoration-accent-strong"
+              >
+                {guide.title}
+              </Link>{" "}
+              guide for what this listing includes.
+            </p>
+          ) : null}
         </div>
       </div>
 

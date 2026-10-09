@@ -3,9 +3,9 @@ import { posts } from "@/data/posts";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Notes on website templates and digital resources",
+  title: "Notes on templates, ebooks, and digital resources",
   description:
-    "Guides from Afordz on website template bundles and digital resources: what the Bootstrap 5 and Tailwind CSS HTML files include, and what the Canva listing does and does not confirm.",
+    "Afordz guides on Bootstrap and Tailwind HTML templates, Canva, keto and mindset ebooks, affiliate marketing, freelancer productivity kits, and print-on-demand typography designs.",
   path: "/blog",
 });
 
@@ -15,10 +15,10 @@ export default function BlogPage() {
       <div className="mx-auto w-full max-w-3xl">
         <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent-strong">Journal</p>
         <h1 className="mt-4 font-display text-5xl tracking-tight text-ink sm:text-6xl">
-          Notes on templates and digital resources
+          Notes on templates, ebooks, and digital resources
         </h1>
         <p className="mt-5 max-w-xl text-lg leading-8 text-muted">
-          Practical notes that match the product pages. Read what the Bootstrap 5 and Tailwind CSS HTML template bundle includes, or what Canva is useful for before the listing is available to buy.
+          Practical notes that match the product pages: website template bundles, Canva, partner ebooks, downloads, and design resources. Read what a listing includes before you buy or follow a partner checkout.
         </p>
         <ul className="mt-10 space-y-6">
           {posts.map((post) => {
