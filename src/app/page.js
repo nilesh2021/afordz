@@ -63,7 +63,7 @@ export default function HomePage() {
   return (
     <>
       <section className="px-4 pt-6 sm:px-6 sm:pt-10">
-        <div className="relative mx-auto grid w-full max-w-6xl items-end gap-10 overflow-hidden rounded-[2.5rem] border border-zinc-950/10 bg-white px-6 py-12 shadow-[0_30px_80px_rgb(20_18_28/0.08)] sm:px-10 sm:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-8 lg:px-14 lg:py-16">
+        <div className="relative mx-auto grid w-full max-w-6xl items-end gap-6 overflow-hidden rounded-[1.75rem] border border-zinc-950/10 bg-white px-5 py-8 shadow-[0_30px_80px_rgb(20_18_28/0.08)] sm:gap-10 sm:rounded-[2.5rem] sm:px-10 sm:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-8 lg:px-14 lg:py-16">
           <div
             className="pointer-events-none absolute -left-16 -top-24 size-72 rounded-full bg-indigo-200/70 blur-3xl"
             aria-hidden="true"
@@ -76,14 +76,14 @@ export default function HomePage() {
             <p className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-indigo-800">
               Website resources · INR
             </p>
-            <h1 className="mt-6 max-w-xl font-display text-5xl leading-[0.95] tracking-tight text-zinc-950 sm:text-6xl lg:text-[4.5rem]">
+            <h1 className="mt-4 max-w-xl font-display text-4xl leading-[0.95] tracking-tight text-zinc-950 sm:mt-6 sm:text-6xl lg:text-[4.5rem]">
               Digital resources for your{" "}
               <em className="not-italic text-indigo-700">next big idea</em>
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-7 text-zinc-600 sm:text-lg">
+            <p className="mt-4 max-w-xl text-sm leading-6 text-zinc-600 sm:mt-6 sm:text-lg sm:leading-7">
               Browse the catalogue by category, format, compatible tool, and price. Open an Afordz listing before you add one digital licence to the cart. Partner offers open on the vendor website.
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap gap-3 sm:mt-9">
               <Button href="/shop">Shop the catalogue</Button>
               <Button href="/contact" variant="secondary">
                 Contact us
@@ -139,11 +139,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="about" className="px-4 py-16 sm:px-6 sm:py-24">
+      <section id="about" className="px-4 py-10 sm:px-6 sm:py-24">
         <div className="mx-auto grid w-full max-w-6xl items-center gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-indigo-700">About</p>
-            <h2 className="mt-3 max-w-lg font-display text-4xl tracking-tight text-zinc-950 sm:text-5xl">
+            <h2 className="mt-2 max-w-lg font-display text-3xl tracking-tight text-zinc-950 sm:mt-3 sm:text-5xl">
               About Afordz
             </h2>
             <p className="mt-5 max-w-xl text-base leading-7 text-zinc-700">
@@ -182,12 +182,12 @@ export default function HomePage() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-indigo-700">Features</p>
-              <h2 className="mt-3 max-w-xl font-display text-4xl tracking-tight text-zinc-950 sm:text-5xl">
+              <h2 className="mt-2 max-w-xl font-display text-3xl tracking-tight text-zinc-950 sm:mt-3 sm:text-5xl">
                 What you can do in the shop today
               </h2>
             </div>
           </div>
-          <ul className="mt-8 grid gap-4 md:grid-cols-2">
+          <ul className="mt-5 grid gap-3 sm:mt-8 sm:gap-4 md:grid-cols-2">
             {homeFeatures.map((feature, index) => {
               const photo = featurePhotos[feature.title];
               return (
@@ -204,7 +204,7 @@ export default function HomePage() {
                       className="aspect-[16/8] w-full object-cover"
                     />
                   ) : null}
-                  <div className="p-6 sm:p-7">
+                  <div className="p-4 sm:p-7">
                     <p className="font-display text-sm text-indigo-600">
                       {String(index + 1).padStart(2, "0")}
                     </p>
@@ -218,16 +218,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="steps" className="px-4 py-16 sm:px-6 sm:py-24">
+      <section id="steps" className="px-4 py-10 sm:px-6 sm:py-24">
         <div className="mx-auto w-full max-w-6xl">
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-indigo-700">Process</p>
-          <h2 className="mt-3 font-display text-4xl tracking-tight text-zinc-950 sm:text-5xl">How an order works</h2>
+          <h2 className="mt-2 font-display text-3xl tracking-tight text-zinc-950 sm:mt-3 sm:text-5xl">How an order works</h2>
           <p className="mt-4 max-w-2xl text-sm leading-6 text-zinc-600">
             Three steps from the catalogue to checkout.
           </p>
-          <ol className="mt-10 grid gap-px overflow-hidden rounded-[1.75rem] border border-zinc-200 bg-zinc-200 md:grid-cols-3">
+          <ol className="mt-6 grid gap-px overflow-hidden rounded-[1.75rem] border border-zinc-200 bg-zinc-200 sm:mt-10 md:grid-cols-3">
             {downloadSteps.map((step, index) => (
-              <li key={step.title} className="bg-[#f7f4ef] p-6 sm:p-8">
+              <li key={step.title} className="bg-[#f7f4ef] p-4 sm:p-8">
                 <StepIcon index={index} />
                 <p className="mt-5 text-sm font-semibold text-indigo-700">Step {index + 1}</p>
                 <h3 className="mt-1 font-display text-2xl text-zinc-950">{step.title}</h3>
@@ -238,10 +238,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="faq" className="px-4 pb-20 sm:px-6 sm:pb-28">
+      <section id="faq" className="px-4 pb-12 sm:px-6 sm:pb-28">
         <div className="mx-auto grid w-full max-w-6xl gap-8 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:items-start">
           <div className="lg:sticky lg:top-28">
-            <h2 className="font-display text-4xl tracking-tight text-zinc-950 sm:text-5xl">FAQ</h2>
+            <h2 className="font-display text-3xl tracking-tight text-zinc-950 sm:text-5xl">FAQ</h2>
             <p className="mt-4 max-w-xs text-sm leading-6 text-zinc-600">
               Short answers about the catalogue, delivery, and checkout.
             </p>
@@ -250,8 +250,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="px-4 pb-20 sm:px-6">
-        <div className="mx-auto flex w-full max-w-6xl flex-col items-start gap-4 rounded-2xl border border-zinc-200 bg-white px-6 py-8 sm:flex-row sm:items-center sm:justify-between">
+      <section className="px-4 pb-12 sm:px-6 sm:pb-20">
+        <div className="mx-auto flex w-full max-w-6xl flex-col items-start gap-3 rounded-2xl border border-zinc-200 bg-white px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-6 sm:py-8">
           <h2 className="font-display text-2xl tracking-tight text-zinc-950">Browse the catalogue</h2>
           <Button href="/shop">Shop</Button>
         </div>

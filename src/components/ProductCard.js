@@ -22,8 +22,8 @@ export default function ProductCard({ product }) {
   const title = productTitle(product);
 
   return (
-    <article className="flex h-full flex-col rounded-[2rem] border border-white/80 bg-white/90 shadow-[0_18px_40px_rgb(20_18_28/0.08)] sm:flex-row">
-      <div className="shrink-0 overflow-hidden rounded-t-[2rem] bg-linear-to-br from-violet-50 via-white to-emerald-50 p-3 sm:w-64 sm:rounded-l-[2rem] sm:rounded-tr-none sm:p-4 lg:w-72">
+    <article className="flex h-full flex-col rounded-3xl border border-white/80 bg-white/90 shadow-[0_18px_40px_rgb(20_18_28/0.08)] sm:flex-row sm:rounded-[2rem]">
+      <div className="shrink-0 overflow-hidden rounded-t-3xl bg-linear-to-br from-violet-50 via-white to-emerald-50 p-2 sm:w-64 sm:rounded-l-[2rem] sm:rounded-tr-none sm:p-4 lg:w-72">
         {preview?.src ? (
           <TemplateMockup
             variant={preview.variant}
@@ -45,7 +45,7 @@ export default function ProductCard({ product }) {
           <div className="aspect-[16/10] rounded-2xl border border-dashed border-indigo-200 bg-white" />
         )}
       </div>
-      <div className="flex min-w-0 flex-1 flex-col justify-between gap-5 p-5 sm:px-6 sm:py-5">
+      <div className="flex min-w-0 flex-1 flex-col justify-between gap-3 p-4 sm:gap-5 sm:px-6 sm:py-5">
         <div>
           <div className="flex flex-wrap items-center gap-2">
             {product.category ? (
@@ -64,14 +64,14 @@ export default function ProductCard({ product }) {
               </p>
             ) : null}
           </div>
-          <h3 className="mt-3 font-display text-[1.7rem] leading-snug tracking-tight text-zinc-950">
+          <h3 className="mt-2 font-display text-2xl leading-snug tracking-tight text-zinc-950 sm:mt-3 sm:text-[1.7rem]">
             <Link href={`/products/${product.slug}`} className="hover:text-indigo-800">
               {title}
             </Link>
           </h3>
           <p className="mt-2 max-w-xl text-sm leading-6 text-zinc-600">{summary}</p>
-          <div className="mt-4 flex flex-wrap items-center gap-2">
-            <p className="font-display text-2xl tracking-tight text-zinc-950">
+          <div className="mt-3 flex flex-wrap items-center gap-2 sm:mt-4">
+            <p className="font-display text-xl tracking-tight text-zinc-950 sm:text-2xl">
               <span className="sr-only">Price: </span>
               {affiliate || !hasVerifiedPrice(product) ? (
                 "Check current price"
