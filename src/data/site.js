@@ -12,6 +12,7 @@ export const staticPageUpdatedAt = {
   "/": "2026-10-09",
   "/shop": "2026-10-09",
   "/blog": "2026-10-09",
+  "/training": "2026-10-09",
   "/contact": "2026-10-09",
   "/privacy": "2026-10-09",
   "/terms": "2026-10-09",

@@ -1,5 +1,5 @@
 import { formatInr } from "@/data/products";
-import { purchaseLabel } from "@/data/catalogue";
+import { DEFAULT_PURCHASE, purchaseLabel } from "@/data/catalogue";
 
 function Chip({ children, onRemove, label }) {
   return (
@@ -19,8 +19,9 @@ function Chip({ children, onRemove, label }) {
 
 export default function AppliedFilters({ query, onChange }) {
   const formats = query.formats ?? [];
+  const purchaseChip = query.purchase && query.purchase !== DEFAULT_PURCHASE;
   const hasChips =
-    query.purchase ||
+    purchaseChip ||
     query.categories.length > 0 ||
     formats.length > 0 ||
     query.frameworks.length > 0 ||
@@ -33,8 +34,11 @@ export default function AppliedFilters({ query, onChange }) {
 
   return (
     <ul aria-label="Active filters" className="mt-3 flex flex-wrap gap-2">
-      {query.purchase ? (
-        <Chip label={`purchase type ${purchaseLabel(query.purchase)}`} onRemove={() => onChange({ ...query, purchase: "" })}>
+      {purchaseChip ? (
+        <Chip
+          label={`purchase type ${purchaseLabel(query.purchase)}`}
+          onRemove={() => onChange({ ...query, purchase: DEFAULT_PURCHASE })}
+        >
           {purchaseLabel(query.purchase)}
         </Chip>
       ) : null}

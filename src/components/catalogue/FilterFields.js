@@ -1,5 +1,5 @@
 import { formatInr } from "@/data/products";
-import { PURCHASE_OPTIONS } from "@/data/catalogue";
+import { DEFAULT_PURCHASE, PURCHASE_OPTIONS } from "@/data/catalogue";
 
 function fieldId(prefix, group, value) {
   const slug = value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -57,7 +57,7 @@ export default function FilterFields({
     "mt-1 w-full min-h-9 rounded-lg border border-border bg-surface px-2.5 text-sm text-ink";
   const formats = options.formats ?? [];
   const selectedFormats = values.formats ?? [];
-  const purchase = values.purchase ?? "";
+  const purchase = values.purchase ?? DEFAULT_PURCHASE;
 
   return (
     <div className="space-y-4">
@@ -66,11 +66,11 @@ export default function FilterFields({
         <div className="mt-1">
           {PURCHASE_OPTIONS.map((option) => (
             <label
-              key={option.value || "all"}
+              key={option.value}
               className="flex min-h-9 cursor-pointer items-center gap-2 rounded-lg px-1.5 text-sm text-ink hover:bg-accent/15"
             >
               <input
-                id={fieldId(idPrefix, "purchase", option.value || "all")}
+                id={fieldId(idPrefix, "purchase", option.value)}
                 type="radio"
                 name={`${idPrefix}-purchase`}
                 className="size-4 shrink-0 accent-accent-strong"

@@ -8,11 +8,15 @@
  * Price range applies only to products with a verified numeric price.
  * Partner offers without a price are not treated as 0 and are not dropped
  * by a min or max filter.
+ *
+ * Purchase type defaults to Afordz Products (`own`). Use `all` or `partner`
+ * in the URL to override.
  */
 
 import { hasVerifiedPrice, isAffiliateProduct } from "@/data/products";
 
 export const DEFAULT_SORT = "newest";
+export const DEFAULT_PURCHASE = "own";
 
 export const SORT_OPTIONS = [
   { value: "newest", label: "Newest", shortLabel: "Newest" },
@@ -21,7 +25,7 @@ export const SORT_OPTIONS = [
 ];
 
 export const PURCHASE_OPTIONS = [
-  { value: "", label: "All" },
+  { value: "all", label: "All" },
   { value: "own", label: "Afordz Products" },
   { value: "partner", label: "Partner Offers" },
 ];
@@ -80,7 +84,7 @@ export function parseCatalogueQuery(params = {}) {
   const purchaseValue = typeof params.purchase === "string" ? params.purchase : "";
   return {
     q: typeof params.search === "string" ? params.search : "",
-    purchase: PURCHASE_VALUES.has(purchaseValue) ? purchaseValue : "",
+    purchase: PURCHASE_VALUES.has(purchaseValue) ? purchaseValue : DEFAULT_PURCHASE,
     categories: asList(params.category).map((item) => item.trim()).filter(Boolean),
     formats: asList(params.format).map((item) => item.trim()).filter(Boolean),
     frameworks: asList(params.framework).map((item) => item.trim()).filter(Boolean),
@@ -96,7 +100,7 @@ export function serializeCatalogueQuery(query) {
   if (search) {
     params.set("search", search);
   }
-  if (query.purchase) {
+  if (query.purchase && query.purchase !== DEFAULT_PURCHASE) {
     params.set("purchase", query.purchase);
   }
   for (const category of query.categories) {
@@ -123,7 +127,7 @@ export function serializeCatalogueQuery(query) {
 export function emptyFilters(query) {
   return {
     ...query,
-    purchase: "",
+    purchase: DEFAULT_PURCHASE,
     categories: [],
     formats: [],
     frameworks: [],
@@ -153,9 +157,13 @@ export function isPriceRangeInvalid(query) {
   return min != null && max != null && min > max;
 }
 
+function isNonDefaultPurchase(purchase) {
+  return Boolean(purchase) && purchase !== DEFAULT_PURCHASE;
+}
+
 export function hasActiveFilters(query) {
   return (
-    Boolean(query.purchase) ||
+    isNonDefaultPurchase(query.purchase) ||
     query.categories.length > 0 ||
     (query.formats ?? []).length > 0 ||
     query.frameworks.length > 0 ||
@@ -166,7 +174,7 @@ export function hasActiveFilters(query) {
 
 export function countActiveFilters(query) {
   return (
-    (query.purchase ? 1 : 0) +
+    (isNonDefaultPurchase(query.purchase) ? 1 : 0) +
     query.categories.length +
     (query.formats ?? []).length +
     query.frameworks.length +
@@ -194,7 +202,7 @@ function matchesSearch(product, needle) {
 }
 
 function matchesPurchase(product, purchase) {
-  if (!purchase) {
+  if (!purchase || purchase === "all") {
     return true;
   }
   if (purchase === "own") {

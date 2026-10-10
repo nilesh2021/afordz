@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Catalogue from "@/components/catalogue/Catalogue";
 import { parseCatalogueQuery } from "@/data/catalogue";
 import { pageMetadata } from "@/lib/seo";
@@ -32,6 +33,23 @@ export default async function ShopPage({ searchParams }) {
             </h1>
             <p className="mt-2 max-w-xl text-sm leading-6 text-muted">
               Filter by category, format, tool, and price in INR. Partner offers check out on the vendor site.
+            </p>
+            <p className="mt-2 max-w-xl text-sm leading-6 text-muted">
+              Looking for courses?{" "}
+              <Link
+                href="/shop?category=Training"
+                className="font-semibold text-ink underline decoration-accent underline-offset-4 hover:decoration-accent-strong"
+              >
+                Browse Training courses
+              </Link>
+              {" "}or explore{" "}
+              <Link
+                href="/training"
+                className="font-semibold text-ink underline decoration-accent underline-offset-4 hover:decoration-accent-strong"
+              >
+                skill tracks
+              </Link>
+              .
             </p>
           </div>
           <div className="hidden shrink-0 grid-cols-2 gap-2 sm:grid sm:w-56 lg:w-64">

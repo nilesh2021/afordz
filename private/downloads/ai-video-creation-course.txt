@@ -1,0 +1,5 @@
+﻿Afordz Training — AI Video Creation Course Pack
+===============================================
+This placeholder file stands in until the paid course ZIP is published.
+Replace private/downloads/ai-video-creation-course.txt with ai-video-creation-course.zip
+and set the product status to "live" in src/data/products.js.

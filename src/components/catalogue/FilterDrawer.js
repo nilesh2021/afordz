@@ -3,12 +3,17 @@
 import { useEffect, useId, useRef, useState } from "react";
 import Button from "@/components/Button";
 import FilterFields from "@/components/catalogue/FilterFields";
-import { countActiveFilters, filterProducts, productCountLabel } from "@/data/catalogue";
+import {
+  countActiveFilters,
+  DEFAULT_PURCHASE,
+  filterProducts,
+  productCountLabel,
+} from "@/data/catalogue";
 import { getVisibleProducts } from "@/data/products";
 
 function emptyDraft() {
   return {
-    purchase: "",
+    purchase: DEFAULT_PURCHASE,
     categories: [],
     formats: [],
     frameworks: [],
@@ -19,7 +24,7 @@ function emptyDraft() {
 
 function draftFromQuery(query) {
   return {
-    purchase: query.purchase ?? "",
+    purchase: query.purchase ?? DEFAULT_PURCHASE,
     categories: [...query.categories],
     formats: [...(query.formats ?? [])],
     frameworks: [...query.frameworks],

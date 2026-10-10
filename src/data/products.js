@@ -10,6 +10,8 @@
  * - status: "live" listings can be purchased. "coming-soon" listings appear in
  *   the catalogue without add to cart or checkout. "draft" listings are hidden.
  * - category, format, and framework: shop filters
+ * - learningTrack: Training hub path id (ui-ux, ai-video, ai-image, content-ideas, fundamentals)
+ * - level: Beginner or Intermediate (shown on Training cards)
  * - priceInr: INR price for direct products with a verified numeric amount
  * - addedAt: YYYY-MM-DD date used by the Newest sort
  * - name, title, tagline, description, topics, and vendor: catalogue search
@@ -17,6 +19,9 @@
  *   "/previews/business.webp", or leave src empty to keep the CSS mockup
  *   chosen by variant (business, portfolio, agency, saas, ecommerce, landing,
  *   data, fields, export, prompts, ebook, canva)
+ *
+ * Training courses use category "Training", saleType "direct", and a learningTrack.
+ * They check out through Razorpay like other Afordz downloads.
  *
  * How to publish an affiliate listing:
  * 1. Paste your real Digistore24 promo URL into affiliateUrl (full https URL).
@@ -320,6 +325,173 @@ export const products = [
         "Support hours are not confirmed.",
         "This listing does not open a support ticket.",
         "Questions can be sent from the contact page.",
+      ],
+    },
+  },
+  {
+    id: "ui-ux-fundamentals-course",
+    slug: "ui-ux-fundamentals-course",
+    saleType: "direct",
+    status: "coming-soon",
+    type: "digital",
+    name: "UI/UX Fundamentals Course Pack",
+    title: "UI/UX Fundamentals Course Pack",
+    category: "Training",
+    format: "Course download",
+    language: "English",
+    vendor: "Afordz",
+    affiliateUrl: "",
+    learningTrack: "ui-ux",
+    level: "Beginner",
+    topics: ["UI design", "UX basics", "Figma", "Wireframes"],
+    framework: "Figma",
+    addedAt: "2026-10-09",
+    tagline:
+      "A downloadable beginner pack for UI/UX fundamentals: core concepts, Figma workflow notes, and practice checklists.",
+    description:
+      "One digital licence for an Afordz Training course pack on UI/UX fundamentals. Materials are delivered as a private download after a captured Razorpay payment. This is not a live cohort, streaming classroom, or mentorship programme. The archive and final lesson list will be confirmed before the listing is marked live.",
+    priceInr: 499,
+    currency: "INR",
+    detailsStatus: "placeholder",
+    placeholderNote:
+      "Lesson list, file formats inside the ZIP, and licence wording are drafts until the course archive is final. The listing is coming soon and cannot be purchased yet.",
+    previewNote:
+      "This preview is an original CSS placeholder for a Training course. It is not a screenshot of the download.",
+    placeholders: {
+      contents: true,
+      licence: true,
+      support: true,
+    },
+    images: [
+      {
+        id: "overview",
+        label: "Course overview",
+        variant: "portfolio",
+        src: "",
+        alt: "Original CSS placeholder for the UI/UX Fundamentals course pack",
+        summary: "Placeholder graphic for this Training listing.",
+      },
+    ],
+    contents: [
+      {
+        title: "Fundamentals lessons",
+        detail:
+          "Placeholder. Confirm the lesson count and topics that will ship in the ZIP (layout, hierarchy, basic UX flows).",
+      },
+      {
+        title: "Figma workflow notes",
+        detail:
+          "Placeholder. Confirm whether Figma file links, local .fig files, or PDF notes are included.",
+      },
+      {
+        title: "Practice checklists",
+        detail: "Placeholder. Confirm the checklist formats (PDF or Markdown) before going live.",
+      },
+    ],
+    compatibility: [
+      "A device that can open PDF or Markdown notes from a ZIP.",
+      "Figma in a current browser if the pack includes Figma-based exercises.",
+      "This listing does not include live mentoring or a progress tracker.",
+    ],
+    licence: {
+      summary:
+        "Draft only: one digital licence for the buyer’s own learning use. Resale and redistribution of the course files are not decided in this text.",
+      points: [
+        "This is not legal advice.",
+        "Replace with final terms before accepting orders.",
+        "Coming soon — checkout is not open yet.",
+      ],
+    },
+    support: {
+      summary:
+        "Draft only: a placeholder window of 30 days for questions about a missing download after a verified payment.",
+      points: [
+        "Support hours are not confirmed.",
+        "There is no live classroom support channel for this pack.",
+      ],
+    },
+  },
+  {
+    id: "ai-video-creation-course",
+    slug: "ai-video-creation-course",
+    saleType: "direct",
+    status: "coming-soon",
+    type: "digital",
+    name: "AI Video Creation Course Pack",
+    title: "AI Video Creation Course Pack",
+    category: "Training",
+    format: "Video + PDF",
+    language: "English",
+    vendor: "Afordz",
+    affiliateUrl: "",
+    learningTrack: "ai-video",
+    level: "Beginner",
+    topics: ["AI video", "Short-form video", "CapCut", "Social export"],
+    framework: "CapCut",
+    addedAt: "2026-10-09",
+    tagline:
+      "A downloadable beginner pack for AI-assisted video: tool overview, workflow steps, and export notes for social formats.",
+    description:
+      "One digital licence for an Afordz Training course pack on AI video creation. Materials are delivered as a private download after a captured Razorpay payment. This is not a live workshop or an hosted video streaming platform. Confirm the final archive before marking the listing live.",
+    priceInr: 599,
+    currency: "INR",
+    detailsStatus: "placeholder",
+    placeholderNote:
+      "Video lesson count, tool versions, and sample project files are drafts until the ZIP is final. Coming soon — not available to purchase yet.",
+    previewNote:
+      "This preview is an original CSS placeholder for a Training course. It is not a sample of the video lessons.",
+    placeholders: {
+      contents: true,
+      licence: true,
+      support: true,
+    },
+    images: [
+      {
+        id: "overview",
+        label: "Course overview",
+        variant: "saas",
+        src: "",
+        alt: "Original CSS placeholder for the AI Video Creation course pack",
+        summary: "Placeholder graphic for this Training listing.",
+      },
+    ],
+    contents: [
+      {
+        title: "AI video workflow lessons",
+        detail:
+          "Placeholder. Confirm how many lessons ship and whether they are MP4 files, links, or PDF walkthroughs.",
+      },
+      {
+        title: "Editor notes (CapCut-oriented)",
+        detail:
+          "Placeholder. Confirm the editor versions you document and any project files included.",
+      },
+      {
+        title: "Social export checklist",
+        detail:
+          "Placeholder. Confirm aspect ratios and platform notes included in the pack.",
+      },
+    ],
+    compatibility: [
+      "A device that can open PDF notes and common video files from a ZIP.",
+      "CapCut or a similar editor if you follow the practical exercises.",
+      "This listing does not include cloud rendering credits or a streaming LMS.",
+    ],
+    licence: {
+      summary:
+        "Draft only: one digital licence for the buyer’s own learning use. Resale of the pack is not decided in this text.",
+      points: [
+        "This is not legal advice.",
+        "Third-party tools keep their own terms.",
+        "Coming soon — checkout is not open yet.",
+      ],
+    },
+    support: {
+      summary:
+        "Draft only: a placeholder window of 30 days for questions about a missing download after a verified payment.",
+      points: [
+        "Support hours are not confirmed.",
+        "There is no live workshop support for this pack.",
       ],
     },
   },
@@ -639,6 +811,21 @@ export function getVisibleProductBySlug(slug) {
 
 export function getProductById(id) {
   return products.find((product) => product.id === id) ?? null;
+}
+
+export function isTrainingProduct(product) {
+  return product?.category === "Training" && isDirectProduct(product);
+}
+
+export function getTrainingProducts() {
+  return getVisibleProducts().filter(isTrainingProduct);
+}
+
+export function getProductsByTrack(trackId) {
+  if (!trackId) {
+    return [];
+  }
+  return getTrainingProducts().filter((product) => product.learningTrack === trackId);
 }
 
 export function isAffiliateProduct(product) {

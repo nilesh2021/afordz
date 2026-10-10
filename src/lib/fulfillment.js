@@ -12,6 +12,26 @@ const PRODUCTS = {
     ),
     downloadName: "bootstrap-templates-bundle",
   },
+  "ui-ux-fundamentals-course": {
+    archivePath: path.join(process.cwd(), "private", "downloads", "ui-ux-fundamentals-course.zip"),
+    placeholderPath: path.join(
+      process.cwd(),
+      "private",
+      "downloads",
+      "ui-ux-fundamentals-course.txt",
+    ),
+    downloadName: "ui-ux-fundamentals-course",
+  },
+  "ai-video-creation-course": {
+    archivePath: path.join(process.cwd(), "private", "downloads", "ai-video-creation-course.zip"),
+    placeholderPath: path.join(
+      process.cwd(),
+      "private",
+      "downloads",
+      "ai-video-creation-course.txt",
+    ),
+    downloadName: "ai-video-creation-course",
+  },
 };
 
 function safeExisting(filePath) {
