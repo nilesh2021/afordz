@@ -24,7 +24,7 @@ export default function ProductCard({ product }) {
   return (
     <article className="flex h-full flex-col rounded-3xl border border-border bg-surface/90 shadow-[0_18px_40px_rgb(22_20_16/0.08)] sm:flex-row sm:rounded-[2rem]">
       <div className="shrink-0 overflow-hidden rounded-t-3xl bg-linear-to-br from-[#f3eef8] via-surface to-[#e4dcf0] p-2 sm:w-64 sm:rounded-l-[2rem] sm:rounded-tr-none sm:p-4 lg:w-72">
-        {preview?.src ? (
+        {preview?.src || preview?.variant ? (
           <TemplateMockup
             variant={preview.variant}
             src={preview.src}

@@ -123,25 +123,30 @@ function LandingLayout() {
 }
 
 function DataLayout() {
+  const emails = [
+    "contact001@example.com",
+    "contact002@example.com",
+    "contact003@example.com",
+    "contact004@example.com",
+    "contact005@example.com",
+    "contact006@example.com",
+  ];
+
   return (
     <div className="flex h-full flex-col gap-2">
-      <div className="flex items-center gap-2">
-        <div className="h-2 w-16 rounded-full bg-ink" />
-        <div className="h-5 flex-1 rounded-md bg-zinc-100" />
+      <div className="rounded-md bg-ink px-2 py-1.5 text-center text-[10px] font-semibold tracking-wide text-white">
+        email
       </div>
-      <div className="grid min-h-0 flex-1 grid-cols-4 gap-1.5">
-        {["Name", "Email", "Role", "Region"].map((label) => (
-          <div key={label} className="flex min-h-0 flex-col gap-1.5">
-            <div className="rounded-md bg-ink px-1 py-1 text-center text-[8px] font-semibold text-white">
-              {label}
-            </div>
-            <div className="h-2 rounded-full bg-accent/20" />
-            <div className="h-2 rounded-full bg-zinc-100" />
-            <div className="h-2 rounded-full bg-background" />
-            <div className="h-2 rounded-full bg-zinc-100" />
-            <div className="h-2 rounded-full bg-background" />
+      <div className="flex min-h-0 flex-1 flex-col gap-1.5 overflow-hidden rounded-lg border border-border bg-white p-2">
+        {emails.map((email) => (
+          <div
+            key={email}
+            className="truncate rounded-md bg-background px-2 py-1.5 font-mono text-[9px] leading-none text-ink sm:text-[10px]"
+          >
+            {email}
           </div>
         ))}
+        <div className="mt-auto truncate px-1 text-[9px] text-muted">+ 94 more sample rows</div>
       </div>
     </div>
   );

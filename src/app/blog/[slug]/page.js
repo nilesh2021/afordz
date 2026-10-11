@@ -225,7 +225,7 @@ export default async function BlogPostPage({ params }) {
               The readme in the Bootstrap folder describes a Bootstrap 5.3.8 modernisation. The HTML that was checked requests 5.3.0-alpha1 instead. Treat the link in each file as the version that page will load. The Tailwind folder’s readme repeats the Bootstrap 5.3.8 title even though those pages load Tailwind. The shop listing is the clearer description: 1,000 single-page HTML files, split evenly, with CDN dependencies.
             </p>
             <p className="mt-4">
-              Sampled Bootstrap titles read “Bootstrap 5 Page”. Sampled Tailwind titles read “Tailwind Starter Kit | TailwindStarterKit.com”. The product gallery shows the top of six of those files. Open a file to see its full page. Do not judge a page by this article’s photograph.
+              Sampled Bootstrap titles read “Bootstrap 5 Page”. Sampled Tailwind titles read “Tailwind   | TailwindStarterKit.com”. The product gallery shows the top of six of those files. Open a file to see its full page. Do not judge a page by this article’s photograph.
             </p>
           </section>
 

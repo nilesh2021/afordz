@@ -32,6 +32,16 @@ const PRODUCTS = {
     ),
     downloadName: "ai-video-creation-course",
   },
+  "marketing-contact-email-list": {
+    archivePath: path.join(process.cwd(), "private", "downloads", "100-Email-Contact-List.pdf"),
+    placeholderPath: path.join(
+      process.cwd(),
+      "private",
+      "downloads",
+      "marketing-contact-email-list.csv",
+    ),
+    downloadName: "100-Email-Contact-List",
+  },
 };
 
 function safeExisting(filePath) {
@@ -43,21 +53,40 @@ function safeExisting(filePath) {
   return fs.existsSync(filePath);
 }
 
+function contentTypeFor(ext) {
+  if (ext === ".zip") {
+    return "application/zip";
+  }
+  if (ext === ".pdf") {
+    return "application/pdf";
+  }
+  if (ext === ".csv") {
+    return "text/csv; charset=utf-8";
+  }
+  return "text/plain; charset=utf-8";
+}
+
 export function resolveDownload(productId) {
   const entry = PRODUCTS[productId];
   if (!entry) {
     return null;
   }
 
-  const isZip = safeExisting(entry.archivePath);
-  const filePath = isZip ? entry.archivePath : safeExisting(entry.placeholderPath) ? entry.placeholderPath : null;
+  const primaryExists = safeExisting(entry.archivePath);
+  const filePath = primaryExists
+    ? entry.archivePath
+    : safeExisting(entry.placeholderPath)
+      ? entry.placeholderPath
+      : null;
   if (!filePath) {
     return null;
   }
 
+  const ext = path.extname(filePath).toLowerCase();
+
   return {
     filePath,
-    downloadName: `${entry.downloadName}${isZip ? ".zip" : ".txt"}`,
-    contentType: isZip ? "application/zip" : "text/plain; charset=utf-8",
+    downloadName: `${entry.downloadName}${ext}`,
+    contentType: contentTypeFor(ext),
   };
 }

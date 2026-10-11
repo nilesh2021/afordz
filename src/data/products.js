@@ -138,109 +138,59 @@ export const products = [
     id: "marketing-contact-email-list",
     slug: "marketing-contact-email-list",
     saleType: "direct",
-    status: "draft",
+    status: "live",
     type: "digital",
-    name: "Marketing Contact Email List",
-    title: "Marketing Contact Email List",
+    name: "Email Contact List  ",
+    title: "Email Contact List  ",
     category: "Marketing Data",
     format: "Digital download",
     language: "English",
     vendor: "Afordz",
     affiliateUrl: "",
-    topics: [],
-    framework: "CSV",
-    addedAt: "2026-10-01",
-    tagline: "A digital file of contact records for marketing campaigns. Record count, source, and consent status are placeholders.",
+    topics: ["Email marketing", "Contact list", "PDF", "Opt-in"],
+    framework: "PDF",
+    addedAt: "2026-10-11",
+    tagline: " PDF of 100 email contacts in list format for your own marketing setup.",
     description:
-      "A single digital licence for a contact list intended for marketing use. This demo does not include real names or email addresses, and it does not deliver a file. Confirm how the records were collected, whether people agreed to be contacted, and which laws apply before you sell or use a list like this.",
-    priceInr: 1999,
+      "Digital download of 100-Email-Contact-List.pdf — a  contact list in PDF for practice and formatting. Use it to see column layout, then build your own list from people who opted in. Not a licence to spam or resell third-party addresses.",
+    priceInr: 49,
     currency: "INR",
-    detailsStatus: "placeholder",
-    placeholderNote:
-      "Price, record count, columns, source, consent, licence, and support window are drafts. Confirm each one, including lawful collection, before you accept orders.",
-    previewNote:
-      "These previews are original CSS mockups of a spreadsheet-style file. They are not a sample of real contacts, and they are not the download.",
-    placeholders: {
-      price: true,
-      recordCount: true,
-      contents: true,
-      compatibility: true,
-      licence: true,
-      support: true,
-      source: true,
-      fileFormat: true,
-    },
-    fileFormat: "CSV",
-    fileFormatNote:
-      "Placeholder. Confirm the delimiter, character encoding, and whether a spreadsheet workbook will also ship.",
+    detailsStatus: "confirmed",
+    previewNote: "Mockup only — not a page from the PDF.",
+    fileFormat: "PDF",
+    fileFormatNote: "PDF download: 100-Email-Contact-List.pdf. Open in any PDF reader.",
     images: [
       {
-        id: "spreadsheet",
-        label: "Spreadsheet view",
+        id: "emails",
+        label: " emails",
         variant: "data",
         src: "",
-        alt: "CSS mockup of a contact list spreadsheet",
-        summary: "A table layout with columns for name, email, role, and region. The rows are bars, not real contacts.",
-      },
-      {
-        id: "fields",
-        label: "Fields",
-        variant: "fields",
-        src: "",
-        alt: "CSS mockup of contact list fields",
-        summary: "Draft columns only. Confirm the field names you will actually deliver.",
-      },
-      {
-        id: "export",
-        label: "File export",
-        variant: "export",
-        src: "",
-        alt: "CSS mockup of a file export panel",
-        summary: "A file is planned after a verified payment. This demo does not create a download.",
+        alt: "Mockup of an email column with  addresses",
+        summary: "email column preview for the  list format.",
       },
     ],
     contents: [
       {
-        title: "Contact records",
-        detail:
-          "Placeholder. Confirm the number of rows, and do not treat any count on this site as final until you check the file.",
+        title: "100-Email-Contact-List.pdf",
+        detail: "One PDF with 100  email rows in list format.",
       },
       {
-        title: "Draft columns",
-        detail:
-          "Name, email, role, and region are a draft. Replace this list with the headers in the file you will deliver.",
-      },
-      {
-        title: "Source and consent",
-        detail:
-          "Placeholder. Confirm where the records came from and whether each person agreed to marketing contact. This listing is not a claim that the data is opted-in.",
-      },
-      {
-        title: "File format",
-        detail: "A CSV download is planned. It is not part of this store demo.",
+        title: "How to use",
+        detail: "Download after payment. Use as a format ; email only people who opted in.",
       },
     ],
     compatibility: [
-      "Spreadsheet apps that can open a UTF-8 CSV file. Placeholder — confirm the encoding and delimiter.",
-      "This demo does not include a sample file you can import.",
+      "Any current PDF reader (Adobe Reader, Chrome, Edge, Preview).",
     ],
     licence: {
-      summary:
-        "Draft only: one digital licence for the buyer’s own marketing use. Resale of the list, sharing the file, and contacting people without a lawful basis are not decided in this text.",
+      summary: "One licence for your own use of this  file. Not legal advice.",
       points: [
-        "This is not a licence grant and it is not legal advice.",
-        "Replace it with terms that match how the list was collected and how it may be used.",
-        "The demo checkout does not create a paid licence and does not transfer any contacts.",
+        "Do not treat  rows as opted-in leads or resell the file as a live contact dump.",
       ],
     },
     support: {
-      summary:
-        "Draft only: a placeholder window of 30 days for questions about a missing or damaged file. That window is not a promise.",
-      points: [
-        "Support hours are not confirmed.",
-        "This demo does not open a support ticket.",
-        "Publish a real contact address before you offer help.",
-      ],
+      summary: "Missing file? Email hello@afordz.in.",
+      points: [],
     },
   },
   {
@@ -437,9 +387,9 @@ export const products = [
     currency: "INR",
     detailsStatus: "placeholder",
     placeholderNote:
-      "Video lesson count, tool versions, and sample project files are drafts until the ZIP is final. Coming soon — not available to purchase yet.",
+      "Video lesson count, tool versions, and  project files are drafts until the ZIP is final. Coming soon — not available to purchase yet.",
     previewNote:
-      "This preview is an original CSS placeholder for a Training course. It is not a sample of the video lessons.",
+      "This preview is an original CSS placeholder for a Training course. It is not a  of the video lessons.",
     placeholders: {
       contents: true,
       licence: true,
@@ -525,7 +475,7 @@ export const products = [
     audience:
       "People who want prompt starting points for affiliate marketing tasks such as niche research, offer selection, funnel planning, content, email, SEO, and advertising.",
     previewNote:
-      "This preview is an original CSS placeholder. It is not a vendor screenshot and it is not a sample of the prompt library.",
+      "This preview is an original CSS placeholder. It is not a vendor screenshot and it is not a  of the prompt library.",
     images: [
       {
         id: "prompts",
@@ -565,7 +515,7 @@ export const products = [
     audience:
       "Beginners looking for an introduction to affiliate marketing, funnels, traffic strategies, and email sequences.",
     previewNote:
-      "This preview is an original CSS placeholder. It is not a vendor screenshot and it is not a sample of the ebook.",
+      "This preview is an original CSS placeholder. It is not a vendor screenshot and it is not a  of the ebook.",
     images: [
       {
         id: "ebook",
@@ -600,7 +550,7 @@ export const products = [
     audience:
       "People looking for a digital keto guide with food lists and practical tips for staying in ketosis.",
     previewNote:
-      "This preview is the authorised vendor product image from Digistore24. It is not a sample of the downloadable files.",
+      "This preview is the authorised vendor product image from Digistore24. It is not a  of the downloadable files.",
     images: [
       {
         id: "cover",
@@ -634,7 +584,7 @@ export const products = [
     audience:
       "Stay-at-home and busy moms who want flexible ways to earn online with limited time or experience.",
     previewNote:
-      "This preview is the authorised vendor product image from Digistore24. It is not a sample of the downloadable PDF.",
+      "This preview is the authorised vendor product image from Digistore24. It is not a  of the downloadable PDF.",
     images: [
       {
         id: "cover",
@@ -674,7 +624,7 @@ export const products = [
     audience:
       "Readers looking for a short PDF guide on attitude, positive thinking, creativity, and handling obstacles.",
     previewNote:
-      "This preview is the authorised vendor product image from Digistore24. It is not a sample of the ebook.",
+      "This preview is the authorised vendor product image from Digistore24. It is not a  of the ebook.",
     images: [
       {
         id: "cover",
@@ -713,7 +663,7 @@ export const products = [
     audience:
       "Freelancers who want a simple planning and content system to stay organised and focused.",
     previewNote:
-      "This preview is the authorised vendor product image from Digistore24. It is not a sample of the downloadable files.",
+      "This preview is the authorised vendor product image from Digistore24. It is not a  of the downloadable files.",
     images: [
       {
         id: "cover",
@@ -753,7 +703,7 @@ export const products = [
     audience:
       "Print-on-demand sellers and apparel creators who want ready-to-edit typography designs for t-shirts and related merch.",
     previewNote:
-      "This preview is the authorised vendor product image from Digistore24. It is not a sample of the downloadable design files.",
+      "This preview is the authorised vendor product image from Digistore24. It is not a  of the downloadable design files.",
     images: [
       {
         id: "cover",

@@ -55,45 +55,47 @@ export default function PreviewGallery({ images, note }) {
         ) : null}
       </div>
 
-      <div
-        role="tablist"
-        aria-label="Product previews"
-        className="mt-2 grid grid-cols-3 gap-1.5 sm:grid-cols-4"
-        onKeyDown={onKeyDown}
-      >
-        {images.map((image) => {
-          const selected = image.id === active.id;
-          return (
-            <button
-              key={image.id}
-              ref={(node) => {
-                tabs.current[image.id] = node;
-              }}
-              id={`tab-${image.id}`}
-              type="button"
-              role="tab"
-              aria-selected={selected}
-              aria-controls={`panel-${image.id}`}
-              tabIndex={selected ? 0 : -1}
-              onClick={() => setActiveId(image.id)}
-              className={`rounded-xl p-1 text-left ${
-                selected ? "ring-2 ring-accent-strong ring-offset-1" : "hover:bg-background"
-              }`}
-            >
-              <TemplateMockup
-                variant={image.variant}
-                src={image.src}
-                alt=""
-                sizes="(min-width: 640px) 10rem, 30vw"
-              />
-              <span className="mt-1 block truncate text-xs font-medium text-ink">
-                {image.label}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-      <p className="mt-2 text-xs leading-5 text-muted">{previewNote}</p>
+      {images.length > 1 ? (
+        <div
+          role="tablist"
+          aria-label="Product previews"
+          className="mt-2 grid grid-cols-3 gap-1.5 sm:grid-cols-4"
+          onKeyDown={onKeyDown}
+        >
+          {images.map((image) => {
+            const selected = image.id === active.id;
+            return (
+              <button
+                key={image.id}
+                ref={(node) => {
+                  tabs.current[image.id] = node;
+                }}
+                id={`tab-${image.id}`}
+                type="button"
+                role="tab"
+                aria-selected={selected}
+                aria-controls={`panel-${image.id}`}
+                tabIndex={selected ? 0 : -1}
+                onClick={() => setActiveId(image.id)}
+                className={`rounded-xl p-1 text-left ${
+                  selected ? "ring-2 ring-accent-strong ring-offset-1" : "hover:bg-background"
+                }`}
+              >
+                <TemplateMockup
+                  variant={image.variant}
+                  src={image.src}
+                  alt=""
+                  sizes="(min-width: 640px) 10rem, 30vw"
+                />
+                <span className="mt-1 block truncate text-xs font-medium text-ink">
+                  {image.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      ) : null}
+      {previewNote ? <p className="mt-2 text-xs leading-5 text-muted">{previewNote}</p> : null}
     </div>
   );
 }
