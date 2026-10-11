@@ -32,11 +32,16 @@ export async function generateMetadata({ params }) {
     return { title: "Product" };
   }
   const title = productTitle(product);
+  const keywords = [
+    ...(Array.isArray(product.keywords) ? product.keywords : []),
+    ...(Array.isArray(product.topics) ? product.topics : []),
+  ];
   return pageMetadata({
     title,
     description: product.tagline,
     path: `/products/${product.slug}`,
     images: [productShareImage(product)],
+    keywords,
     index: isIndexableProduct(product),
   });
 }
@@ -66,6 +71,7 @@ function DirectProductPage({ product }) {
   const compatibility = Array.isArray(product.compatibility) ? product.compatibility : [];
   const licencePoints = Array.isArray(product.licence?.points) ? product.licence.points : [];
   const supportPoints = Array.isArray(product.support?.points) ? product.support.points : [];
+  const topics = Array.isArray(product.topics) ? product.topics : [];
   const guide = getPostByProductSlug(product.slug);
   const crumbs = productBreadcrumbs(product);
   const hasSpecs =
@@ -75,7 +81,8 @@ function DirectProductPage({ product }) {
     Boolean(product.fileFormat) ||
     compatibility.length > 0 ||
     Boolean(product.licence) ||
-    Boolean(product.support);
+    Boolean(product.support) ||
+    topics.length > 0;
 
   const compact = product.slug === "marketing-contact-email-list";
 
@@ -184,6 +191,21 @@ function DirectProductPage({ product }) {
               {fieldIsPlaceholder(product, "recordCount") ? (
                 <p>The number of contact records is still a placeholder.</p>
               ) : null}
+            </Spec>
+          ) : null}
+
+          {topics.length > 0 ? (
+            <Spec title="Related searches">
+              <ul className="flex flex-wrap gap-2">
+                {topics.map((topic) => (
+                  <li
+                    key={topic}
+                    className="rounded-full border border-border bg-background px-2.5 py-1 text-xs font-medium text-ink"
+                  >
+                    {topic}
+                  </li>
+                ))}
+              </ul>
             </Spec>
           ) : null}
 

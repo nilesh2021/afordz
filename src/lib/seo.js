@@ -41,6 +41,7 @@ export function pageMetadata({
   description,
   path,
   images,
+  keywords,
   index = true,
   type = "website",
   publishedTime,
@@ -48,10 +49,14 @@ export function pageMetadata({
   const canonical = canonicalUrl(path);
   const ogTitle = shareTitle(title);
   const ogImages = shareImageEntries(images);
+  const keywordList = Array.isArray(keywords)
+    ? keywords.map((keyword) => String(keyword).trim()).filter(Boolean)
+    : [];
 
   return {
     title,
     description,
+    ...(keywordList.length ? { keywords: keywordList } : {}),
     alternates: { canonical },
     robots: {
       index: Boolean(index),
@@ -125,6 +130,15 @@ export function productJsonLd(product) {
     url,
     image: images,
   };
+  const keywords = [
+    ...(Array.isArray(product.keywords) ? product.keywords : []),
+    ...(Array.isArray(product.topics) ? product.topics : []),
+  ]
+    .map((keyword) => String(keyword).trim())
+    .filter(Boolean);
+  if (keywords.length) {
+    data.keywords = [...new Set(keywords)].join(", ");
+  }
 
   if (isIndexableProduct(product) && Number.isFinite(product.priceInr)) {
     data.offers = {
