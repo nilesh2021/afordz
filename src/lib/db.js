@@ -42,6 +42,16 @@ const SCHEMA_STEPS = [
     sql: `CREATE INDEX IF NOT EXISTS orders_download_token_hash
     ON orders (download_token_hash)`,
   },
+  {
+    id: "create_newsletter_subscribers",
+    sqlKind: "ddl",
+    sql: `CREATE TABLE IF NOT EXISTS newsletter_subscribers (
+    email TEXT PRIMARY KEY,
+    source TEXT NOT NULL,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+  )`,
+  },
 ];
 
 function attachStatement(error, step) {

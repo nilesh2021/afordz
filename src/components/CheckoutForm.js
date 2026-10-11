@@ -7,7 +7,7 @@ import Button from "@/components/Button";
 import { useCart } from "@/components/CartProvider";
 import { fieldIsPlaceholder, formatInr, getProductById } from "@/data/products";
 
-const initialValues = { name: "", email: "" };
+const initialValues = { name: "", email: "", marketingOptIn: false };
 
 function validate(values) {
   const errors = {};
@@ -71,6 +71,22 @@ export default function CheckoutForm() {
     setFormError("");
   }
 
+  function subscribeMarketingIfOptedIn() {
+    if (!values.marketingOptIn) {
+      return;
+    }
+    fetch("/api/newsletter", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: values.email.trim(),
+        source: "checkout",
+      }),
+    }).catch(() => {
+      // Marketing signup must not block payment.
+    });
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
     const nextErrors = validate(values);
@@ -81,6 +97,7 @@ export default function CheckoutForm() {
 
     setPaying(true);
     setFormError("");
+    subscribeMarketingIfOptedIn();
 
     try {
       const orderResponse = await fetch("/api/orders", {
@@ -221,6 +238,25 @@ export default function CheckoutForm() {
                 {errors.email}
               </p>
             ) : null}
+          </div>
+
+          <div className="rounded-2xl border border-border bg-background/70 px-4 py-4">
+            <label htmlFor="marketing-opt-in" className="flex cursor-pointer items-start gap-3">
+              <input
+                id="marketing-opt-in"
+                name="marketingOptIn"
+                type="checkbox"
+                checked={values.marketingOptIn}
+                onChange={(event) => update("marketingOptIn", event.target.checked)}
+                className="mt-1 size-4 shrink-0 rounded border-border text-accent-strong focus:ring-accent-strong"
+              />
+              <span className="text-sm leading-6 text-ink">
+                Also email me Afordz deals and new products.
+                <span className="mt-1 block text-muted">
+                  Optional. Unchecked by default. Order email is separate from marketing.
+                </span>
+              </span>
+            </label>
           </div>
         </div>
 
