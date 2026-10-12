@@ -2,8 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Button from "@/components/Button";
 import TrainingCourseCard from "@/components/TrainingCourseCard";
+import TrainingFreeCourse from "@/components/TrainingFreeCourse";
 import { getProductsByTrack } from "@/data/products";
-import { getLearningTrackBySlug, LEARNING_TRACKS } from "@/data/training";
+import { getCourseLessonCount, getLearningTrackBySlug, isFreeOnSiteCourse, LEARNING_TRACKS } from "@/data/training";
 import { pageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -15,6 +16,19 @@ export async function generateMetadata({ params }) {
   const track = getLearningTrackBySlug(trackSlug);
   if (!track) {
     return { title: "Training" };
+  }
+
+  if (isFreeOnSiteCourse(track)) {
+    const course = track.course;
+    const lessonCount = getCourseLessonCount(course);
+    return pageMetadata({
+      title: {
+        absolute: `Free UI UX Design Course — ${course.title} | Afordz`,
+      },
+      description: `Free UI UX design course for beginners. Self-paced ${course.title}: ${lessonCount} lessons covering Figma, Jakob Nielsen heuristics, and the design process. No payment required.`,
+      path: `/training/${track.slug}`,
+      keywords: course.keywords,
+    });
   }
 
   return pageMetadata({
@@ -29,6 +43,10 @@ export default async function TrainingTrackPage({ params }) {
   const track = getLearningTrackBySlug(trackSlug);
   if (!track) {
     notFound();
+  }
+
+  if (isFreeOnSiteCourse(track)) {
+    return <TrainingFreeCourse track={track} />;
   }
 
   const courses = getProductsByTrack(track.id);

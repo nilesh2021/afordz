@@ -20,8 +20,9 @@
  *   chosen by variant (business, portfolio, agency, saas, ecommerce, landing,
  *   data, fields, export, prompts, ebook, canva)
  *
- * Training courses use category "Training", saleType "direct", and a learningTrack.
- * They check out through Razorpay like other Afordz downloads.
+ * Paid Training packs use category "Training", saleType "direct", and a learningTrack.
+ * They check out through Razorpay like other Afordz downloads. The UI/UX track is a
+ * free on-site course in training.js and is not sold from this catalogue.
  *
  * How to publish an affiliate listing:
  * 1. Paste your real Digistore24 promo URL into affiliateUrl (full https URL).
@@ -302,7 +303,7 @@ export const products = [
     id: "ui-ux-fundamentals-course",
     slug: "ui-ux-fundamentals-course",
     saleType: "direct",
-    status: "coming-soon",
+    status: "draft",
     type: "digital",
     name: "UI/UX Fundamentals Course Pack",
     title: "UI/UX Fundamentals Course Pack",

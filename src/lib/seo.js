@@ -117,6 +117,48 @@ export function breadcrumbJsonLd(items) {
   };
 }
 
+export function courseJsonLd(track) {
+  const course = track.course;
+  const origin = getSiteUrl();
+  const url = canonicalUrl(`/training/${track.slug}`);
+  const keywordList = Array.isArray(course.keywords)
+    ? course.keywords.map((keyword) => String(keyword).trim()).filter(Boolean)
+    : [];
+  return {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: course.title,
+    description: course.description || course.tagline,
+    url,
+    isAccessibleForFree: true,
+    inLanguage: "en",
+    educationalLevel: course.level,
+    ...(keywordList.length ? { keywords: keywordList.join(", ") } : {}),
+    provider: {
+      "@id": `${origin}/#organization`,
+    },
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "online",
+      courseWorkload: course.duration,
+    },
+    offers: {
+      "@type": "Offer",
+      url,
+      price: 0,
+      priceCurrency: "INR",
+      availability: "https://schema.org/InStock",
+      category: "Free",
+    },
+    hasPart: (course.modules ?? []).map((module) => ({
+      "@type": "LearningResource",
+      name: module.title,
+      description: module.summary,
+      timeRequired: module.duration,
+    })),
+  };
+}
+
 export function productJsonLd(product) {
   const url = canonicalUrl(`/products/${product.slug}`);
   const images = (product.images ?? [])

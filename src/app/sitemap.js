@@ -1,7 +1,7 @@
 import { posts } from "@/data/posts";
 import { getIndexableProducts } from "@/data/products";
 import { canonicalUrl, getSiteUrl, staticPageUpdatedAt } from "@/data/site";
-import { LEARNING_TRACKS } from "@/data/training";
+import { getPublishedLessons, isFreeOnSiteCourse, LEARNING_TRACKS } from "@/data/training";
 
 export default function sitemap() {
   const siteUrl = getSiteUrl();
@@ -17,6 +17,16 @@ export default function sitemap() {
     lastModified: new Date(`${staticPageUpdatedAt["/training"]}T00:00:00Z`),
   }));
 
+  const trainingLessonEntries = LEARNING_TRACKS.flatMap((track) => {
+    if (!isFreeOnSiteCourse(track)) {
+      return [];
+    }
+    return getPublishedLessons(track.course).map((lesson) => ({
+      url: `${siteUrl}/training/${track.slug}/${lesson.slug}`,
+      lastModified: new Date(`${staticPageUpdatedAt["/training"]}T00:00:00Z`),
+    }));
+  });
+
   const postEntries = posts.map((post) => ({
     url: `${siteUrl}/blog/${post.slug}`,
     lastModified: new Date(`${post.published}T00:00:00Z`),
@@ -27,5 +37,11 @@ export default function sitemap() {
     lastModified: new Date(`${product.addedAt}T00:00:00Z`),
   }));
 
-  return [...staticEntries, ...trainingTrackEntries, ...postEntries, ...productEntries];
+  return [
+    ...staticEntries,
+    ...trainingTrackEntries,
+    ...trainingLessonEntries,
+    ...postEntries,
+    ...productEntries,
+  ];
 }

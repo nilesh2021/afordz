@@ -91,7 +91,11 @@ body {
 #steps,
 #included,
 #downloads,
-#gallery {
+#gallery,
+#syllabus,
+#outcomes,
+#process,
+#principles {
   scroll-margin-top: 6.5rem;
 }
 
