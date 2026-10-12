@@ -1,101 +1,101 @@
-name,email,role,region,source,consent_status
-Sample Contact 001,contact001@example.com,Founder,India,sample_template,example_only
-Sample Contact 002,contact002@example.com,Marketer,Southeast Asia,sample_template,example_only
-Sample Contact 003,contact003@example.com,Designer,Europe,sample_template,example_only
-Sample Contact 004,contact004@example.com,Developer,North America,sample_template,example_only
-Sample Contact 005,contact005@example.com,Owner,Middle East,sample_template,example_only
-Sample Contact 006,contact006@example.com,Manager,Africa,sample_template,example_only
-Sample Contact 007,contact007@example.com,Founder,India,sample_template,example_only
-Sample Contact 008,contact008@example.com,Marketer,Southeast Asia,sample_template,example_only
-Sample Contact 009,contact009@example.com,Designer,Europe,sample_template,example_only
-Sample Contact 010,contact010@example.com,Developer,North America,sample_template,example_only
-Sample Contact 011,contact011@example.com,Owner,Middle East,sample_template,example_only
-Sample Contact 012,contact012@example.com,Manager,Africa,sample_template,example_only
-Sample Contact 013,contact013@example.com,Founder,India,sample_template,example_only
-Sample Contact 014,contact014@example.com,Marketer,Southeast Asia,sample_template,example_only
-Sample Contact 015,contact015@example.com,Designer,Europe,sample_template,example_only
-Sample Contact 016,contact016@example.com,Developer,North America,sample_template,example_only
-Sample Contact 017,contact017@example.com,Owner,Middle East,sample_template,example_only
-Sample Contact 018,contact018@example.com,Manager,Africa,sample_template,example_only
-Sample Contact 019,contact019@example.com,Founder,India,sample_template,example_only
-Sample Contact 020,contact020@example.com,Marketer,Southeast Asia,sample_template,example_only
-Sample Contact 021,contact021@example.com,Designer,Europe,sample_template,example_only
-Sample Contact 022,contact022@example.com,Developer,North America,sample_template,example_only
-Sample Contact 023,contact023@example.com,Owner,Middle East,sample_template,example_only
-Sample Contact 024,contact024@example.com,Manager,Africa,sample_template,example_only
-Sample Contact 025,contact025@example.com,Founder,India,sample_template,example_only
-Sample Contact 026,contact026@example.com,Marketer,Southeast Asia,sample_template,example_only
-Sample Contact 027,contact027@example.com,Designer,Europe,sample_template,example_only
-Sample Contact 028,contact028@example.com,Developer,North America,sample_template,example_only
-Sample Contact 029,contact029@example.com,Owner,Middle East,sample_template,example_only
-Sample Contact 030,contact030@example.com,Manager,Africa,sample_template,example_only
-Sample Contact 031,contact031@example.com,Founder,India,sample_template,example_only
-Sample Contact 032,contact032@example.com,Marketer,Southeast Asia,sample_template,example_only
-Sample Contact 033,contact033@example.com,Designer,Europe,sample_template,example_only
-Sample Contact 034,contact034@example.com,Developer,North America,sample_template,example_only
-Sample Contact 035,contact035@example.com,Owner,Middle East,sample_template,example_only
-Sample Contact 036,contact036@example.com,Manager,Africa,sample_template,example_only
-Sample Contact 037,contact037@example.com,Founder,India,sample_template,example_only
-Sample Contact 038,contact038@example.com,Marketer,Southeast Asia,sample_template,example_only
-Sample Contact 039,contact039@example.com,Designer,Europe,sample_template,example_only
-Sample Contact 040,contact040@example.com,Developer,North America,sample_template,example_only
-Sample Contact 041,contact041@example.com,Owner,Middle East,sample_template,example_only
-Sample Contact 042,contact042@example.com,Manager,Africa,sample_template,example_only
-Sample Contact 043,contact043@example.com,Founder,India,sample_template,example_only
-Sample Contact 044,contact044@example.com,Marketer,Southeast Asia,sample_template,example_only
-Sample Contact 045,contact045@example.com,Designer,Europe,sample_template,example_only
-Sample Contact 046,contact046@example.com,Developer,North America,sample_template,example_only
-Sample Contact 047,contact047@example.com,Owner,Middle East,sample_template,example_only
-Sample Contact 048,contact048@example.com,Manager,Africa,sample_template,example_only
-Sample Contact 049,contact049@example.com,Founder,India,sample_template,example_only
-Sample Contact 050,contact050@example.com,Marketer,Southeast Asia,sample_template,example_only
-Sample Contact 051,contact051@example.com,Designer,Europe,sample_template,example_only
-Sample Contact 052,contact052@example.com,Developer,North America,sample_template,example_only
-Sample Contact 053,contact053@example.com,Owner,Middle East,sample_template,example_only
-Sample Contact 054,contact054@example.com,Manager,Africa,sample_template,example_only
-Sample Contact 055,contact055@example.com,Founder,India,sample_template,example_only
-Sample Contact 056,contact056@example.com,Marketer,Southeast Asia,sample_template,example_only
-Sample Contact 057,contact057@example.com,Designer,Europe,sample_template,example_only
-Sample Contact 058,contact058@example.com,Developer,North America,sample_template,example_only
-Sample Contact 059,contact059@example.com,Owner,Middle East,sample_template,example_only
-Sample Contact 060,contact060@example.com,Manager,Africa,sample_template,example_only
-Sample Contact 061,contact061@example.com,Founder,India,sample_template,example_only
-Sample Contact 062,contact062@example.com,Marketer,Southeast Asia,sample_template,example_only
-Sample Contact 063,contact063@example.com,Designer,Europe,sample_template,example_only
-Sample Contact 064,contact064@example.com,Developer,North America,sample_template,example_only
-Sample Contact 065,contact065@example.com,Owner,Middle East,sample_template,example_only
-Sample Contact 066,contact066@example.com,Manager,Africa,sample_template,example_only
-Sample Contact 067,contact067@example.com,Founder,India,sample_template,example_only
-Sample Contact 068,contact068@example.com,Marketer,Southeast Asia,sample_template,example_only
-Sample Contact 069,contact069@example.com,Designer,Europe,sample_template,example_only
-Sample Contact 070,contact070@example.com,Developer,North America,sample_template,example_only
-Sample Contact 071,contact071@example.com,Owner,Middle East,sample_template,example_only
-Sample Contact 072,contact072@example.com,Manager,Africa,sample_template,example_only
-Sample Contact 073,contact073@example.com,Founder,India,sample_template,example_only
-Sample Contact 074,contact074@example.com,Marketer,Southeast Asia,sample_template,example_only
-Sample Contact 075,contact075@example.com,Designer,Europe,sample_template,example_only
-Sample Contact 076,contact076@example.com,Developer,North America,sample_template,example_only
-Sample Contact 077,contact077@example.com,Owner,Middle East,sample_template,example_only
-Sample Contact 078,contact078@example.com,Manager,Africa,sample_template,example_only
-Sample Contact 079,contact079@example.com,Founder,India,sample_template,example_only
-Sample Contact 080,contact080@example.com,Marketer,Southeast Asia,sample_template,example_only
-Sample Contact 081,contact081@example.com,Designer,Europe,sample_template,example_only
-Sample Contact 082,contact082@example.com,Developer,North America,sample_template,example_only
-Sample Contact 083,contact083@example.com,Owner,Middle East,sample_template,example_only
-Sample Contact 084,contact084@example.com,Manager,Africa,sample_template,example_only
-Sample Contact 085,contact085@example.com,Founder,India,sample_template,example_only
-Sample Contact 086,contact086@example.com,Marketer,Southeast Asia,sample_template,example_only
-Sample Contact 087,contact087@example.com,Designer,Europe,sample_template,example_only
-Sample Contact 088,contact088@example.com,Developer,North America,sample_template,example_only
-Sample Contact 089,contact089@example.com,Owner,Middle East,sample_template,example_only
-Sample Contact 090,contact090@example.com,Manager,Africa,sample_template,example_only
-Sample Contact 091,contact091@example.com,Founder,India,sample_template,example_only
-Sample Contact 092,contact092@example.com,Marketer,Southeast Asia,sample_template,example_only
-Sample Contact 093,contact093@example.com,Designer,Europe,sample_template,example_only
-Sample Contact 094,contact094@example.com,Developer,North America,sample_template,example_only
-Sample Contact 095,contact095@example.com,Owner,Middle East,sample_template,example_only
-Sample Contact 096,contact096@example.com,Manager,Africa,sample_template,example_only
-Sample Contact 097,contact097@example.com,Founder,India,sample_template,example_only
-Sample Contact 098,contact098@example.com,Marketer,Southeast Asia,sample_template,example_only
-Sample Contact 099,contact099@example.com,Designer,Europe,sample_template,example_only
-Sample Contact 100,contact100@example.com,Developer,North America,sample_template,example_only
+email
+contact001@example.com
+contact002@example.com
+contact003@example.com
+contact004@example.com
+contact005@example.com
+contact006@example.com
+contact007@example.com
+contact008@example.com
+contact009@example.com
+contact010@example.com
+contact011@example.com
+contact012@example.com
+contact013@example.com
+contact014@example.com
+contact015@example.com
+contact016@example.com
+contact017@example.com
+contact018@example.com
+contact019@example.com
+contact020@example.com
+contact021@example.com
+contact022@example.com
+contact023@example.com
+contact024@example.com
+contact025@example.com
+contact026@example.com
+contact027@example.com
+contact028@example.com
+contact029@example.com
+contact030@example.com
+contact031@example.com
+contact032@example.com
+contact033@example.com
+contact034@example.com
+contact035@example.com
+contact036@example.com
+contact037@example.com
+contact038@example.com
+contact039@example.com
+contact040@example.com
+contact041@example.com
+contact042@example.com
+contact043@example.com
+contact044@example.com
+contact045@example.com
+contact046@example.com
+contact047@example.com
+contact048@example.com
+contact049@example.com
+contact050@example.com
+contact051@example.com
+contact052@example.com
+contact053@example.com
+contact054@example.com
+contact055@example.com
+contact056@example.com
+contact057@example.com
+contact058@example.com
+contact059@example.com
+contact060@example.com
+contact061@example.com
+contact062@example.com
+contact063@example.com
+contact064@example.com
+contact065@example.com
+contact066@example.com
+contact067@example.com
+contact068@example.com
+contact069@example.com
+contact070@example.com
+contact071@example.com
+contact072@example.com
+contact073@example.com
+contact074@example.com
+contact075@example.com
+contact076@example.com
+contact077@example.com
+contact078@example.com
+contact079@example.com
+contact080@example.com
+contact081@example.com
+contact082@example.com
+contact083@example.com
+contact084@example.com
+contact085@example.com
+contact086@example.com
+contact087@example.com
+contact088@example.com
+contact089@example.com
+contact090@example.com
+contact091@example.com
+contact092@example.com
+contact093@example.com
+contact094@example.com
+contact095@example.com
+contact096@example.com
+contact097@example.com
+contact098@example.com
+contact099@example.com
+contact100@example.com
