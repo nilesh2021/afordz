@@ -1,0 +1,19 @@
+Afordz Training — Generative AI for Designers Who Build
+=======================================================
+12-week learning syllabus: from UI/UX designer to AI product designer.
+
+This placeholder stands in until the paid course ZIP is published.
+Replace private/downloads/genai-learning-syllabus.txt with genai-learning-syllabus.zip
+(or keep the DOCX as the archive) and set the product status to "live" in src/data/products.js.
+
+Outcome: 3 portfolio projects (2 AI web apps + 1 AI UX case study)
+Time: about 5–6 hours per week (~66 hours total)
+
+Modules
+-------
+1. AI Basics & Prompting — how LLMs work, 20 design prompts
+2. AI Design Tools — Figma AI, Stitch, v0, Firefly; redesign with time log
+3. JavaScript Basics — DOM, events, fetch; interactive Bootstrap page
+4. Your First AI Web App — chatbot UI + protected API key (Project 1)
+5. UX for AI — patterns, trust, states; Figma AI product redesign (Project 2)
+6. AI Coding Assistants & Portfolio — landing-page generator + portfolio (Project 3)

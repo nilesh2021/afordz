@@ -2611,6 +2611,16 @@ export const LEARNING_TRACKS = [
     course: UI_UX_COURSE,
   },
   {
+    id: "genai",
+    slug: "genai",
+    title: "Generative AI",
+    shortTitle: "GenAI",
+    description:
+      "12-week path for designers who build: prompting, AI design tools, JavaScript, AI web apps, AI UX patterns, and a portfolio of three projects.",
+    audience:
+      "UI/UX designers who know HTML and Bootstrap and want to become AI product designers — designing and shipping AI features, not training models.",
+  },
+  {
     id: "ai-video",
     slug: "ai-video",
     title: "AI video creation",

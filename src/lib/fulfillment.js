@@ -32,6 +32,16 @@ const PRODUCTS = {
     ),
     downloadName: "ai-video-creation-course",
   },
+  "genai-learning-syllabus": {
+    archivePath: path.join(process.cwd(), "private", "downloads", "genai-learning-syllabus.docx"),
+    placeholderPath: path.join(
+      process.cwd(),
+      "private",
+      "downloads",
+      "genai-learning-syllabus.txt",
+    ),
+    downloadName: "genai-learning-syllabus",
+  },
   "marketing-contact-email-list": {
     archivePath: path.join(process.cwd(), "private", "downloads", "100-Email-Contact-List.pdf"),
     placeholderPath: path.join(
@@ -59,6 +69,9 @@ function contentTypeFor(ext) {
   }
   if (ext === ".pdf") {
     return "application/pdf";
+  }
+  if (ext === ".docx") {
+    return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
   }
   if (ext === ".csv") {
     return "text/csv; charset=utf-8";

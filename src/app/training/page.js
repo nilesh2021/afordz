@@ -8,13 +8,14 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: { absolute: "Free UI UX Design Course & Training Tracks | Afordz" },
   description:
-    "Free UI UX design course on this site — learn UI UX fundamentals with Figma practice and usability heuristics. Plus downloadable packs for AI video, AI image generation, and content ideas when those listings are live.",
+    "Free UI UX design course on this site, plus Generative AI for designers and other Training packs for AI video, AI image generation, and content ideas when those listings are live.",
   path: "/training",
   keywords: [
     "free UI UX design course",
     "UI UX fundamentals",
+    "generative AI for designers",
+    "AI product designer course",
     "learn UI UX",
-    "Figma UI UX course",
     "Afordz training",
   ],
 });

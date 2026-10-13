@@ -90,8 +90,9 @@ export default function HomePage() {
             <p className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-ink">
               Website resources · INR
             </p>
-            <h1 className="mt-4 max-w-xl font-display text-4xl leading-[0.95] tracking-tight text-ink sm:mt-6 sm:text-6xl lg:text-[4.5rem]">
-              Smart tools for your{" "}
+            <h1 className="mt-4 max-w-xl font-display text-3xl leading-[1.05] tracking-tight text-ink sm:mt-6 sm:text-6xl sm:leading-[0.95] lg:text-[4.5rem]">
+              Smart tools for your
+              <br className="sm:hidden" />{" "}
               <em className="italic text-accent-strong">next project</em>
             </h1>
             <p className="mt-4 max-w-xl text-sm leading-6 text-muted sm:mt-6 sm:text-lg sm:leading-7">

@@ -10,7 +10,7 @@
  * - status: "live" listings can be purchased. "coming-soon" listings appear in
  *   the catalogue without add to cart or checkout. "draft" listings are hidden.
  * - category, format, and framework: shop filters
- * - learningTrack: Training hub path id (ui-ux, ai-video, ai-image, content-ideas, fundamentals)
+ * - learningTrack: Training hub path id (ui-ux, genai, ai-video, ai-image, content-ideas, fundamentals)
  * - level: Beginner or Intermediate (shown on Training cards)
  * - priceInr: INR price for direct products with a verified numeric amount
  * - addedAt: YYYY-MM-DD date used by the Newest sort
@@ -463,6 +463,127 @@ export const products = [
       points: [
         "Support hours are not confirmed.",
         "There is no live workshop support for this pack.",
+      ],
+    },
+  },
+  {
+    id: "genai-learning-syllabus",
+    slug: "genai-learning-syllabus",
+    saleType: "direct",
+    status: "coming-soon",
+    type: "digital",
+    name: "Generative AI for Designers Who Build",
+    title: "Generative AI for Designers Who Build",
+    category: "Training",
+    format: "Course download",
+    language: "English",
+    vendor: "Afordz",
+    affiliateUrl: "",
+    learningTrack: "genai",
+    level: "Intermediate",
+    topics: [
+      "Generative AI",
+      "Prompt engineering",
+      "AI UX",
+      "JavaScript",
+      "Chatbot UI",
+      "Figma AI",
+      "Portfolio",
+    ],
+    keywords: [
+      "generative AI for designers",
+      "AI product designer course",
+      "prompt engineering for UX",
+      "AI UX design",
+      "build AI web apps",
+      "12 week GenAI syllabus",
+    ],
+    framework: "JavaScript",
+    addedAt: "2026-10-13",
+    tagline:
+      "A 12-week design-first GenAI syllabus: prompting, AI design tools, JavaScript, a chatbot app, AI UX patterns, and a portfolio with three projects.",
+    description:
+      "One digital licence for the Afordz Training syllabus Generative AI for Designers Who Build. Built for UI/UX designers who already know HTML and Bootstrap and want to design and ship AI-powered products — not train models. The pack covers six modules over about 12 weeks (roughly 5–6 hours per week): AI basics and prompting, AI design tools, JavaScript fundamentals, your first AI web app, UX for AI, and AI coding assistants with a portfolio finish. Outcome focus: three portfolio projects (chatbot UI, AI UX case study, landing-page-from-prompt generator). Materials are delivered as a private download after a captured Razorpay payment. This is not a live cohort, mentorship programme, or streaming classroom.",
+    priceInr: 799,
+    currency: "INR",
+    detailsStatus: "placeholder",
+    placeholderNote:
+      "The syllabus document is ready for preview. Licence wording and any bonus files will be confirmed before checkout opens. Coming soon — not available to purchase yet.",
+    previewNote:
+      "This preview is an original CSS placeholder for a Training course. It is not a screenshot of the syllabus document.",
+    placeholders: {
+      contents: false,
+      licence: true,
+      support: true,
+    },
+    images: [
+      {
+        id: "overview",
+        label: "Course overview",
+        variant: "saas",
+        src: "",
+        alt: "Original CSS placeholder for the Generative AI for Designers course pack",
+        summary: "Placeholder graphic for this Training listing.",
+      },
+    ],
+    contents: [
+      {
+        title: "Module 1 — AI Basics & Prompting",
+        detail:
+          "How LLMs work (tokens, context, hallucinations), structured prompting, and a library of 20 tested design prompts for copy, research, audits, and ideation.",
+      },
+      {
+        title: "Module 2 — AI Design Tools",
+        detail:
+          "Explore Figma AI, Uizard, Google Stitch, v0, and Firefly/Midjourney. Redesign 3–5 screens of a past project with a time-saved log and reflection.",
+      },
+      {
+        title: "Module 3 — JavaScript Basics",
+        detail:
+          "Variables, DOM, events, and fetch. Build an interactive Bootstrap page (form, modal, dynamic list) and publish it on GitHub.",
+      },
+      {
+        title: "Module 4 — Your First AI Web App (Project 1)",
+        detail:
+          "Call Gemini or OpenAI safely, keep keys off the client, and ship a polished chatbot UI with loading, error, and conversation states.",
+      },
+      {
+        title: "Module 5 — UX for AI (Project 2)",
+        detail:
+          "People + AI Guidebook and HAX patterns: streaming, trust, control, and errors. Figma case study redesigning an existing AI product.",
+      },
+      {
+        title: "Module 6 — AI Coding Assistants & Portfolio (Project 3)",
+        detail:
+          "Use Cursor/Copilot to build a landing-page-from-prompt generator, then present all three projects on a live portfolio site.",
+      },
+      {
+        title: "Progress checklist & role map",
+        detail:
+          "Week-by-week checklist, what to skip for now (training models, heavy ML math), and target roles such as AI product designer and design engineer.",
+      },
+    ],
+    compatibility: [
+      "A device that can open a Word (.docx) syllabus or a ZIP of notes.",
+      "A free Figma account and a current browser for HTML/Bootstrap/JS exercises.",
+      "Free-tier access to tools such as Google AI Studio, Figma AI credits, and GitHub — third-party accounts are not included.",
+      "This listing does not include live mentoring, API credits, or a streaming classroom.",
+    ],
+    licence: {
+      summary:
+        "Draft only: one digital licence for the buyer’s own learning use. Resale and redistribution of the syllabus files are not decided in this text.",
+      points: [
+        "This is not legal advice.",
+        "Third-party tools and APIs keep their own terms and pricing.",
+        "Coming soon — checkout is not open yet.",
+      ],
+    },
+    support: {
+      summary:
+        "Draft only: a placeholder window of 30 days for questions about a missing download after a verified payment.",
+      points: [
+        "Support hours are not confirmed.",
+        "There is no live cohort or office-hours channel for this pack.",
       ],
     },
   },
