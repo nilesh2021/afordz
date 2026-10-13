@@ -4,8 +4,8 @@ import AddToCartControls from "@/components/AddToCartControls";
 import AffiliateOfferCta from "@/components/AffiliateOfferCta";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
-import PlaceholderLabel from "@/components/PlaceholderLabel";
 import PreviewGallery from "@/components/PreviewGallery";
+import ProductSpecsMenu, { ProductSpec } from "@/components/ProductSpecsMenu";
 import PriceTag from "@/components/PriceTag";
 import { getPostByProductSlug } from "@/data/posts";
 import {
@@ -52,18 +52,6 @@ function productBreadcrumbs(product) {
     { name: "Shop", path: "/shop" },
     { name: productTitle(product), path: `/products/${product.slug}` },
   ];
-}
-
-function Spec({ title, placeholder, children }) {
-  return (
-    <section className="rounded-3xl border border-border bg-surface p-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-lg font-semibold text-ink">{title}</h2>
-        {placeholder ? <PlaceholderLabel /> : null}
-      </div>
-      <div className="mt-4 space-y-3 text-sm leading-6 text-muted">{children}</div>
-    </section>
-  );
 }
 
 function DirectProductPage({ product }) {
@@ -145,9 +133,9 @@ function DirectProductPage({ product }) {
       </div>
 
       {hasSpecs ? (
-        <div className={`grid gap-4 md:grid-cols-2 ${compact ? "mt-8" : "mt-16 gap-6"}`}>
+        <ProductSpecsMenu compact={compact} aside={topics} asideTitle="Related searches">
           {contents.length > 0 ? (
-            <Spec
+            <ProductSpec
               title={product.subscriptionTerm ? "What's included" : "Included files"}
               placeholder={fieldIsPlaceholder(product, "contents")}
             >
@@ -159,18 +147,18 @@ function DirectProductPage({ product }) {
                   </li>
                 ))}
               </ul>
-            </Spec>
+            </ProductSpec>
           ) : null}
 
           {product.subscriptionTerm ? (
-            <Spec title="Subscription term" placeholder={fieldIsPlaceholder(product, "plan")}>
+            <ProductSpec title="Subscription term" placeholder={fieldIsPlaceholder(product, "plan")}>
               <p className="text-2xl font-semibold text-ink">{product.subscriptionTerm}</p>
               <p>Listed catalogue term. Confirm when the year starts after a verified payment.</p>
-            </Spec>
+            </ProductSpec>
           ) : null}
 
           {product.bootstrapVersion ? (
-            <Spec
+            <ProductSpec
               title="Bootstrap version"
               placeholder={fieldIsPlaceholder(product, "bootstrapVersion")}
             >
@@ -181,46 +169,31 @@ function DirectProductPage({ product }) {
                   The name of this product mentions 1000 templates. That count is still a placeholder.
                 </p>
               ) : null}
-            </Spec>
+            </ProductSpec>
           ) : null}
 
           {product.fileFormat ? (
-            <Spec title="File format" placeholder={fieldIsPlaceholder(product, "fileFormat")}>
+            <ProductSpec title="File format" placeholder={fieldIsPlaceholder(product, "fileFormat")}>
               <p className="text-2xl font-semibold text-ink">{product.fileFormat}</p>
               <p>{product.fileFormatNote}</p>
               {fieldIsPlaceholder(product, "recordCount") ? (
                 <p>The number of contact records is still a placeholder.</p>
               ) : null}
-            </Spec>
-          ) : null}
-
-          {topics.length > 0 ? (
-            <Spec title="Related searches">
-              <ul className="flex flex-wrap gap-2">
-                {topics.map((topic) => (
-                  <li
-                    key={topic}
-                    className="rounded-full border border-border bg-background px-2.5 py-1 text-xs font-medium text-ink"
-                  >
-                    {topic}
-                  </li>
-                ))}
-              </ul>
-            </Spec>
+            </ProductSpec>
           ) : null}
 
           {compatibility.length > 0 ? (
-            <Spec title="Compatibility" placeholder={fieldIsPlaceholder(product, "compatibility")}>
+            <ProductSpec title="Compatibility" placeholder={fieldIsPlaceholder(product, "compatibility")}>
               <ul className="list-disc space-y-2 pl-5">
                 {compatibility.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-            </Spec>
+            </ProductSpec>
           ) : null}
 
           {product.licence ? (
-            <Spec title="Usage licence" placeholder={fieldIsPlaceholder(product, "licence")}>
+            <ProductSpec title="Usage licence" placeholder={fieldIsPlaceholder(product, "licence")}>
               <p>{product.licence.summary}</p>
               {licencePoints.length > 0 ? (
                 <ul className="list-disc space-y-2 pl-5">
@@ -229,11 +202,11 @@ function DirectProductPage({ product }) {
                   ))}
                 </ul>
               ) : null}
-            </Spec>
+            </ProductSpec>
           ) : null}
 
           {product.support ? (
-            <Spec title="Support" placeholder={fieldIsPlaceholder(product, "support")}>
+            <ProductSpec title="Support" placeholder={fieldIsPlaceholder(product, "support")}>
               <p>{product.support.summary}</p>
               {supportPoints.length > 0 ? (
                 <ul className="list-disc space-y-2 pl-5">
@@ -242,9 +215,9 @@ function DirectProductPage({ product }) {
                   ))}
                 </ul>
               ) : null}
-            </Spec>
+            </ProductSpec>
           ) : null}
-        </div>
+        </ProductSpecsMenu>
       ) : null}
     </div>
   );
@@ -298,28 +271,18 @@ function AffiliateProductPage({ product }) {
         </div>
       </div>
 
-      <div className="mt-16 grid gap-6 md:grid-cols-2">
-        <Spec title="Overview">
+      <ProductSpecsMenu aside={topics} asideTitle="Related searches">
+        <ProductSpec title="Overview">
           <p>{product.description}</p>
-        </Spec>
-
-        {topics.length > 0 ? (
-          <Spec title="Topics">
-            <ul className="list-disc space-y-2 pl-5">
-              {topics.map((topic) => (
-                <li key={topic}>{topic}</li>
-              ))}
-            </ul>
-          </Spec>
-        ) : null}
+        </ProductSpec>
 
         {product.audience ? (
-          <Spec title="Intended audience">
+          <ProductSpec title="Intended audience">
             <p>{product.audience}</p>
-          </Spec>
+          </ProductSpec>
         ) : null}
 
-        <Spec title="Vendor information">
+        <ProductSpec title="Vendor information">
           <p>
             Vendor: {product.vendor}. Format: {product.format}. Language: {product.language}.
           </p>
@@ -331,8 +294,8 @@ function AffiliateProductPage({ product }) {
             Checkout, delivery, and support are handled by the vendor, not through the Afordz cart
             or download flow.
           </p>
-        </Spec>
-      </div>
+        </ProductSpec>
+      </ProductSpecsMenu>
     </div>
   );
 }

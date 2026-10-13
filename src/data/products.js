@@ -89,9 +89,9 @@ export const products = [
         id: "dark-hero",
         label: "Dark hero",
         variant: "business",
-        src: "/previews/dark-hero.png",
-        alt: "Screenshot of the top of BS500DEAL/index1.html, a dark Bootstrap hero with feature cards",
-        summary: "BS500DEAL/index1.html. A dark hero, two buttons, and a row of feature cards.",
+        src: "/previews/dark-hero-studio.png",
+        alt: "Dark Bootstrap hero with Get started and Learn more buttons and Features, Pricing, About cards",
+        summary: "A dark hero, two buttons, and a row of feature cards.",
       },
       {
         id: "cover-header",
