@@ -1,5 +1,5 @@
 import { formatInr } from "@/data/products";
-import { DEFAULT_PURCHASE, PURCHASE_OPTIONS } from "@/data/catalogue";
+import { DEFAULT_PURCHASE, DEFAULT_TIER, PURCHASE_OPTIONS, TIER_OPTIONS } from "@/data/catalogue";
 
 function fieldId(prefix, group, value) {
   const slug = value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -41,9 +41,8 @@ export default function FilterFields({
   values,
   options,
   onPurchaseChange,
+  onTierChange,
   onCategoryChange,
-  onFormatChange,
-  onFrameworkChange,
   onMinChange,
   onMaxChange,
 }) {
@@ -55,12 +54,33 @@ export default function FilterFields({
   const describedBy = [hintId, invalid ? errorId : null].filter(Boolean).join(" ");
   const inputClass =
     "mt-1 w-full min-h-9 rounded-lg border border-border bg-surface px-2.5 text-sm text-ink";
-  const formats = options.formats ?? [];
-  const selectedFormats = values.formats ?? [];
   const purchase = values.purchase ?? DEFAULT_PURCHASE;
+  const tier = values.tier ?? DEFAULT_TIER;
 
   return (
     <div className="space-y-4">
+      <fieldset>
+        <legend className="px-1.5 text-sm font-semibold text-ink">Listing type</legend>
+        <div className="mt-1">
+          {TIER_OPTIONS.map((option) => (
+            <label
+              key={option.value}
+              className="flex min-h-9 cursor-pointer items-center gap-2 rounded-lg px-1.5 text-sm text-ink hover:bg-accent/15"
+            >
+              <input
+                id={fieldId(idPrefix, "tier", option.value)}
+                type="radio"
+                name={`${idPrefix}-tier`}
+                className="size-4 shrink-0 accent-accent-strong"
+                checked={tier === option.value}
+                onChange={() => onTierChange(option.value)}
+              />
+              <span>{option.label}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
       <fieldset>
         <legend className="px-1.5 text-sm font-semibold text-ink">Purchase type</legend>
         <div className="mt-1">
@@ -94,40 +114,6 @@ export default function FilterFields({
                 label={category}
                 checked={values.categories.includes(category)}
                 onChange={(checked) => onCategoryChange(category, checked)}
-              />
-            ))}
-          </div>
-        </fieldset>
-      ) : null}
-
-      {formats.length > 0 ? (
-        <fieldset>
-          <legend className="px-1.5 text-sm font-semibold text-ink">Format</legend>
-          <div className="mt-1">
-            {formats.map((format) => (
-              <Choice
-                key={format}
-                id={fieldId(idPrefix, "format", format)}
-                label={format}
-                checked={selectedFormats.includes(format)}
-                onChange={(checked) => onFormatChange(format, checked)}
-              />
-            ))}
-          </div>
-        </fieldset>
-      ) : null}
-
-      {options.frameworks.length > 0 ? (
-        <fieldset>
-          <legend className="px-1.5 text-sm font-semibold text-ink">Compatible tool</legend>
-          <div className="mt-1">
-            {options.frameworks.map((framework) => (
-              <Choice
-                key={framework}
-                id={fieldId(idPrefix, "framework", framework)}
-                label={framework}
-                checked={values.frameworks.includes(framework)}
-                onChange={(checked) => onFrameworkChange(framework, checked)}
               />
             ))}
           </div>

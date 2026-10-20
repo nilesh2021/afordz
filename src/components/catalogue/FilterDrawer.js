@@ -6,6 +6,7 @@ import FilterFields from "@/components/catalogue/FilterFields";
 import {
   countActiveFilters,
   DEFAULT_PURCHASE,
+  DEFAULT_TIER,
   filterProducts,
   productCountLabel,
 } from "@/data/catalogue";
@@ -14,9 +15,8 @@ import { getVisibleProducts } from "@/data/products";
 function emptyDraft() {
   return {
     purchase: DEFAULT_PURCHASE,
+    tier: DEFAULT_TIER,
     categories: [],
-    formats: [],
-    frameworks: [],
     min: "",
     max: "",
   };
@@ -25,9 +25,8 @@ function emptyDraft() {
 function draftFromQuery(query) {
   return {
     purchase: query.purchase ?? DEFAULT_PURCHASE,
+    tier: query.tier ?? DEFAULT_TIER,
     categories: [...query.categories],
-    formats: [...(query.formats ?? [])],
-    frameworks: [...query.frameworks],
     min: query.min,
     max: query.max,
   };
@@ -80,30 +79,16 @@ export default function FilterDrawer({ query, options, onApply }) {
     setDraft((current) => ({ ...current, purchase }));
   }
 
+  function setTier(tier) {
+    setDraft((current) => ({ ...current, tier }));
+  }
+
   function setCategory(category, checked) {
     setDraft((current) => ({
       ...current,
       categories: checked
         ? [...current.categories.filter((item) => item !== category), category]
         : current.categories.filter((item) => item !== category),
-    }));
-  }
-
-  function setFormat(format, checked) {
-    setDraft((current) => ({
-      ...current,
-      formats: checked
-        ? [...current.formats.filter((item) => item !== format), format]
-        : current.formats.filter((item) => item !== format),
-    }));
-  }
-
-  function setFramework(framework, checked) {
-    setDraft((current) => ({
-      ...current,
-      frameworks: checked
-        ? [...current.frameworks.filter((item) => item !== framework), framework]
-        : current.frameworks.filter((item) => item !== framework),
     }));
   }
 
@@ -166,9 +151,8 @@ export default function FilterDrawer({ query, options, onApply }) {
                 values={draft}
                 options={options}
                 onPurchaseChange={setPurchase}
+                onTierChange={setTier}
                 onCategoryChange={setCategory}
-                onFormatChange={setFormat}
-                onFrameworkChange={setFramework}
                 onMinChange={(min) => setDraft((current) => ({ ...current, min }))}
                 onMaxChange={(max) => setDraft((current) => ({ ...current, max }))}
               />

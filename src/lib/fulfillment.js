@@ -52,6 +52,51 @@ const PRODUCTS = {
     ),
     downloadName: "100-Email-Contact-List",
   },
+  "500-tongue-twisters-english-pronunciation": {
+    archivePath: path.join(
+      process.cwd(),
+      "private",
+      "downloads",
+      "500-tongue-twisters-english-pronunciation.pdf",
+    ),
+    placeholderPath: path.join(
+      process.cwd(),
+      "private",
+      "downloads",
+      "500-tongue-twisters-english-pronunciation.txt",
+    ),
+    downloadName: "500-tongue-twisters-english-pronunciation",
+  },
+  "free-ats-resume-template-freshers-2026": {
+    archivePath: path.join(process.cwd(), "private", "downloads", "ATS-Resume-Template-Pack.zip"),
+    placeholderPath: path.join(
+      process.cwd(),
+      "private",
+      "downloads",
+      "free-ats-resume-template-freshers-2026.txt",
+    ),
+    downloadName: "ATS-Resume-Template-Pack",
+  },
+  "free-job-application-tracker": {
+    archivePath: path.join(process.cwd(), "private", "downloads", "Job-Application-Tracker.xlsx"),
+    placeholderPath: path.join(
+      process.cwd(),
+      "private",
+      "downloads",
+      "free-job-application-tracker.txt",
+    ),
+    downloadName: "Job-Application-Tracker",
+  },
+  "free-chatgpt-prompts-job-seekers-2026": {
+    archivePath: path.join(process.cwd(), "private", "downloads", "AI-Prompt-Pack-for-Job-Seekers.zip"),
+    placeholderPath: path.join(
+      process.cwd(),
+      "private",
+      "downloads",
+      "free-chatgpt-prompts-job-seekers-2026.txt",
+    ),
+    downloadName: "AI-Prompt-Pack-for-Job-Seekers",
+  },
 };
 
 function safeExisting(filePath) {
@@ -75,6 +120,9 @@ function contentTypeFor(ext) {
   }
   if (ext === ".csv") {
     return "text/csv; charset=utf-8";
+  }
+  if (ext === ".xlsx") {
+    return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
   }
   return "text/plain; charset=utf-8";
 }

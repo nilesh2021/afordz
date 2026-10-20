@@ -156,12 +156,12 @@ test("checkout price comes from the catalogue, not the request", () => {
     priceInr: 999999,
   });
   assert.equal(priced.ok, true);
-  assert.equal(priced.amountPaise, 100);
+  assert.equal(priced.amountPaise, 9900);
   assert.equal(
     buildCheckoutOrder({
       name: "Test Buyer",
       email: "buyer@example.com",
-      productIds: ["marketing-contact-email-list"],
+      productIds: ["500-tongue-twisters-english-pronunciation"],
     }).ok,
     false,
   );

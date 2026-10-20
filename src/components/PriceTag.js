@@ -10,7 +10,7 @@ export default function PriceTag({ amount, placeholder = false, size = "md", ter
   return (
     <div>
       <p className={amountClass}>
-        {formatInr(amount)}
+        {amount === 0 ? "Free" : formatInr(amount)}
         {term ? (
           <span className="ml-2 text-lg font-medium tracking-normal text-muted">for {term}</span>
         ) : null}

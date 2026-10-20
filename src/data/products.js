@@ -2,17 +2,18 @@
  * Product catalogue for Afordz.
  *
  * Add a product by copying an object into `products`. The shop page builds its
- * category, format, tool, and price filters from this list — there is no
+ * category and price filters from this list — there is no
  * separate filter list to maintain.
  *
  * Fields the catalogue reads:
  * - saleType: "direct" (Afordz products) or "affiliate" (partner offers)
  * - status: "live" listings can be purchased. "coming-soon" listings appear in
  *   the catalogue without add to cart or checkout. "draft" listings are hidden.
- * - category, format, and framework: shop filters
+ * - category, format, and framework: product metadata (category is a shop filter)
  * - learningTrack: Training hub path id (ui-ux, genai, ai-video, ai-image, content-ideas, fundamentals)
  * - level: Beginner or Intermediate (shown on Training cards)
- * - priceInr: INR price for direct products with a verified numeric amount
+ * - priceInr: INR price for direct products with a verified numeric amount (0 = free, email-gated download)
+ * - freeCtaLabel / freeDownloadLabel: optional copy for free listings (unlock button and post-unlock download)
  * - addedAt: YYYY-MM-DD date used by the Newest sort
  * - name, title, tagline, description, topics, and vendor: catalogue search
  * - images[0]: card preview. Set src to a file in /public, such as
@@ -177,7 +178,7 @@ export const products = [
     priceInr: 49,
     currency: "INR",
     detailsStatus: "confirmed",
-    previewNote: "Mockup only — not a page from the PDF.",
+    previewNote: "Original cover artwork for this listing — not a page from the PDF.",
     fileFormat: "PDF",
     fileFormatNote: "PDF download: 100-Email-Contact-List.pdf. Open in any PDF reader.",
     images: [
@@ -185,9 +186,9 @@ export const products = [
         id: "emails",
         label: " emails",
         variant: "data",
-        src: "",
-        alt: "Mockup of an email column with  addresses",
-        summary: "email column preview for the  list format.",
+        src: "/previews/marketing-contact-email-list.webp",
+        alt: "Cover art for the 100 email contact list PDF listing",
+        summary: "Original cover graphic for this email list listing.",
       },
     ],
     contents: [
@@ -211,6 +212,324 @@ export const products = [
     },
     support: {
       summary: "Missing file? Email hello@afordz.in.",
+      points: [],
+    },
+  },
+  {
+    id: "500-tongue-twisters-english-pronunciation",
+    slug: "500-tongue-twisters-english-pronunciation",
+    saleType: "direct",
+    status: "live",
+    type: "digital",
+    name: "500 Tongue Twisters for English Pronunciation",
+    title: "500 Tongue Twisters for English Pronunciation",
+    category: "Learning Resources",
+    format: "PDF",
+    language: "English",
+    vendor: "Afordz",
+    affiliateUrl: "",
+    topics: [
+      "Tongue twisters",
+      "English pronunciation",
+      "Speaking practice",
+      "ESL",
+      "Pronunciation drills",
+    ],
+    keywords: [
+      "tongue twisters",
+      "English pronunciation practice",
+      "ESL speaking",
+      "pronunciation PDF",
+      "free tongue twisters",
+      "English speaking drills",
+    ],
+    framework: "PDF",
+    addedAt: "2026-10-20",
+    tagline:
+      "500 tongue twisters in a PDF for English pronunciation and speaking warm-ups — free with email.",
+    description:
+      "A PDF collection of 500 tongue twisters to practise English sounds, rhythm, and clarity. Enter your email on this page to unlock a private download link. The file is for your own practice. It is not sold through checkout and does not use Razorpay.",
+    priceInr: 0,
+    currency: "INR",
+    freeCtaLabel: "Get free PDF",
+    freeDownloadLabel: "Download PDF",
+    detailsStatus: "confirmed",
+    previewNote: "Original cover artwork for this listing — not a page from the PDF.",
+    fileFormat: "PDF",
+    fileFormatNote:
+      "PDF download: 500-tongue-twisters-english-pronunciation.pdf. Open in any PDF reader.",
+    images: [
+      {
+        id: "cover",
+        label: "PDF",
+        variant: "ebook",
+        src: "/previews/500-tongue-twisters-english-pronunciation.webp",
+        alt: "Cover art for the 500 tongue twisters pronunciation PDF listing",
+        summary: "Original cover graphic for this free PDF listing.",
+      },
+    ],
+    contents: [
+      {
+        title: "500-tongue-twisters-english-pronunciation.pdf",
+        detail: "One PDF with 500 tongue twisters for English pronunciation practice.",
+      },
+      {
+        title: "How to get it",
+        detail:
+          "Enter your email on this product page. After the server saves it, a download link stays active for 48 hours.",
+      },
+    ],
+    compatibility: ["Any current PDF reader (Adobe Reader, Chrome, Edge, Preview)."],
+    licence: {
+      summary: "Free for your own personal practice. Not legal advice.",
+      points: [
+        "Do not resell or redistribute the PDF as your own product.",
+        "Email is required to unlock the download link on this site.",
+      ],
+    },
+    support: {
+      summary: "Download trouble? Email hello@afordz.in.",
+      points: [],
+    },
+  },
+  {
+    id: "free-ats-resume-template-freshers-2026",
+    slug: "free-ats-resume-template-freshers-2026",
+    saleType: "direct",
+    status: "live",
+    type: "digital",
+    name: "Free ATS Resume Template for Freshers (2026)",
+    title: "Free ATS Resume Template for Freshers (2026)",
+    category: "Career Resources",
+    format: "DOCX + PDF",
+    language: "English",
+    vendor: "Afordz",
+    affiliateUrl: "",
+    topics: [
+      "ATS resume",
+      "Fresher resume",
+      "Resume template",
+      "Word resume",
+      "Job search",
+    ],
+    keywords: [
+      "ATS resume template",
+      "fresher resume template",
+      "free resume template 2026",
+      "one page resume",
+      "resume tips",
+      "resume checklist",
+    ],
+    framework: "Word / PDF",
+    addedAt: "2026-10-21",
+    tagline:
+      "One-page ATS-friendly resume template in Word and PDF, with a tips guide and checklist — free with email.",
+    description:
+      "A one-page, ATS-friendly resume template pack for freshers: editable Word (DOCX), a PDF version, a tips guide, and a checklist. Enter your email on this page to unlock a private ZIP download. For your own job search. Not sold through checkout and does not use Razorpay.",
+    priceInr: 0,
+    currency: "INR",
+    freeCtaLabel: "Get Free Template",
+    freeDownloadLabel: "Download template pack",
+    detailsStatus: "confirmed",
+    previewNote: "Original cover artwork for this listing — not a page from the template files.",
+    fileFormat: "ZIP (DOCX + PDF)",
+    fileFormatNote:
+      "Download: ATS-Resume-Template-Pack.zip. Includes DOCX and PDF templates plus guides. Open in Word or any PDF reader.",
+    images: [
+      {
+        id: "resume",
+        label: "Resume",
+        variant: "data",
+        src: "/previews/free-ats-resume-template-freshers-2026.webp",
+        alt: "Cover art for the free ATS resume template pack listing",
+        summary: "Original cover graphic for this free resume template listing.",
+      },
+    ],
+    contents: [
+      {
+        title: "ATS-Resume-Template-Pack.zip",
+        detail: "One-page resume template in DOCX and PDF, plus a tips guide and checklist.",
+      },
+      {
+        title: "How to get it",
+        detail:
+          "Enter your email on this product page. After the server saves it, a download link stays active for 48 hours.",
+      },
+    ],
+    compatibility: [
+      "Microsoft Word or compatible app for the DOCX file.",
+      "Any current PDF reader for the PDF template and guides.",
+    ],
+    licence: {
+      summary: "Free for your own job search. Not legal advice.",
+      points: [
+        "Do not resell or redistribute the template pack as your own product.",
+        "Email is required to unlock the download link on this site.",
+      ],
+    },
+    support: {
+      summary: "Download trouble? Email hello@afordz.in.",
+      points: [],
+    },
+  },
+  {
+    id: "free-job-application-tracker",
+    slug: "free-job-application-tracker",
+    saleType: "direct",
+    status: "live",
+    type: "digital",
+    name: "Free Job Application Tracker (Excel & Google Sheets)",
+    title: "Free Job Application Tracker (Excel & Google Sheets)",
+    category: "Career Resources",
+    format: "XLSX",
+    language: "English",
+    vendor: "Afordz",
+    affiliateUrl: "",
+    topics: [
+      "Job application tracker",
+      "Excel tracker",
+      "Google Sheets",
+      "Job search",
+      "Follow-up",
+    ],
+    keywords: [
+      "job application tracker",
+      "free job tracker spreadsheet",
+      "Excel job search",
+      "application status tracker",
+      "interview follow-up",
+    ],
+    framework: "Excel / Google Sheets",
+    addedAt: "2026-10-22",
+    tagline:
+      "Track applications, status, contacts, and follow-ups in one spreadsheet — free with email.",
+    description:
+      "Track every job application, status, contact, and follow-up in one place. The workbook includes a summary sheet that updates from your entries. Enter your email on this page to unlock the XLSX download. Works in Excel and Google Sheets. Not sold through checkout and does not use Razorpay.",
+    priceInr: 0,
+    currency: "INR",
+    freeCtaLabel: "Get Free Tracker",
+    freeDownloadLabel: "Download tracker",
+    detailsStatus: "confirmed",
+    previewNote: "Original cover artwork for this listing — not a screenshot of the spreadsheet.",
+    fileFormat: "XLSX",
+    fileFormatNote:
+      "Download: Job-Application-Tracker.xlsx. Open in Excel or upload to Google Sheets.",
+    images: [
+      {
+        id: "tracker",
+        label: "Tracker",
+        variant: "export",
+        src: "/previews/free-job-application-tracker.webp",
+        alt: "Cover art for the free job application tracker listing",
+        summary: "Original cover graphic for this free tracker listing.",
+      },
+    ],
+    contents: [
+      {
+        title: "Job-Application-Tracker.xlsx",
+        detail: "Application log with status, contacts, follow-up dates, and a summary sheet.",
+      },
+      {
+        title: "How to get it",
+        detail:
+          "Enter your email on this product page. After the server saves it, a download link stays active for 48 hours.",
+      },
+    ],
+    compatibility: [
+      "Microsoft Excel or another spreadsheet app that opens .xlsx files.",
+      "Google Sheets after uploading the file.",
+    ],
+    licence: {
+      summary: "Free for your own job search. Not legal advice.",
+      points: [
+        "Do not resell or redistribute the tracker as your own product.",
+        "Email is required to unlock the download link on this site.",
+      ],
+    },
+    support: {
+      summary: "Download trouble? Email hello@afordz.in.",
+      points: [],
+    },
+  },
+  {
+    id: "free-chatgpt-prompts-job-seekers-2026",
+    slug: "free-chatgpt-prompts-job-seekers-2026",
+    saleType: "direct",
+    status: "live",
+    type: "digital",
+    name: "100 Free ChatGPT Prompts for Job Seekers (2026)",
+    title: "100 Free ChatGPT Prompts for Job Seekers (2026)",
+    category: "Career Resources",
+    format: "PDF + DOCX",
+    language: "English",
+    vendor: "Afordz",
+    affiliateUrl: "",
+    topics: [
+      "ChatGPT prompts",
+      "Job search",
+      "Resume writing",
+      "Cover letter",
+      "Interview prep",
+      "LinkedIn",
+    ],
+    keywords: [
+      "ChatGPT prompts job seekers",
+      "AI resume prompts",
+      "cover letter prompts",
+      "interview prompts ChatGPT",
+      "salary negotiation prompts",
+      "free prompt pack",
+    ],
+    framework: "ChatGPT / AI",
+    addedAt: "2026-10-23",
+    tagline:
+      "Copy-paste AI prompts for resumes, cover letters, LinkedIn, interviews, salary, and follow-ups — free with email.",
+    description:
+      "One hundred copy-paste ChatGPT prompts for job seekers: resumes, cover letters, LinkedIn, interviews, salary conversations, and follow-up emails. Enter your email on this page to unlock a private ZIP with PDF and DOCX formats. For your own job search. Not sold through checkout and does not use Razorpay.",
+    priceInr: 0,
+    currency: "INR",
+    freeCtaLabel: "Get Free Prompts",
+    freeDownloadLabel: "Download prompt pack",
+    detailsStatus: "confirmed",
+    previewNote: "Original cover artwork for this listing — not a page from the prompt files.",
+    fileFormat: "ZIP (PDF + DOCX)",
+    fileFormatNote:
+      "Download: AI-Prompt-Pack-for-Job-Seekers.zip. Includes PDF and DOCX. Open in Word or any PDF reader.",
+    images: [
+      {
+        id: "prompts",
+        label: "Prompts",
+        variant: "prompts",
+        src: "/previews/free-chatgpt-prompts-job-seekers-2026.webp",
+        alt: "Cover art for the free ChatGPT job seeker prompt pack listing",
+        summary: "Original cover graphic for this free prompt pack listing.",
+      },
+    ],
+    contents: [
+      {
+        title: "AI-Prompt-Pack-for-Job-Seekers.zip",
+        detail: "100 prompts in PDF and DOCX for resumes, applications, interviews, and follow-ups.",
+      },
+      {
+        title: "How to get it",
+        detail:
+          "Enter your email on this product page. After the server saves it, a download link stays active for 48 hours.",
+      },
+    ],
+    compatibility: [
+      "Microsoft Word or compatible app for the DOCX file.",
+      "Any current PDF reader for the PDF version.",
+      "A ChatGPT or similar AI account when you use the prompts.",
+    ],
+    licence: {
+      summary: "Free for your own job search. Not legal advice.",
+      points: [
+        "Do not resell or redistribute the prompt pack as your own product.",
+        "Email is required to unlock the download link on this site.",
+      ],
+    },
+    support: {
+      summary: "Download trouble? Email hello@afordz.in.",
       points: [],
     },
   },
@@ -240,7 +559,7 @@ export const products = [
     placeholderNote:
       "Plan name, seat count, and how access is delivered are not confirmed. The listed price is ₹99 for one year. This listing does not include a download file.",
     previewNote:
-      "This preview is an original CSS placeholder for a design-tool subscription. It is not a Canva screenshot and it does not use Canva brand assets.",
+      "Original cover artwork for this listing — not a Canva screenshot and not Canva brand assets.",
     placeholders: {
       price: false,
       contents: true,
@@ -255,9 +574,9 @@ export const products = [
         id: "workspace",
         label: "Workspace",
         variant: "canva",
-        src: "",
-        alt: "Original CSS placeholder for a design subscription listing",
-        summary: "An original placeholder graphic of a design workspace. It is not a Canva screenshot.",
+        src: "/previews/canva-subscription.webp",
+        alt: "Cover art for the design subscription listing",
+        summary: "Original cover graphic for this design subscription listing.",
       },
     ],
     contents: [
@@ -410,7 +729,7 @@ export const products = [
     placeholderNote:
       "Video lesson count, tool versions, and  project files are drafts until the ZIP is final. Coming soon — not available to purchase yet.",
     previewNote:
-      "This preview is an original CSS placeholder for a Training course. It is not a  of the video lessons.",
+      "Original cover artwork for this listing — not a screenshot of the video lessons.",
     placeholders: {
       contents: true,
       licence: true,
@@ -421,9 +740,9 @@ export const products = [
         id: "overview",
         label: "Course overview",
         variant: "saas",
-        src: "",
-        alt: "Original CSS placeholder for the AI Video Creation course pack",
-        summary: "Placeholder graphic for this Training listing.",
+        src: "/previews/ai-video-creation-course.webp",
+        alt: "Cover art for the AI Video Creation course pack listing",
+        summary: "Original cover graphic for this Training listing.",
       },
     ],
     contents: [
@@ -510,7 +829,7 @@ export const products = [
     placeholderNote:
       "The syllabus document is ready for preview. Licence wording and any bonus files will be confirmed before checkout opens. Coming soon — not available to purchase yet.",
     previewNote:
-      "This preview is an original CSS placeholder for a Training course. It is not a screenshot of the syllabus document.",
+      "Original cover artwork for this listing — not a screenshot of the syllabus document.",
     placeholders: {
       contents: false,
       licence: true,
@@ -521,9 +840,9 @@ export const products = [
         id: "overview",
         label: "Course overview",
         variant: "saas",
-        src: "",
-        alt: "Original CSS placeholder for the Generative AI for Designers course pack",
-        summary: "Placeholder graphic for this Training listing.",
+        src: "/previews/genai-learning-syllabus.webp",
+        alt: "Cover art for the Generative AI for Designers course pack listing",
+        summary: "Original cover graphic for this Training listing.",
       },
     ],
     contents: [
@@ -657,15 +976,15 @@ export const products = [
     audience:
       "Beginners looking for an introduction to affiliate marketing, funnels, traffic strategies, and email sequences.",
     previewNote:
-      "This preview is an original CSS placeholder. It is not a vendor screenshot and it is not a  of the ebook.",
+      "Original cover artwork for this listing — not a vendor screenshot or page from the ebook.",
     images: [
       {
         id: "ebook",
         label: "Ebook",
         variant: "ebook",
-        src: "",
-        alt: "Original CSS placeholder for an ebook listing",
-        summary: "An original placeholder graphic for this partner listing. It is not a vendor screenshot.",
+        src: "/previews/start-affiliate-marketing.webp",
+        alt: "Cover art for the Start Affiliate Marketing ebook partner listing",
+        summary: "Original cover graphic for this partner listing.",
       },
     ],
   },
@@ -875,8 +1194,21 @@ export function isCatalogueVisible(product) {
   return product?.status === "live" || isComingSoon(product);
 }
 
+export function isFreeProduct(product) {
+  return (
+    isDirectProduct(product) &&
+    product?.status === "live" &&
+    product?.priceInr === 0 &&
+    Number.isInteger(product.priceInr)
+  );
+}
+
+export function isPremiumCatalogueProduct(product) {
+  return !isFreeProduct(product);
+}
+
 export function isPurchasable(product) {
-  return product?.status === "live" && !isAffiliateProduct(product);
+  return product?.status === "live" && !isAffiliateProduct(product) && !isFreeProduct(product);
 }
 
 /** Live listings with confirmed details may be indexed and listed in the sitemap. */
@@ -890,6 +1222,10 @@ export function getIndexableProducts() {
 
 export function getVisibleProducts() {
   return products.filter(isCatalogueVisible);
+}
+
+export function getFreeProducts() {
+  return getVisibleProducts().filter(isFreeProduct);
 }
 
 export function getProductBySlug(slug) {

@@ -8,9 +8,8 @@ export default function FilterPanel({
   values,
   options,
   onPurchaseChange,
+  onTierChange,
   onCategoryChange,
-  onFormatChange,
-  onFrameworkChange,
   onPriceCommit,
   onClear,
 }) {
@@ -62,9 +61,8 @@ export default function FilterPanel({
           values={{ ...values, min, max }}
           options={options}
           onPurchaseChange={onPurchaseChange}
+          onTierChange={onTierChange}
           onCategoryChange={onCategoryChange}
-          onFormatChange={onFormatChange}
-          onFrameworkChange={onFrameworkChange}
           onMinChange={setMin}
           onMaxChange={setMax}
         />

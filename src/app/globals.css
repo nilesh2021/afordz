@@ -51,7 +51,7 @@ body {
 
 .catalogue-grid {
   display: grid;
-  gap: 1.75rem;
+  gap: 1.25rem;
   grid-template-columns: minmax(0, 1fr);
 }
 

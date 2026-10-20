@@ -96,7 +96,7 @@ export default function HomePage() {
               <em className="italic text-accent-strong">next project</em>
             </h1>
             <p className="mt-4 max-w-xl text-sm leading-6 text-muted sm:mt-6 sm:text-lg sm:leading-7">
-              Browse Bootstrap 5 templates, Tailwind CSS HTML templates, website template bundles, and other digital resources. Filter by category, format, compatible tool, and price in INR. Open a listing before you add one digital licence to the cart. Partner offers open on the vendor website.
+              Browse Bootstrap 5 templates, Tailwind CSS HTML templates, website template bundles, and other digital resources. Filter by category, free or premium, and price in INR. Open a listing before you add one digital licence to the cart. Partner offers open on the vendor website.
             </p>
             <div className="mt-6 flex flex-wrap gap-3 sm:mt-9">
               <Button href="/shop">Shop the catalogue</Button>

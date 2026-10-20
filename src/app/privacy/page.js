@@ -22,7 +22,7 @@ export default function PrivacyPage() {
           Checkout sends your name and email to this server. A pending or paid order is stored in a server database with the Razorpay order id, the amount, the currency, and a hash of the download token. Card numbers, UPI ids, and bank details are not stored here.
         </p>
         <p>
-          Marketing email is separate. If you subscribe in the footer, or tick “Also email me Afordz deals and new products” at checkout, your email and signup source are stored so Afordz can send product updates and offers. Checkout without that checkbox does not add you to the marketing list. You can ask to be removed by emailing {site.email}.
+          Marketing email is separate. If you subscribe in the footer, tick “Also email me Afordz deals and new products” at checkout, or unlock a free PDF download on a product page, your email and signup source are stored so Afordz can send product updates and offers. Checkout without that checkbox does not add you to the marketing list. You can ask to be removed by emailing {site.email}.
         </p>
         <p>
           The contact page is email only. It does not submit a form to this server.

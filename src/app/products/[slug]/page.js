@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import AddToCartControls from "@/components/AddToCartControls";
+import FreeDownloadControls from "@/components/FreeDownloadControls";
 import AffiliateOfferCta from "@/components/AffiliateOfferCta";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
@@ -16,6 +17,7 @@ import {
   isAffiliateProduct,
   isComingSoon,
   isDraftProduct,
+  isFreeProduct,
   isIndexableProduct,
   productTitle,
 } from "@/data/products";
@@ -117,6 +119,8 @@ function DirectProductPage({ product }) {
             <p className="mt-6 rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm font-semibold leading-6 text-amber-950">
               Coming soon. This listing is not available to purchase yet.
             </p>
+          ) : isFreeProduct(product) ? (
+            <FreeDownloadControls product={product} />
           ) : (
             <AddToCartControls product={product} />
           )}

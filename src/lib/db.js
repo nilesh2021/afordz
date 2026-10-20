@@ -52,6 +52,23 @@ const SCHEMA_STEPS = [
     updated_at TEXT NOT NULL
   )`,
   },
+  {
+    id: "create_free_download_grants",
+    sqlKind: "ddl",
+    sql: `CREATE TABLE IF NOT EXISTS free_download_grants (
+    token_hash TEXT PRIMARY KEY,
+    product_id TEXT NOT NULL,
+    email TEXT NOT NULL,
+    expires_at TEXT NOT NULL,
+    created_at TEXT NOT NULL
+  )`,
+  },
+  {
+    id: "create_index_free_download_grants_product",
+    sqlKind: "ddl",
+    sql: `CREATE INDEX IF NOT EXISTS free_download_grants_product_id
+    ON free_download_grants (product_id)`,
+  },
 ];
 
 function attachStatement(error, step) {

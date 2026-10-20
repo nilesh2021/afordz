@@ -1,5 +1,5 @@
 import { formatInr } from "@/data/products";
-import { DEFAULT_PURCHASE, purchaseLabel } from "@/data/catalogue";
+import { DEFAULT_PURCHASE, DEFAULT_TIER, purchaseLabel, tierLabel } from "@/data/catalogue";
 
 function Chip({ children, onRemove, label }) {
   return (
@@ -18,13 +18,12 @@ function Chip({ children, onRemove, label }) {
 }
 
 export default function AppliedFilters({ query, onChange }) {
-  const formats = query.formats ?? [];
   const purchaseChip = query.purchase && query.purchase !== DEFAULT_PURCHASE;
+  const tierChip = query.tier && query.tier !== DEFAULT_TIER;
   const hasChips =
     purchaseChip ||
+    tierChip ||
     query.categories.length > 0 ||
-    formats.length > 0 ||
-    query.frameworks.length > 0 ||
     query.min !== "" ||
     query.max !== "";
 
@@ -42,6 +41,14 @@ export default function AppliedFilters({ query, onChange }) {
           {purchaseLabel(query.purchase)}
         </Chip>
       ) : null}
+      {tierChip ? (
+        <Chip
+          label={`listing type ${tierLabel(query.tier)}`}
+          onRemove={() => onChange({ ...query, tier: DEFAULT_TIER })}
+        >
+          {tierLabel(query.tier)}
+        </Chip>
+      ) : null}
       {query.categories.map((category) => (
         <Chip
           key={`category-${category}`}
@@ -54,34 +61,6 @@ export default function AppliedFilters({ query, onChange }) {
           }
         >
           {category}
-        </Chip>
-      ))}
-      {formats.map((format) => (
-        <Chip
-          key={`format-${format}`}
-          label={`format ${format}`}
-          onRemove={() =>
-            onChange({
-              ...query,
-              formats: formats.filter((item) => item !== format),
-            })
-          }
-        >
-          {format}
-        </Chip>
-      ))}
-      {query.frameworks.map((framework) => (
-        <Chip
-          key={`framework-${framework}`}
-          label={`compatible tool ${framework}`}
-          onRemove={() =>
-            onChange({
-              ...query,
-              frameworks: query.frameworks.filter((item) => item !== framework),
-            })
-          }
-        >
-          {framework}
         </Chip>
       ))}
       {query.min !== "" ? (

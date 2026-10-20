@@ -1,7 +1,17 @@
-import { dbGet, dbRun } from "@/lib/db";
+import { getProductById, isFreeProduct } from "../data/products.js";
+import { dbGet, dbRun } from "./db.js";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const ALLOWED_SOURCES = new Set(["footer", "checkout"]);
+const FREE_DOWNLOAD_PREFIX = "free-download:";
+
+function isAllowedFreeDownloadSource(source) {
+  if (!source.startsWith(FREE_DOWNLOAD_PREFIX)) {
+    return false;
+  }
+  const productId = source.slice(FREE_DOWNLOAD_PREFIX.length);
+  return isFreeProduct(getProductById(productId));
+}
 
 export function normalizeNewsletterEmail(value) {
   return typeof value === "string" ? value.trim().toLowerCase() : "";
@@ -15,7 +25,7 @@ export function validateNewsletterInput({ email, source }) {
     return { ok: false, error: "Enter a valid email address." };
   }
 
-  if (!ALLOWED_SOURCES.has(normalizedSource)) {
+  if (!ALLOWED_SOURCES.has(normalizedSource) && !isAllowedFreeDownloadSource(normalizedSource)) {
     return { ok: false, error: "Choose a valid signup source." };
   }
 

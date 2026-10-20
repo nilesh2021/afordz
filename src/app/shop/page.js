@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: { absolute: "Digital Resources & Website Template Bundles | Afordz" },
   description:
-    "Shop digital resources and website template bundles from Afordz, including Bootstrap 5 templates and Tailwind CSS HTML templates. Filter by category, format, and price in INR.",
+    "Shop digital resources and website template bundles from Afordz, including Bootstrap 5 templates and Tailwind CSS HTML templates. Filter by category, free or premium, and price in INR.",
   path: "/shop",
   images: [
     {
@@ -32,7 +32,7 @@ export default async function ShopPage({ searchParams }) {
               Smart tools and digital resources
             </h1>
             <p className="mt-2 max-w-xl text-sm leading-6 text-muted">
-              Filter by category, format, tool, and price in INR. Partner offers check out on the vendor site.
+              Filter by category, free or premium, and price in INR. Partner offers check out on the vendor site.
             </p>
             <p className="mt-2 max-w-xl text-sm leading-6 text-muted">
               Looking for courses?{" "}

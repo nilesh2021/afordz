@@ -84,7 +84,7 @@ export const navLinks = [
 export const homeFeatures = [
   {
     title: "Filter the shop",
-    body: "Narrow the catalogue by purchase type, category, format, compatible tool, and a price range in INR. Sort sits above the product cards.",
+    body: "Narrow the catalogue by purchase type, category, and a price range in INR. Sort sits above the product cards.",
   },
   {
     title: "Prices in INR",

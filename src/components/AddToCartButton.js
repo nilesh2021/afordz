@@ -4,7 +4,7 @@ import { useState } from "react";
 import Button from "@/components/Button";
 import { useCart } from "@/components/CartProvider";
 
-export default function AddToCartButton({ product }) {
+export default function AddToCartButton({ product, className = "" }) {
   const { addItem, isInCart, ready } = useCart();
   const [message, setMessage] = useState("");
   const inCart = ready && isInCart(product.id);
@@ -24,7 +24,7 @@ export default function AddToCartButton({ product }) {
       {inCart ? (
         <Button
           href="/cart"
-          className="w-full shadow-md shadow-accent-strong/25"
+          className={`w-full shadow-md shadow-accent-strong/25 ${className}`}
           aria-label={`View cart, ${product.name} already added`}
         >
           View cart
@@ -33,7 +33,7 @@ export default function AddToCartButton({ product }) {
         <Button
           type="button"
           onClick={handleAdd}
-          className="w-full shadow-md shadow-accent-strong/25"
+          className={`w-full shadow-md shadow-accent-strong/25 ${className}`}
           disabled={!ready}
           aria-label={`Add ${product.name} to cart`}
         >

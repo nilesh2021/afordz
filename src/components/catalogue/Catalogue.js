@@ -81,22 +81,11 @@ export default function Catalogue({ initialQuery }) {
             values={query}
             options={options}
             onPurchaseChange={(purchase) => commit({ ...query, purchase })}
+            onTierChange={(tier) => commit({ ...query, tier })}
             onCategoryChange={(category, checked) =>
               commit({
                 ...query,
                 categories: withValue(query.categories, category, checked),
-              })
-            }
-            onFormatChange={(format, checked) =>
-              commit({
-                ...query,
-                formats: withValue(query.formats ?? [], format, checked),
-              })
-            }
-            onFrameworkChange={(framework, checked) =>
-              commit({
-                ...query,
-                frameworks: withValue(query.frameworks, framework, checked),
               })
             }
             onPriceCommit={onPriceCommit}

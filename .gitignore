@@ -42,6 +42,7 @@ yarn-error.log*
 /private/downloads/*.zip
 /private/downloads/*.pdf
 /private/downloads/*.docx
+/private/downloads/*.xlsx
 
 # vercel
 .vercel

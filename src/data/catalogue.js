@@ -1,8 +1,8 @@
 /**
  * Catalogue query, filtering, and sorting.
  *
- * Filters combine with AND across groups. Within category, format, or tool,
- * any selected value can match. Search checks the product name, title,
+ * Filters combine with AND across groups. Within category, any selected value
+ * can match. Search checks the product name, title,
  * tagline, description, topics, and vendor. Sort defaults to newest.
  *
  * Price range applies only to products with a verified numeric price.
@@ -13,10 +13,11 @@
  * in the URL to override.
  */
 
-import { hasVerifiedPrice, isAffiliateProduct } from "@/data/products";
+import { hasVerifiedPrice, isAffiliateProduct, isFreeProduct } from "./products.js";
 
 export const DEFAULT_SORT = "newest";
 export const DEFAULT_PURCHASE = "own";
+export const DEFAULT_TIER = "all";
 
 export const SORT_OPTIONS = [
   { value: "newest", label: "Newest", shortLabel: "Newest" },
@@ -30,8 +31,15 @@ export const PURCHASE_OPTIONS = [
   { value: "partner", label: "Partner Offers" },
 ];
 
+export const TIER_OPTIONS = [
+  { value: "all", label: "All listings" },
+  { value: "free", label: "Free" },
+  { value: "premium", label: "Premium" },
+];
+
 const SORT_VALUES = new Set(SORT_OPTIONS.map((option) => option.value));
 const PURCHASE_VALUES = new Set(PURCHASE_OPTIONS.map((option) => option.value));
+const TIER_VALUES = new Set(TIER_OPTIONS.map((option) => option.value));
 
 function uniqueInOrder(values) {
   const seen = new Set();
@@ -51,8 +59,6 @@ export function getFilterOptions(products) {
 
   return {
     categories: uniqueInOrder(products.map((product) => product.category)),
-    formats: uniqueInOrder(products.map((product) => product.format)),
-    frameworks: uniqueInOrder(products.map((product) => product.framework)),
     priceMin: prices.length ? Math.min(...prices) : 0,
     priceMax: prices.length ? Math.max(...prices) : 0,
   };
@@ -82,12 +88,12 @@ export function normalizePriceParam(value) {
 export function parseCatalogueQuery(params = {}) {
   const sortValue = typeof params.sort === "string" ? params.sort : "";
   const purchaseValue = typeof params.purchase === "string" ? params.purchase : "";
+  const tierValue = typeof params.tier === "string" ? params.tier : "";
   return {
     q: typeof params.search === "string" ? params.search : "",
     purchase: PURCHASE_VALUES.has(purchaseValue) ? purchaseValue : DEFAULT_PURCHASE,
+    tier: TIER_VALUES.has(tierValue) ? tierValue : DEFAULT_TIER,
     categories: asList(params.category).map((item) => item.trim()).filter(Boolean),
-    formats: asList(params.format).map((item) => item.trim()).filter(Boolean),
-    frameworks: asList(params.framework).map((item) => item.trim()).filter(Boolean),
     min: normalizePriceParam(params.min),
     max: normalizePriceParam(params.max),
     sort: SORT_VALUES.has(sortValue) ? sortValue : DEFAULT_SORT,
@@ -103,14 +109,11 @@ export function serializeCatalogueQuery(query) {
   if (query.purchase && query.purchase !== DEFAULT_PURCHASE) {
     params.set("purchase", query.purchase);
   }
+  if (query.tier && query.tier !== DEFAULT_TIER) {
+    params.set("tier", query.tier);
+  }
   for (const category of query.categories) {
     params.append("category", category);
-  }
-  for (const format of query.formats ?? []) {
-    params.append("format", format);
-  }
-  for (const framework of query.frameworks) {
-    params.append("framework", framework);
   }
   if (query.min !== "") {
     params.set("min", query.min);
@@ -128,9 +131,8 @@ export function emptyFilters(query) {
   return {
     ...query,
     purchase: DEFAULT_PURCHASE,
+    tier: DEFAULT_TIER,
     categories: [],
-    formats: [],
-    frameworks: [],
     min: "",
     max: "",
   };
@@ -164,9 +166,8 @@ function isNonDefaultPurchase(purchase) {
 export function hasActiveFilters(query) {
   return (
     isNonDefaultPurchase(query.purchase) ||
+    (query.tier && query.tier !== DEFAULT_TIER) ||
     query.categories.length > 0 ||
-    (query.formats ?? []).length > 0 ||
-    query.frameworks.length > 0 ||
     query.min !== "" ||
     query.max !== ""
   );
@@ -175,9 +176,8 @@ export function hasActiveFilters(query) {
 export function countActiveFilters(query) {
   return (
     (isNonDefaultPurchase(query.purchase) ? 1 : 0) +
+    (query.tier && query.tier !== DEFAULT_TIER ? 1 : 0) +
     query.categories.length +
-    (query.formats ?? []).length +
-    query.frameworks.length +
     (query.min !== "" ? 1 : 0) +
     (query.max !== "" ? 1 : 0)
   );
@@ -214,6 +214,19 @@ function matchesPurchase(product, purchase) {
   return true;
 }
 
+function matchesTier(product, tier) {
+  if (!tier || tier === DEFAULT_TIER) {
+    return true;
+  }
+  if (tier === "free") {
+    return isFreeProduct(product);
+  }
+  if (tier === "premium") {
+    return !isFreeProduct(product);
+  }
+  return true;
+}
+
 export function filterProducts(products, query) {
   if (isPriceRangeInvalid(query)) {
     return [];
@@ -222,8 +235,6 @@ export function filterProducts(products, query) {
   const needle = query.q.trim().toLowerCase();
   const min = priceBound(query.min);
   const max = priceBound(query.max);
-  const formats = query.formats ?? [];
-
   return products.filter((product) => {
     if (!matchesSearch(product, needle)) {
       return false;
@@ -231,13 +242,10 @@ export function filterProducts(products, query) {
     if (!matchesPurchase(product, query.purchase)) {
       return false;
     }
+    if (!matchesTier(product, query.tier)) {
+      return false;
+    }
     if (query.categories.length > 0 && !query.categories.includes(product.category)) {
-      return false;
-    }
-    if (formats.length > 0 && !formats.includes(product.format)) {
-      return false;
-    }
-    if (query.frameworks.length > 0 && !query.frameworks.includes(product.framework)) {
       return false;
     }
     if ((min != null || max != null) && !hasVerifiedPrice(product)) {
@@ -281,6 +289,10 @@ export function sortProducts(products, sort) {
 
 export function purchaseLabel(value) {
   return PURCHASE_OPTIONS.find((option) => option.value === value)?.label ?? "All";
+}
+
+export function tierLabel(value) {
+  return TIER_OPTIONS.find((option) => option.value === value)?.label ?? "All listings";
 }
 
 export function productCountLabel(count) {
