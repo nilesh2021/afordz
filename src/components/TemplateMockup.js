@@ -280,18 +280,29 @@ export default function TemplateMockup({
   className = "",
   sizes = "(min-width: 1024px) 640px, 100vw",
   eager = false,
+  colorful = false,
 }) {
   if (src) {
     return (
       <div
-        className={`relative aspect-[16/10] overflow-hidden rounded-2xl border border-border bg-background ${className}`}
+        className={`relative aspect-[16/10] overflow-hidden rounded-2xl ${
+          colorful
+            ? "border-2 border-white/90 bg-gradient-to-br from-violet-500 via-fuchsia-400 to-cyan-400 shadow-[0_10px_28px_rgb(109_40_217/0.28)]"
+            : "border border-border bg-background"
+        } ${className}`}
       >
+        {colorful ? (
+          <div
+            className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-tr from-accent-strong/25 via-transparent to-sky-400/30 mix-blend-soft-light"
+            aria-hidden="true"
+          />
+        ) : null}
         <Image
           src={src}
           alt={alt}
           fill
           sizes={sizes}
-          className="object-cover"
+          className={`object-cover ${colorful ? "saturate-[1.2] contrast-[1.05] brightness-[1.03]" : ""}`}
           {...(eager ? { fetchPriority: "high", loading: "eager" } : { loading: "lazy" })}
         />
       </div>
@@ -302,7 +313,11 @@ export default function TemplateMockup({
 
   return (
     <div
-      className={`overflow-hidden rounded-2xl border border-border bg-surface shadow-sm ${className}`}
+      className={`overflow-hidden rounded-2xl border shadow-sm ${
+        colorful
+          ? "border-accent/45 bg-gradient-to-br from-violet-100 via-surface to-amber-50 shadow-[0_10px_28px_rgb(109_40_217/0.22)]"
+          : "border-border bg-surface"
+      } ${className}`}
       aria-hidden="true"
     >
       <div className="flex items-center gap-1.5 border-b border-border bg-background px-3 py-2.5">
