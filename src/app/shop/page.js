@@ -44,7 +44,7 @@ export default async function ShopPage({ searchParams }) {
               </Link>
               {" "}or explore{" "}
               <Link
-                href="/training"
+                href="/courses"
                 className="font-semibold text-ink underline decoration-accent underline-offset-4 hover:decoration-accent-strong"
               >
                 skill tracks

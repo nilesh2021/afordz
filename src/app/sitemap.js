@@ -5,25 +5,25 @@ import { getPublishedLessons, isFreeOnSiteCourse, LEARNING_TRACKS } from "@/data
 
 export default function sitemap() {
   const siteUrl = getSiteUrl();
-  const staticPaths = ["/", "/shop", "/blog", "/training", "/contact", "/privacy", "/terms", "/refund-policy"];
+  const staticPaths = ["/", "/shop", "/blog", "/courses", "/contact", "/privacy", "/terms", "/refund-policy"];
 
   const staticEntries = staticPaths.map((path) => ({
     url: canonicalUrl(path),
     lastModified: new Date(`${staticPageUpdatedAt[path]}T00:00:00Z`),
   }));
 
-  const trainingTrackEntries = LEARNING_TRACKS.map((track) => ({
-    url: `${siteUrl}/training/${track.slug}`,
-    lastModified: new Date(`${staticPageUpdatedAt["/training"]}T00:00:00Z`),
+  const courseTrackEntries = LEARNING_TRACKS.map((track) => ({
+    url: `${siteUrl}/courses/${track.slug}`,
+    lastModified: new Date(`${staticPageUpdatedAt["/courses"]}T00:00:00Z`),
   }));
 
-  const trainingLessonEntries = LEARNING_TRACKS.flatMap((track) => {
+  const courseLessonEntries = LEARNING_TRACKS.flatMap((track) => {
     if (!isFreeOnSiteCourse(track)) {
       return [];
     }
     return getPublishedLessons(track.course).map((lesson) => ({
-      url: `${siteUrl}/training/${track.slug}/${lesson.slug}`,
-      lastModified: new Date(`${staticPageUpdatedAt["/training"]}T00:00:00Z`),
+      url: `${siteUrl}/courses/${track.slug}/${lesson.slug}`,
+      lastModified: new Date(`${staticPageUpdatedAt["/courses"]}T00:00:00Z`),
     }));
   });
 
@@ -39,8 +39,8 @@ export default function sitemap() {
 
   return [
     ...staticEntries,
-    ...trainingTrackEntries,
-    ...trainingLessonEntries,
+    ...courseTrackEntries,
+    ...courseLessonEntries,
     ...postEntries,
     ...productEntries,
   ];

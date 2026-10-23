@@ -1,9 +1,10 @@
-import { hasAffiliateUrl } from "@/data/products";
+import { getAffiliateOutboundUrl, hasAffiliateUrl } from "@/data/products";
 
 const buttonClass =
   "inline-flex min-h-12 w-full items-center justify-center rounded-full px-6 py-2.5 text-center text-sm font-semibold tracking-wide transition-colors bg-accent-strong text-surface shadow-[0_12px_28px_rgb(109_40_217/0.35)] hover:bg-[#5b21b6] active:bg-[#4c1d95] disabled:cursor-not-allowed disabled:opacity-60 sm:flex-1";
 
 export default function AffiliateOfferCta({ product }) {
+  const outboundUrl = getAffiliateOutboundUrl(product);
   const urlReady = hasAffiliateUrl(product);
 
   return (
@@ -16,7 +17,7 @@ export default function AffiliateOfferCta({ product }) {
       <div className="mt-6">
         {urlReady ? (
           <a
-            href={product.affiliateUrl.trim()}
+            href={outboundUrl}
             target="_blank"
             rel="sponsored noopener noreferrer"
             className={buttonClass}

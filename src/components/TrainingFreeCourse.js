@@ -2,6 +2,7 @@ import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Button from "@/components/Button";
 import CourseSyllabus from "@/components/CourseSyllabus";
+import FreeCourseUnlockForm from "@/components/FreeCourseUnlockForm";
 import JsonLd from "@/components/JsonLd";
 import { getCourseLessonCount } from "@/data/training";
 import { breadcrumbJsonLd, courseJsonLd } from "@/lib/seo";
@@ -23,22 +24,22 @@ function getFirstLessonPath(track) {
   for (const module of track.course.modules ?? []) {
     for (const lesson of module.lessons ?? []) {
       if (lesson.content) {
-        return `/training/${track.slug}/${lesson.slug}`;
+        return `/courses/${track.slug}/${lesson.slug}`;
       }
     }
   }
   return `#syllabus`;
 }
 
-export default function TrainingFreeCourse({ track }) {
+export default function TrainingFreeCourse({ track, unlocked = true }) {
   const course = track.course;
   const lessonCount = getCourseLessonCount(course);
   const phases = getSyllabusPhases(course.modules ?? []);
   const firstLessonPath = getFirstLessonPath(track);
   const crumbs = [
     { name: "Home", path: "/" },
-    { name: "Training", path: "/training" },
-    { name: track.title, path: `/training/${track.slug}` },
+    { name: "Courses", path: "/courses" },
+    { name: track.title, path: `/courses/${track.slug}` },
   ];
   const chips = [
     "Free",
@@ -81,14 +82,20 @@ export default function TrainingFreeCourse({ track }) {
             ))}
           </ul>
           <p className="relative mt-4 max-w-2xl text-sm leading-6 text-muted">
-            For beginners, developers, and marketers. Self-paced on this page — no account or payment.
+            For beginners, developers, and marketers. Self-paced on this page — email unlock, no payment.
           </p>
-          <div className="relative mt-7 flex flex-wrap gap-3">
-            <Button href={firstLessonPath}>Start first lesson</Button>
-            <Button href="#syllabus" variant="secondary">
-              View syllabus
-            </Button>
-          </div>
+          {unlocked ? (
+            <div className="relative mt-7 flex flex-wrap gap-3">
+              <Button href={firstLessonPath}>Start first lesson</Button>
+              <Button href="#syllabus" variant="secondary">
+                View syllabus
+              </Button>
+            </div>
+          ) : (
+            <div className="relative mt-7">
+              <FreeCourseUnlockForm courseSlug={track.slug} courseTitle={course.title} />
+            </div>
+          )}
         </header>
 
         {course.process?.length ? (
@@ -170,12 +177,18 @@ export default function TrainingFreeCourse({ track }) {
               </div>
             </dl>
 
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Button href={firstLessonPath}>Start first lesson</Button>
-              <Button href="#syllabus-list" variant="secondary">
-                Jump to modules
-              </Button>
-            </div>
+            {unlocked ? (
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Button href={firstLessonPath}>Start first lesson</Button>
+                <Button href="#syllabus-list" variant="secondary">
+                  Jump to modules
+                </Button>
+              </div>
+            ) : (
+              <p className="mt-6 text-sm leading-6 text-muted">
+                Unlock the course above to open lesson links and start the first module.
+              </p>
+            )}
 
             {phases.length > 0 ? (
               <nav aria-label="Syllabus phases" className="mt-6 flex flex-wrap gap-2">
@@ -193,14 +206,18 @@ export default function TrainingFreeCourse({ track }) {
           </div>
 
           <div id="syllabus-list" className="mt-8 scroll-mt-28">
-            <CourseSyllabus modules={course.modules} trackSlug={track.slug} />
+            <CourseSyllabus
+              modules={course.modules}
+              trackSlug={unlocked ? track.slug : null}
+              lessonsLocked={!unlocked}
+            />
           </div>
         </section>
 
         <p className="mt-10 text-sm leading-6 text-muted">
           A free Figma account is enough for later modules. There is no certificate or live class.{" "}
           <Link
-            href="/training"
+            href="/courses"
             className="font-semibold text-ink underline decoration-accent underline-offset-4 hover:decoration-accent-strong"
           >
             All tracks

@@ -12,7 +12,7 @@ export const staticPageUpdatedAt = {
   "/": "2026-10-09",
   "/shop": "2026-10-09",
   "/blog": "2026-10-09",
-  "/training": "2026-10-12",
+  "/courses": "2026-10-12",
   "/contact": "2026-10-09",
   "/privacy": "2026-10-09",
   "/terms": "2026-10-09",
@@ -77,9 +77,13 @@ export function canonicalUrl(path = "/") {
 export const navLinks = [
   { href: "/", label: "Home" },
   { href: "/shop", label: "Shop" },
+  { href: "/courses", label: "Courses" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact Us" },
 ];
+
+/** Add { network, label, href } when social profiles are ready. Empty href entries are hidden. */
+export const socialLinks = [];
 
 export const homeFeatures = [
   {
@@ -154,7 +158,7 @@ export const faqs = [
     id: "refunds",
     question: "What is the refund policy?",
     answer:
-      "The refund policy does not promise a refund, exchange, replacement, or credit.",
+      "Digital sales are final once Razorpay captures your payment. Read the refund policy page for the full wording.",
   },
   {
     id: "partner-offers",

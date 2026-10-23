@@ -18,6 +18,16 @@ const nextConfig = {
         destination: "https://www.afordz.in/:path+",
         permanent: true,
       },
+      {
+        source: "/training",
+        destination: "/courses",
+        permanent: true,
+      },
+      {
+        source: "/training/:path*",
+        destination: "/courses/:path*",
+        permanent: true,
+      },
     ];
   },
 };

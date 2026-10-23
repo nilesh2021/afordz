@@ -10,7 +10,7 @@ export default function TrainingCourseCard({ product }) {
       <div className="flex flex-wrap gap-2 px-1">
         {track ? (
           <Link
-            href={`/training/${track.slug}`}
+            href={`/courses/${track.slug}`}
             className="rounded-full border border-border bg-surface px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted hover:text-ink"
           >
             {track.shortTitle}

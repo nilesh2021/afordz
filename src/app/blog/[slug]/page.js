@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Button from "@/components/Button";
 import CanvaSubscriptionArticle from "@/components/blog/CanvaSubscriptionArticle";
+import CareerResourceArticle from "@/components/blog/CareerResourceArticle";
 import PartnerOfferArticle from "@/components/blog/PartnerOfferArticle";
 import JsonLd from "@/components/JsonLd";
 import { getBlogArticle } from "@/data/blogArticles";
@@ -130,6 +131,18 @@ export default async function BlogPostPage({ params }) {
         price={price}
         publishedLabel={publishedLabel}
         jsonLd={jsonLd(post, product)}
+      />
+    );
+  }
+
+  const careerArticle = post.audience === "career" ? getBlogArticle(post.slug) : null;
+  if (careerArticle) {
+    return (
+      <CareerResourceArticle
+        post={post}
+        publishedLabel={publishedLabel}
+        jsonLd={jsonLd(post, product)}
+        article={careerArticle}
       />
     );
   }

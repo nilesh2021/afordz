@@ -120,7 +120,7 @@ export function breadcrumbJsonLd(items) {
 export function courseJsonLd(track) {
   const course = track.course;
   const origin = getSiteUrl();
-  const url = canonicalUrl(`/training/${track.slug}`);
+  const url = canonicalUrl(`/courses/${track.slug}`);
   const keywordList = Array.isArray(course.keywords)
     ? course.keywords.map((keyword) => String(keyword).trim()).filter(Boolean)
     : [];

@@ -61,6 +61,31 @@ test("newsletter rejects free-download source for paid product", () => {
   assert.equal(result.ok, false);
 });
 
+test("newsletter allows waitlist source for coming-soon product", () => {
+  const result = validateNewsletterInput({
+    email: "reader@example.com",
+    source: "waitlist:canva-subscription",
+  });
+  assert.equal(result.ok, true);
+  assert.equal(result.source, "waitlist:canva-subscription");
+});
+
+test("newsletter rejects waitlist source for live product", () => {
+  const result = validateNewsletterInput({
+    email: "reader@example.com",
+    source: "waitlist:bootstrap-templates-bundle",
+  });
+  assert.equal(result.ok, false);
+});
+
+test("newsletter rejects waitlist source for unknown product", () => {
+  const result = validateNewsletterInput({
+    email: "reader@example.com",
+    source: "waitlist:unknown-id",
+  });
+  assert.equal(result.ok, false);
+});
+
 for (const productId of CAREER_FREE_IDS) {
   test(`career free listing ${productId} is not purchasable`, () => {
     const product = getProductById(productId);

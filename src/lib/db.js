@@ -69,6 +69,23 @@ const SCHEMA_STEPS = [
     sql: `CREATE INDEX IF NOT EXISTS free_download_grants_product_id
     ON free_download_grants (product_id)`,
   },
+  {
+    id: "create_free_course_grants",
+    sqlKind: "ddl",
+    sql: `CREATE TABLE IF NOT EXISTS free_course_grants (
+    token_hash TEXT PRIMARY KEY,
+    course_slug TEXT NOT NULL,
+    email TEXT NOT NULL,
+    expires_at TEXT NOT NULL,
+    created_at TEXT NOT NULL
+  )`,
+  },
+  {
+    id: "create_index_free_course_grants_slug",
+    sqlKind: "ddl",
+    sql: `CREATE INDEX IF NOT EXISTS free_course_grants_course_slug
+    ON free_course_grants (course_slug)`,
+  },
 ];
 
 function attachStatement(error, step) {

@@ -99,16 +99,41 @@ export default function ProductCard({ product }) {
             {priceIsPlaceholder ? <PlaceholderLabel /> : null}
           </div>
         </div>
-        <div className={`grid gap-2 sm:max-w-sm ${affiliate || free ? "" : "sm:grid-cols-2"}`}>
-          <Button
-            href={`/products/${product.slug}`}
-            variant={free ? "primary" : "secondary"}
-            className="min-h-10 w-full px-4 py-2 text-sm"
-          >
-            {free ? product.freeCtaLabel ?? "Get free download" : "View Details"}
-          </Button>
-          {affiliate || comingSoon || free ? null : (
-            <AddToCartButton product={product} className="min-h-10 px-4 py-2 text-sm" />
+        <div
+          className={`grid gap-2 sm:max-w-sm ${
+            comingSoon || (!affiliate && !free) ? "sm:grid-cols-2" : ""
+          }`}
+        >
+          {comingSoon ? (
+            <>
+              <Button
+                href={`/products/${product.slug}#waitlist`}
+                variant="primary"
+                className="min-h-10 w-full px-4 py-2 text-sm"
+              >
+                Join waitlist
+              </Button>
+              <Button
+                href={`/products/${product.slug}`}
+                variant="secondary"
+                className="min-h-10 w-full px-4 py-2 text-sm"
+              >
+                View details
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                href={`/products/${product.slug}`}
+                variant={free ? "primary" : "secondary"}
+                className="min-h-10 w-full px-4 py-2 text-sm"
+              >
+                {free ? product.freeCtaLabel ?? "Get free download" : "View Details"}
+              </Button>
+              {affiliate || free ? null : (
+                <AddToCartButton product={product} className="min-h-10 px-4 py-2 text-sm" />
+              )}
+            </>
           )}
         </div>
       </div>

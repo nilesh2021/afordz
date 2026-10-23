@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import CourseLesson from "@/components/CourseLesson";
 import {
   getAdjacentLessons,
@@ -7,7 +7,11 @@ import {
   getPublishedLessonParams,
   isFreeOnSiteCourse,
 } from "@/data/training";
+import { requiresFreeCourseEmailGate } from "@/lib/free-course-access";
+import { hasFreeCourseAccess } from "@/lib/free-course-server";
 import { pageMetadata } from "@/lib/seo";
+
+export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {
   return getPublishedLessonParams();
@@ -28,7 +32,7 @@ export async function generateMetadata({ params }) {
   return pageMetadata({
     title: `${lesson.title} | Free UI UX Design Course`,
     description: `${lede} Part of Afordz’s free UI UX design course.`,
-    path: `/training/${track.slug}/${lesson.slug}`,
+    path: `/courses/${track.slug}/${lesson.slug}`,
     keywords: track.course.keywords,
   });
 }
@@ -38,6 +42,10 @@ export default async function CourseLessonPage({ params }) {
   const track = getLearningTrackBySlug(trackSlug);
   if (!isFreeOnSiteCourse(track)) {
     notFound();
+  }
+
+  if (requiresFreeCourseEmailGate(track) && !(await hasFreeCourseAccess(track.slug))) {
+    redirect("/courses/ui-ux#unlock");
   }
 
   const lesson = getLessonBySlug(track.course, lessonSlug);

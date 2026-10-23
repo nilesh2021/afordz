@@ -28,9 +28,9 @@ export default function TermsPage() {
           The product page does not publish a usage licence. This page does not grant rights to copy, adapt, resell, or redistribute the templates. Read the listing and any text inside the download before you use a file on a client site or a commercial project.
         </p>
       </DraftSection>
-      <DraftSection title="No extra promises">
+      <DraftSection title="Service expectations">
         <p>
-          This page does not promise uptime, fitness for a particular project, error-free templates, or a support response time.
+          We aim to keep the site available and listings accurate. We do not guarantee uninterrupted service, error-free files, fitness for every project, or a fixed support response time.
         </p>
       </DraftSection>
     </DraftPage>

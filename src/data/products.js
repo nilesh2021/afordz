@@ -840,7 +840,7 @@ export const products = [
     format: "Digital resource",
     language: "English",
     vendor: "HeikoBoos",
-    affiliateUrl: "http://heikoboos.com/1000-prompts-for-affiliate-marketing#aff=nlsweb27",
+    affiliateUrl: "https://heikoboos.com/1000-prompts-for-affiliate-marketing#aff=nlsweb27",
     addedAt: "2026-10-06",
     tagline: "A structured collection of 1,000+ ChatGPT prompts for affiliate marketing tasks.",
     description:
@@ -883,7 +883,7 @@ export const products = [
     language: "English",
     vendor: "HeikoBoos",
     // Digistore redir/597360 was pasted for this title in error (that ID is the Busy Moms guide).
-    affiliateUrl: "http://heikoboos.com/start-am-like-a-pro/#aff=nlsweb27",
+    affiliateUrl: "https://heikoboos.com/start-am-like-a-pro/#aff=nlsweb27",
     addedAt: "2026-10-06",
     tagline: "A beginner-focused ebook introducing affiliate marketing, funnels, traffic strategies and email sequences.",
     description:
@@ -1190,14 +1190,29 @@ export function hasVerifiedPrice(product) {
 }
 
 export function hasAffiliateUrl(product) {
+  return Boolean(getAffiliateOutboundUrl(product));
+}
+
+/** Outbound partner link with http upgraded to https so clicks do not hang on plain HTTP. */
+export function getAffiliateOutboundUrl(product) {
   if (!product || typeof product.affiliateUrl !== "string") {
-    return false;
+    return "";
+  }
+  const trimmed = product.affiliateUrl.trim();
+  if (!trimmed) {
+    return "";
   }
   try {
-    const url = new URL(product.affiliateUrl.trim());
-    return url.protocol === "http:" || url.protocol === "https:";
+    const url = new URL(trimmed);
+    if (url.protocol !== "http:" && url.protocol !== "https:") {
+      return "";
+    }
+    if (url.protocol === "http:") {
+      url.protocol = "https:";
+    }
+    return url.toString();
   } catch {
-    return false;
+    return "";
   }
 }
 

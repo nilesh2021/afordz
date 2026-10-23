@@ -8,6 +8,7 @@ import JsonLd from "@/components/JsonLd";
 import PreviewGallery from "@/components/PreviewGallery";
 import ProductSpecsMenu, { ProductSpec } from "@/components/ProductSpecsMenu";
 import PriceTag from "@/components/PriceTag";
+import ProductWaitlistSignup from "@/components/ProductWaitlistSignup";
 import { getPostByProductSlug } from "@/data/posts";
 import {
   fieldIsPlaceholder,
@@ -106,9 +107,7 @@ function DirectProductPage({ product }) {
             </p>
           ) : null}
           {isComingSoon(product) ? (
-            <p className="mt-6 rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm font-semibold leading-6 text-amber-950">
-              Coming soon. This listing is not available to purchase yet.
-            </p>
+            <ProductWaitlistSignup product={product} />
           ) : isFreeProduct(product) ? (
             <FreeDownloadControls product={product} />
           ) : (

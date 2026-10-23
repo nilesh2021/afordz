@@ -632,6 +632,225 @@ export const blogArticles = {
     ctaNote:
       "Confirm EPS contents, licence terms, and the live price on the vendor checkout linked from Afordz.",
   },
+  "free-ats-resume-indian-freshers": {
+    lede: [
+      "Campus and off-campus hiring in India often starts with an ATS screen. This guide walks through the ",
+      { href: "/products/free-ats-resume-template-freshers-2026", label: "free ATS resume template for freshers" },
+      " on Afordz—what to edit, what to leave plain, and how to download it with your email.",
+    ],
+    figcaption: "Preview of the free resume template listing. Your download is a DOCX you edit locally.",
+    toc: [
+      { id: "why-ats", label: "Why ATS-friendly layout matters" },
+      { id: "what-you-get", label: "What is in the download" },
+      { id: "how-to-customise", label: "How to customise for your profile" },
+      { id: "download", label: "How to download" },
+    ],
+    sections: [
+      {
+        id: "why-ats",
+        title: "Why ATS-friendly layout matters",
+        paragraphs: [
+          "Many companies parse resumes before a recruiter reads them. Simple headings, standard sections, and readable fonts reduce the chance your file is misread.",
+          "The template is a starting point—not a guarantee of shortlisting. Pair it with accurate projects, skills, and contact details.",
+        ],
+      },
+      {
+        id: "what-you-get",
+        title: "What is in the download",
+        paragraphs: [
+          "The listing includes a DOCX formatted for freshers: education, projects, skills, and internship sections you can rename to match your college format.",
+        ],
+        list: [
+          "Single-column layout with clear section titles",
+          "Room for projects and internships common in Indian campus drives",
+          "Editable in Word, Google Docs, or LibreOffice",
+        ],
+      },
+      {
+        id: "how-to-customise",
+        title: "How to customise for your profile",
+        paragraphs: [
+          "Replace placeholder text with your details. Keep bullet points short and outcome-focused where you can.",
+          "Export to PDF only after you proofread spelling and phone number formatting (+91).",
+        ],
+      },
+      {
+        id: "download",
+        title: "How to download",
+        paragraphs: [
+          "Open the product page, enter your email, and unlock the private download link. There is no Razorpay step for this pack.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Is this really free?",
+        answer: "Yes. Email unlock only—no payment on Afordz for this listing.",
+      },
+      {
+        question: "Can I use it for multiple applications?",
+        answer: "Yes, for your own job search. Do not resell the file as a template product.",
+      },
+    ],
+    ctaHref: "/products/free-ats-resume-template-freshers-2026",
+    ctaLabel: "Get the free resume template",
+    ctaNote: "Unlock the DOCX on the product page. For your own applications in India.",
+  },
+  "chatgpt-prompts-job-search-india": {
+    lede: [
+      "Structured prompts save time when you are rewriting the same cover letter or interview prep for dozens of roles. Grab the ",
+      { href: "/products/free-chatgpt-prompts-job-seekers-2026", label: "free ChatGPT prompts for job seekers" },
+      "—PDF and DOCX in a ZIP after email unlock.",
+    ],
+    figcaption: "Preview image for the prompts listing. Prompts are starting points; edit outputs before you send them.",
+    toc: [
+      { id: "what-inside", label: "What the prompt pack covers" },
+      { id: "how-to-use", label: "How to use prompts safely" },
+      { id: "download", label: "Download steps" },
+    ],
+    sections: [
+      {
+        id: "what-inside",
+        title: "What the prompt pack covers",
+        paragraphs: [
+          "The pack groups prompts for resumes, cover letters, LinkedIn, interviews, salary conversations, and follow-up emails.",
+        ],
+        list: [
+          "Resume and bullet rewrites",
+          "Cover letters tailored to a job description",
+          "Interview practice and thank-you notes",
+        ],
+      },
+      {
+        id: "how-to-use",
+        title: "How to use prompts safely",
+        paragraphs: [
+          "Never paste confidential employer data into public tools. Replace company names with placeholders when you experiment.",
+          "You are responsible for final text you submit to employers.",
+        ],
+      },
+      {
+        id: "download",
+        title: "Download steps",
+        paragraphs: [
+          "Visit the listing, submit your email, and download the ZIP. Use the prompts in any chat tool you already trust.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Do I need ChatGPT Plus?",
+        answer: "No. The prompts work in free tiers of major chat tools; quality varies by model.",
+      },
+    ],
+    ctaHref: "/products/free-chatgpt-prompts-job-seekers-2026",
+    ctaLabel: "Download free prompts",
+    ctaNote: "Email unlock on the product page. For your own job search only.",
+  },
+  "job-application-tracker-spreadsheet": {
+    lede: [
+      "Spreadsheets beat sticky notes when you are juggling campus drives, referrals, and off-campus portals. The ",
+      { href: "/products/free-job-application-tracker", label: "free job application tracker" },
+      " helps you log status, dates, and next steps in one place.",
+    ],
+    figcaption: "Preview of the tracker listing. Format details are on the product page.",
+    toc: [
+      { id: "why-track", label: "Why track applications" },
+      { id: "columns", label: "What to log each week" },
+      { id: "download", label: "Get the tracker" },
+    ],
+    sections: [
+      {
+        id: "why-track",
+        title: "Why track applications",
+        paragraphs: [
+          "Follow-ups slip when you apply in bursts. A single sheet shows who you owe a thank-you email, which tests are pending, and which roles are closed.",
+        ],
+      },
+      {
+        id: "columns",
+        title: "What to log each week",
+        paragraphs: [
+          "Use one row per application. Colour or filter by stage if your tool supports it.",
+        ],
+        list: [
+          "Company, role, and source (campus, LinkedIn, referral)",
+          "Date applied and last contact",
+          "Next action and deadline",
+        ],
+      },
+      {
+        id: "download",
+        title: "Get the tracker",
+        paragraphs: [
+          "Unlock the file from the product page with your email. Duplicate the sheet each semester if you prefer a clean tab per drive season.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Is payment required?",
+        answer: "No. This tracker is a free download on Afordz.",
+      },
+    ],
+    ctaHref: "/products/free-job-application-tracker",
+    ctaLabel: "Get the free tracker",
+    ctaNote: "Open the listing and unlock with email.",
+  },
+  "free-ui-ux-course-freshers": {
+    lede: [
+      "UI/UX is easier to learn with a path, not random YouTube tabs. The ",
+      { href: "/courses/ui-ux", label: "free UI/UX Fundamentals course" },
+      " on Afordz is self-paced: read lessons in order, try exercises, and build a small case study.",
+    ],
+    figcaption: "Design thinking loop from the UI/UX track. Lessons live on this site—no ZIP checkout.",
+    toc: [
+      { id: "who-for", label: "Who this course suits" },
+      { id: "modules", label: "What you will practice" },
+      { id: "start", label: "How to start" },
+    ],
+    sections: [
+      {
+        id: "who-for",
+        title: "Who this course suits",
+        paragraphs: [
+          "Students and freshers exploring product design, developers who want stronger UI instincts, and career switchers building a first portfolio piece.",
+        ],
+      },
+      {
+        id: "modules",
+        title: "What you will practice",
+        paragraphs: [
+          "Work through the track in order. Each module builds on the last so you are not guessing which lesson to open next.",
+        ],
+        list: [
+          "Users, problems, and simple user flows",
+          "Visual hierarchy, spacing, and components",
+          "Figma basics and a lightweight case study",
+        ],
+      },
+      {
+        id: "start",
+        title: "How to start",
+        paragraphs: [
+          "Open the track page and begin with Module 1. A free Figma account is enough for later lessons.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Is there a certificate?",
+        answer: "This is a free learning path on the site, not an accredited certificate programme.",
+      },
+      {
+        question: "Do I pay on Razorpay?",
+        answer: "No. The UI/UX course does not use the cart or checkout.",
+      },
+    ],
+    ctaHref: "/courses/ui-ux",
+    ctaLabel: "Start the free UI/UX course",
+    ctaNote: "Self-paced lessons on Afordz. Bookmark the track and work through one module at a time.",
+  },
 };
 
 export function getBlogArticle(slug) {

@@ -1,6 +1,71 @@
 export const posts = [
   {
+    slug: "free-ats-resume-indian-freshers",
+    title: "Free ATS Resume Template for Indian Freshers (2026)",
+    description:
+      "How to use Afordz’s free ATS-friendly resume template for campus and off-campus applications, what to customise, and how to download with email.",
+    published: "2026-10-23",
+    audience: "career",
+    image: {
+      src: "/previews/free-ats-resume-template-freshers-2026.webp",
+      alt: "Preview of the free ATS resume template for freshers",
+      width: 960,
+      height: 540,
+    },
+    resourceHref: "/products/free-ats-resume-template-freshers-2026",
+    articleSection: "Careers",
+  },
+  {
+    slug: "chatgpt-prompts-job-search-india",
+    title: "100 Free ChatGPT Prompts for Job Search in India",
+    description:
+      "Prompts for resumes, cover letters, LinkedIn, interviews, and follow-ups—free download for your own job search.",
+    published: "2026-10-23",
+    audience: "career",
+    image: {
+      src: "/previews/free-chatgpt-prompts-job-seekers-2026.webp",
+      alt: "Preview of the free ChatGPT prompts pack for job seekers",
+      width: 960,
+      height: 540,
+    },
+    resourceHref: "/products/free-chatgpt-prompts-job-seekers-2026",
+    articleSection: "Careers",
+  },
+  {
+    slug: "job-application-tracker-spreadsheet",
+    title: "Free Job Application Tracker for Campus & Off-Campus",
+    description:
+      "Track companies, roles, deadlines, and follow-ups in one sheet—free download for Indian job seekers.",
+    published: "2026-10-23",
+    audience: "career",
+    image: {
+      src: "/previews/free-job-application-tracker.webp",
+      alt: "Preview of the free job application tracker",
+      width: 960,
+      height: 540,
+    },
+    resourceHref: "/products/free-job-application-tracker",
+    articleSection: "Careers",
+  },
+  {
+    slug: "free-ui-ux-course-freshers",
+    title: "Free UI/UX Course for Beginners (On This Site)",
+    description:
+      "Self-paced UI/UX fundamentals for students and career switchers: users, flows, visual design, and Figma practice—no checkout.",
+    published: "2026-10-23",
+    audience: "career",
+    image: {
+      src: "/training/ux-design-thinking-loop.jpg",
+      alt: "Design thinking loop from the UI/UX training track",
+      width: 960,
+      height: 540,
+    },
+    resourceHref: "/courses/ui-ux",
+    articleSection: "UI/UX",
+  },
+  {
     slug: "bootstrap-5-tailwind-html-templates-bundle",
+    audience: "catalogue",
     title: "500 Bootstrap 5 + 500 Tailwind CSS HTML Templates: What’s Inside",
     description:
       "What the Afordz bundle of 500 Bootstrap 5 HTML pages and 500 Tailwind CSS HTML pages actually contains, how the two stacks differ, and what to check before you customise a file.",
@@ -126,4 +191,12 @@ export function getPostBySlug(slug) {
 
 export function getPostByProductSlug(productSlug) {
   return posts.find((post) => post.productSlug === productSlug) ?? null;
+}
+
+export function getCareerPosts() {
+  return posts.filter((post) => post.audience === "career");
+}
+
+export function getCataloguePosts() {
+  return posts.filter((post) => post.audience !== "career");
 }

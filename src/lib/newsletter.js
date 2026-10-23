@@ -1,9 +1,13 @@
-import { getProductById, isFreeProduct } from "../data/products.js";
+import { getProductById, isComingSoon, isFreeProduct } from "../data/products.js";
 import { dbGet, dbRun } from "./db.js";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const ALLOWED_SOURCES = new Set(["footer", "checkout"]);
 const FREE_DOWNLOAD_PREFIX = "free-download:";
+const WAITLIST_PREFIX = "waitlist:";
+const FREE_COURSE_PREFIX = "free-course:";
+
+const GATED_FREE_COURSE_SLUGS = new Set(["ui-ux"]);
 
 function isAllowedFreeDownloadSource(source) {
   if (!source.startsWith(FREE_DOWNLOAD_PREFIX)) {
@@ -11,6 +15,26 @@ function isAllowedFreeDownloadSource(source) {
   }
   const productId = source.slice(FREE_DOWNLOAD_PREFIX.length);
   return isFreeProduct(getProductById(productId));
+}
+
+function isAllowedWaitlistSource(source) {
+  if (!source.startsWith(WAITLIST_PREFIX)) {
+    return false;
+  }
+  const productId = source.slice(WAITLIST_PREFIX.length);
+  if (!productId) {
+    return false;
+  }
+  const product = getProductById(productId);
+  return isComingSoon(product);
+}
+
+function isAllowedFreeCourseSource(source) {
+  if (!source.startsWith(FREE_COURSE_PREFIX)) {
+    return false;
+  }
+  const courseSlug = source.slice(FREE_COURSE_PREFIX.length);
+  return GATED_FREE_COURSE_SLUGS.has(courseSlug);
 }
 
 export function normalizeNewsletterEmail(value) {
@@ -25,7 +49,12 @@ export function validateNewsletterInput({ email, source }) {
     return { ok: false, error: "Enter a valid email address." };
   }
 
-  if (!ALLOWED_SOURCES.has(normalizedSource) && !isAllowedFreeDownloadSource(normalizedSource)) {
+  if (
+    !ALLOWED_SOURCES.has(normalizedSource) &&
+    !isAllowedFreeDownloadSource(normalizedSource) &&
+    !isAllowedWaitlistSource(normalizedSource) &&
+    !isAllowedFreeCourseSource(normalizedSource)
+  ) {
     return { ok: false, error: "Choose a valid signup source." };
   }
 

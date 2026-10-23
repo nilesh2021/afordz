@@ -22,10 +22,10 @@ function groupModulesByPhase(modules) {
 function firstLessonHref(module, trackSlug) {
   const lesson = (module.lessons ?? []).find((item) => item.content);
   if (!lesson || !trackSlug) return null;
-  return `/training/${trackSlug}/${lesson.slug}`;
+  return `/courses/${trackSlug}/${lesson.slug}`;
 }
 
-export default function CourseSyllabus({ modules, trackSlug }) {
+export default function CourseSyllabus({ modules, trackSlug, lessonsLocked = false }) {
   const groups = useMemo(() => groupModulesByPhase(modules), [modules]);
   const [openId, setOpenId] = useState(modules[0]?.id ?? null);
 
@@ -51,7 +51,7 @@ export default function CourseSyllabus({ modules, trackSlug }) {
               const lessons = module.lessons ?? [];
               const lessonCount = lessons.length;
               const publishedCount = lessons.filter((lesson) => lesson.content).length;
-              const startHref = firstLessonHref(module, trackSlug);
+              const startHref = lessonsLocked ? null : firstLessonHref(module, trackSlug);
 
               return (
                 <li
@@ -110,7 +110,10 @@ export default function CourseSyllabus({ modules, trackSlug }) {
 
                     <ol className="divide-y divide-border border-t border-border">
                       {lessons.map((lesson, lessonIndex) => {
-                        const href = lesson.content && trackSlug ? `/training/${trackSlug}/${lesson.slug}` : null;
+                        const href =
+                          !lessonsLocked && lesson.content && trackSlug
+                            ? `/courses/${trackSlug}/${lesson.slug}`
+                            : null;
 
                         return (
                           <li key={lesson.slug} className="flex gap-3 px-4 py-3.5 sm:px-5">

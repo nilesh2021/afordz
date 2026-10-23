@@ -391,11 +391,11 @@ function LessonTopics({ track, lesson, coursePath, sections, showHeading = true 
 }
 
 export default function CourseLesson({ track, lesson, prev, next }) {
-  const coursePath = `/training/${track.slug}`;
+  const coursePath = `/courses/${track.slug}`;
   const lessonPath = `${coursePath}/${lesson.slug}`;
   const crumbs = [
     { name: "Home", path: "/" },
-    { name: "Training", path: "/training" },
+    { name: "Courses", path: "/courses" },
     { name: track.title, path: coursePath },
     { name: lesson.title, path: lessonPath },
   ];

@@ -6,21 +6,21 @@ import { isFreeOnSiteCourse, LEARNING_TRACKS, TRAINING_STEPS } from "@/data/trai
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: { absolute: "Free UI UX Design Course & Training Tracks | Afordz" },
+  title: { absolute: "Free UI UX Design Course & Skill Tracks | Afordz" },
   description:
-    "Free UI UX design course on this site, plus Generative AI for designers and other Training packs for AI video, AI image generation, and content ideas when those listings are live.",
-  path: "/training",
+    "Free UI UX design course on this site, plus Generative AI for designers and other course packs for AI video, AI image generation, and content ideas when those listings are live.",
+  path: "/courses",
   keywords: [
     "free UI UX design course",
     "UI UX fundamentals",
     "generative AI for designers",
     "AI product designer course",
     "learn UI UX",
-    "Afordz training",
+    "Afordz courses",
   ],
 });
 
-export default function TrainingPage() {
+export default function CoursesPage() {
   const courses = getTrainingProducts();
   const featured = courses.slice(0, 6);
 
@@ -28,7 +28,7 @@ export default function TrainingPage() {
     <div className="px-4 py-12 sm:px-6 sm:py-16">
       <div className="mx-auto w-full max-w-6xl">
         <section className="max-w-3xl">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent-strong">Training</p>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent-strong">Courses</p>
           <h1 className="mt-4 font-display text-5xl tracking-tight text-balance text-ink sm:text-6xl">
             Practical skill courses, starting with free UI/UX
           </h1>
@@ -38,7 +38,7 @@ export default function TrainingPage() {
             classroom with progress tracking.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button href="/training/ui-ux">Open the free UI/UX course</Button>
+            <Button href="/courses/ui-ux">Open the free UI/UX course</Button>
             <Button href="#tracks" variant="secondary">
               View skill tracks
             </Button>
@@ -57,7 +57,7 @@ export default function TrainingPage() {
               return (
                 <li key={track.id}>
                   <Link
-                    href={`/training/${track.slug}`}
+                    href={`/courses/${track.slug}`}
                     className="block h-full rounded-[1.75rem] border border-border bg-surface/90 p-6 shadow-[0_18px_40px_rgb(22_20_16/0.06)] transition hover:border-accent/50"
                   >
                     <div className="flex flex-wrap items-center gap-2">
@@ -95,7 +95,7 @@ export default function TrainingPage() {
             </ul>
           ) : (
             <p className="mt-8 rounded-[1.75rem] border border-border bg-surface/90 p-6 text-base leading-7 text-muted">
-              Courses are coming soon. Check back when the first Training packs are published, or browse the{" "}
+              Courses are coming soon. Check back when the first course packs are published, or browse the{" "}
               <Link
                 href="/shop"
                 className="font-semibold text-ink underline decoration-accent underline-offset-4 hover:decoration-accent-strong"
