@@ -8,7 +8,13 @@ function fieldId(prefix, group, value) {
 
 function Choice({ id, label, checked, onChange }) {
   return (
-    <label className="flex min-h-9 cursor-pointer items-center gap-2 rounded-lg px-1.5 text-sm text-ink hover:bg-accent/15">
+    <label
+      className={`flex min-h-9 cursor-pointer items-center gap-2.5 rounded-xl border px-2.5 py-1.5 text-sm transition ${
+        checked
+          ? "border-accent/50 bg-accent/15 font-semibold text-ink"
+          : "border-transparent text-ink/90 hover:bg-accent/10"
+      }`}
+    >
       <input
         id={id}
         type="checkbox"
@@ -16,7 +22,7 @@ function Choice({ id, label, checked, onChange }) {
         checked={checked}
         onChange={(event) => onChange(event.target.checked)}
       />
-      <span>{label}</span>
+      <span className="truncate">{label}</span>
     </label>
   );
 }
@@ -53,60 +59,80 @@ export default function FilterFields({
   const invalid = minNumber != null && maxNumber != null && minNumber > maxNumber;
   const describedBy = [hintId, invalid ? errorId : null].filter(Boolean).join(" ");
   const inputClass =
-    "mt-1 w-full min-h-9 rounded-lg border border-border bg-surface px-2.5 text-sm text-ink";
+    "mt-1 w-full min-h-9 rounded-xl border border-border bg-surface px-2.5 text-sm text-ink transition focus:border-accent-strong focus:outline-none";
   const purchase = values.purchase ?? DEFAULT_PURCHASE;
   const tier = values.tier ?? DEFAULT_TIER;
 
   return (
     <div className="space-y-4">
-      <fieldset>
-        <legend className="px-1.5 text-sm font-semibold text-ink">Listing type</legend>
-        <div className="mt-1">
-          {TIER_OPTIONS.map((option) => (
-            <label
-              key={option.value}
-              className="flex min-h-9 cursor-pointer items-center gap-2 rounded-lg px-1.5 text-sm text-ink hover:bg-accent/15"
-            >
-              <input
-                id={fieldId(idPrefix, "tier", option.value)}
-                type="radio"
-                name={`${idPrefix}-tier`}
-                className="size-4 shrink-0 accent-accent-strong"
-                checked={tier === option.value}
-                onChange={() => onTierChange(option.value)}
-              />
-              <span>{option.label}</span>
-            </label>
-          ))}
+      <fieldset className="rounded-xl border border-border/80 bg-background/45 p-2.5">
+        <legend className="px-1.5 text-xs font-semibold uppercase tracking-[0.13em] text-accent-strong">
+          Listing type
+        </legend>
+        <div className="mt-1 space-y-1">
+          {TIER_OPTIONS.map((option) => {
+            const active = tier === option.value;
+            return (
+              <label
+                key={option.value}
+                className={`flex min-h-9 cursor-pointer items-center gap-2.5 rounded-xl border px-2.5 py-1.5 text-sm transition ${
+                  active
+                    ? "border-accent/50 bg-accent/15 font-semibold text-ink"
+                    : "border-transparent text-ink/90 hover:bg-accent/10"
+                }`}
+              >
+                <input
+                  id={fieldId(idPrefix, "tier", option.value)}
+                  type="radio"
+                  name={`${idPrefix}-tier`}
+                  className="size-4 shrink-0 accent-accent-strong"
+                  checked={active}
+                  onChange={() => onTierChange(option.value)}
+                />
+                <span>{option.label}</span>
+              </label>
+            );
+          })}
         </div>
       </fieldset>
 
-      <fieldset>
-        <legend className="px-1.5 text-sm font-semibold text-ink">Purchase type</legend>
-        <div className="mt-1">
-          {PURCHASE_OPTIONS.map((option) => (
-            <label
-              key={option.value}
-              className="flex min-h-9 cursor-pointer items-center gap-2 rounded-lg px-1.5 text-sm text-ink hover:bg-accent/15"
-            >
-              <input
-                id={fieldId(idPrefix, "purchase", option.value)}
-                type="radio"
-                name={`${idPrefix}-purchase`}
-                className="size-4 shrink-0 accent-accent-strong"
-                checked={purchase === option.value}
-                onChange={() => onPurchaseChange(option.value)}
-              />
-              <span>{option.label}</span>
-            </label>
-          ))}
+      <fieldset className="rounded-xl border border-border/80 bg-background/45 p-2.5">
+        <legend className="px-1.5 text-xs font-semibold uppercase tracking-[0.13em] text-accent-strong">
+          Purchase type
+        </legend>
+        <div className="mt-1 space-y-1">
+          {PURCHASE_OPTIONS.map((option) => {
+            const active = purchase === option.value;
+            return (
+              <label
+                key={option.value}
+                className={`flex min-h-9 cursor-pointer items-center gap-2.5 rounded-xl border px-2.5 py-1.5 text-sm transition ${
+                  active
+                    ? "border-accent/50 bg-accent/15 font-semibold text-ink"
+                    : "border-transparent text-ink/90 hover:bg-accent/10"
+                }`}
+              >
+                <input
+                  id={fieldId(idPrefix, "purchase", option.value)}
+                  type="radio"
+                  name={`${idPrefix}-purchase`}
+                  className="size-4 shrink-0 accent-accent-strong"
+                  checked={active}
+                  onChange={() => onPurchaseChange(option.value)}
+                />
+                <span>{option.label}</span>
+              </label>
+            );
+          })}
         </div>
       </fieldset>
 
       {options.categories.length > 0 ? (
-        <fieldset>
-          <legend className="px-1.5 text-sm font-semibold text-ink">Category</legend>
-          <div className="mt-1">
+        <fieldset className="rounded-xl border border-border/80 bg-background/45 p-2.5">
+          <legend className="px-1.5 text-xs font-semibold uppercase tracking-[0.13em] text-accent-strong">
+            Category
+          </legend>
+          <div className="mt-1 space-y-1">
             {options.categories.map((category) => (
               <Choice
                 key={category}
@@ -120,18 +146,21 @@ export default function FilterFields({
         </fieldset>
       ) : null}
 
-      <fieldset>
-        <legend className="px-1.5 text-sm font-semibold text-ink">Price (INR)</legend>
+      <fieldset className="rounded-xl border border-border/80 bg-background/45 p-2.5">
+        <legend className="px-1.5 text-xs font-semibold uppercase tracking-[0.13em] text-accent-strong">
+          Price (INR)
+        </legend>
         <p id={hintId} className="mt-1 px-1.5 text-xs leading-5 text-muted">
           {priceHint(options)}
         </p>
-        <div className="mt-2 grid grid-cols-2 gap-2 px-1.5">
-          <label htmlFor={`${idPrefix}-min`} className="block text-sm font-medium text-ink">
+        <div className="mt-2 grid grid-cols-2 gap-2 px-1">
+          <label htmlFor={`${idPrefix}-min`} className="block text-xs font-semibold text-ink">
             Minimum
             <input
               id={`${idPrefix}-min`}
               inputMode="numeric"
               autoComplete="off"
+              placeholder="₹0"
               value={values.min}
               aria-invalid={invalid || undefined}
               aria-describedby={describedBy}
@@ -139,12 +168,13 @@ export default function FilterFields({
               className={inputClass}
             />
           </label>
-          <label htmlFor={`${idPrefix}-max`} className="block text-sm font-medium text-ink">
+          <label htmlFor={`${idPrefix}-max`} className="block text-xs font-semibold text-ink">
             Maximum
             <input
               id={`${idPrefix}-max`}
               inputMode="numeric"
               autoComplete="off"
+              placeholder="Any"
               value={values.max}
               aria-invalid={invalid || undefined}
               aria-describedby={describedBy}
@@ -154,7 +184,7 @@ export default function FilterFields({
           </label>
         </div>
         {invalid ? (
-          <p id={errorId} role="alert" className="mt-3 px-2 text-sm font-medium text-rose-800">
+          <p id={errorId} role="alert" className="mt-3 px-1.5 text-xs font-semibold text-rose-800">
             Minimum price is higher than the maximum price.
           </p>
         ) : null}

@@ -27,27 +27,31 @@ export default async function ShopPage({ searchParams }) {
       <section>
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 pt-6 sm:flex-row sm:items-end sm:justify-between sm:gap-8 sm:px-6 sm:pt-8">
           <div className="min-w-0 max-w-2xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent-strong">Catalogue</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent-strong">
+              Catalogue
+            </p>
             <h1 className="mt-2 font-display text-3xl tracking-tight text-balance text-ink sm:text-4xl">
               Smart tools and digital resources
             </h1>
             <p className="mt-2 max-w-xl text-sm leading-6 text-muted">
-              Filter by category, free or premium, and price in INR. Partner offers check out on the vendor site.
+              Filter by category, free or premium tier, and price in INR. Partner offers check out on the
+              vendor site.
             </p>
             <p className="mt-2 max-w-xl text-sm leading-6 text-muted">
               Looking for courses?{" "}
               <Link
-                href="/shop?category=Training"
-                className="font-semibold text-ink underline decoration-accent underline-offset-4 hover:decoration-accent-strong"
-              >
-                Browse Training courses
-              </Link>
-              {" "}or explore{" "}
-              <Link
                 href="/courses"
                 className="font-semibold text-ink underline decoration-accent underline-offset-4 hover:decoration-accent-strong"
               >
-                skill tracks
+                Browse courses
+              </Link>
+              {" "}
+              or explore{" "}
+              <Link
+                href="/shop?tier=free"
+                className="font-semibold text-ink underline decoration-accent underline-offset-4 hover:decoration-accent-strong"
+              >
+                free downloads
               </Link>
               .
             </p>

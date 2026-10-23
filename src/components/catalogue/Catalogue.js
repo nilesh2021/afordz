@@ -108,7 +108,7 @@ export default function Catalogue({ initialQuery }) {
 
           <AppliedFilters query={query} onChange={commit} />
 
-          <div className="mt-5 rounded-[2rem] bg-linear-to-br from-[#f3eef8] via-surface/70 to-[#e4dcf0] p-4 shadow-[0_16px_40px_rgb(26_18_37/0.06)] sm:p-6">
+          <div className="mt-5">
             <ProductGrid
               products={results}
               totalCount={products.length}
