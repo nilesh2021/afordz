@@ -42,16 +42,6 @@ const PRODUCTS = {
     ),
     downloadName: "genai-learning-syllabus",
   },
-  "marketing-contact-email-list": {
-    archivePath: path.join(process.cwd(), "private", "downloads", "100-Email-Contact-List.pdf"),
-    placeholderPath: path.join(
-      process.cwd(),
-      "private",
-      "downloads",
-      "marketing-contact-email-list.csv",
-    ),
-    downloadName: "100-Email-Contact-List",
-  },
   "500-tongue-twisters-english-pronunciation": {
     archivePath: path.join(
       process.cwd(),

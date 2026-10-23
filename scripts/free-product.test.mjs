@@ -23,7 +23,7 @@ test("tongue twisters listing is free and not purchasable", () => {
 });
 
 test("paid direct product is not free", () => {
-  const product = getProductById("marketing-contact-email-list");
+  const product = getProductById("bootstrap-templates-bundle");
   assert.equal(isFreeProduct(product), false);
   assert.equal(isPurchasable(product), true);
 });
@@ -31,7 +31,7 @@ test("paid direct product is not free", () => {
 test("validateFreeUnlockInput rejects unknown product", () => {
   const result = validateFreeUnlockInput({
     email: "reader@example.com",
-    productId: "marketing-contact-email-list",
+    productId: "bootstrap-templates-bundle",
   });
   assert.equal(result.ok, false);
 });
@@ -56,7 +56,7 @@ test("newsletter allows free-download product source", () => {
 test("newsletter rejects free-download source for paid product", () => {
   const result = validateNewsletterInput({
     email: "reader@example.com",
-    source: "free-download:marketing-contact-email-list",
+    source: "free-download:bootstrap-templates-bundle",
   });
   assert.equal(result.ok, false);
 });

@@ -74,39 +74,29 @@ function DirectProductPage({ product }) {
     Boolean(product.support) ||
     topics.length > 0;
 
-  const compact = product.slug === "marketing-contact-email-list";
-
   return (
-    <div
-      className={`mx-auto w-full max-w-6xl px-4 sm:px-6 ${
-        compact ? "py-8 sm:py-10" : "py-12 sm:py-16"
-      }`}
-    >
+    <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       {isIndexableProduct(product) ? <JsonLd data={productJsonLd(product)} /> : null}
       <JsonLd data={breadcrumbJsonLd(crumbs)} />
       <Breadcrumbs items={crumbs} />
-      <p className={`${compact ? "mt-3" : "mt-4"} text-sm font-semibold text-accent-strong`}>
+      <p className="mt-4 text-sm font-semibold text-accent-strong">
         {product.category || "Digital product"}
       </p>
-      <div className={`mt-4 grid items-start lg:grid-cols-2 ${compact ? "gap-6" : "mt-6 gap-10"}`}>
+      <div className="mt-6 grid items-start gap-10 lg:grid-cols-2">
         <PreviewGallery images={product.images} note={product.previewNote} />
 
         <div>
-          <h1
-            className={`font-display tracking-tight text-balance text-ink ${
-              compact ? "text-3xl sm:text-4xl" : "text-4xl sm:text-5xl"
-            }`}
-          >
+          <h1 className="font-display text-4xl tracking-tight text-balance text-ink sm:text-5xl">
             {productTitle(product)}
           </h1>
-          <p className={`text-muted ${compact ? "mt-3 text-base leading-7" : "mt-4 text-lg leading-8"}`}>
+          <p className="mt-4 text-lg leading-8 text-muted">
             {product.description}
           </p>
-          <div className={compact ? "mt-4" : "mt-6"}>
+          <div className="mt-6">
             <PriceTag
               amount={product.priceInr}
               placeholder={fieldIsPlaceholder(product, "price")}
-              size={compact ? "md" : "lg"}
+              size="lg"
               term={product.subscriptionTerm}
             />
           </div>
@@ -137,7 +127,7 @@ function DirectProductPage({ product }) {
       </div>
 
       {hasSpecs ? (
-        <ProductSpecsMenu compact={compact} aside={topics} asideTitle="Related searches">
+        <ProductSpecsMenu aside={topics} asideTitle="Related searches">
           {contents.length > 0 ? (
             <ProductSpec
               title={product.subscriptionTerm ? "What's included" : "Included files"}

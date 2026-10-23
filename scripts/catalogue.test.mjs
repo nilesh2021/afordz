@@ -59,7 +59,7 @@ test("tier=premium excludes free career and pronunciation packs", () => {
   for (const id of FREE_IDS) {
     assert.equal(results.some((product) => product.id === id), false);
   }
-  assert.ok(results.some((product) => product.id === "marketing-contact-email-list"));
+  assert.ok(results.some((product) => product.id === "bootstrap-templates-bundle"));
   assert.ok(results.some((product) => product.id === "forbidden-keto-code"));
 });
 
