@@ -1,0 +1,10 @@
+Afordz — 500 tongue twisters (English pronunciation)
+
+Placeholder for product id 500-tongue-twisters-english-pronunciation.
+
+Replace by adding private/downloads/500-tongue-twisters-english-pronunciation.pdf
+and redeploying (git add -f that file; PDFs are gitignored by default). Until the PDF
+is on the server, email-unlocked downloads receive this text file instead.
+
+The PDF must not be placed in /public. Free downloads only serve it after the visitor
+unlocks with email on the product page.

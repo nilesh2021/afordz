@@ -119,7 +119,27 @@ git add -f private/downloads/bootstrap-templates-bundle.zip
 git commit -m "Add paid template archive"
 ```
 
-Then redeploy. `next.config.mjs` includes that folder in the Vercel function bundle for `/api/downloads` and `/checkout/success`.
+Then redeploy. `next.config.mjs` includes that folder in the Vercel function bundle for `/api/downloads`, `/api/free-downloads`, and `/checkout/success`.
+
+## Free download files (email unlock)
+
+Free listings use `/api/free-downloads/{productId}`. The server reads the same `private/downloads/` folder via `src/lib/fulfillment.js`. Binaries (`.pdf`, `.zip`, `.xlsx`, `.docx`) are **gitignored**, so production returns **404 “This file is not available.”** until you force-add them and redeploy.
+
+Ship real files (adjust to what you maintain locally):
+
+```bash
+git add -f private/downloads/500-tongue-twisters-english-pronunciation.pdf
+git add -f private/downloads/ATS-Resume-Template-Pack.zip
+git add -f private/downloads/Job-Application-Tracker.xlsx
+git add -f private/downloads/free-chatgpt-prompts-job-seekers-2026.pdf
+# optional: AI-Prompt-Pack-for-Job-Seekers.zip if you use the ZIP instead of PDF
+git add -f private/downloads/genai-learning-syllabus.docx
+git commit -m "Add private free download files for production"
+```
+
+Committed `.txt` placeholders (e.g. `500-tongue-twisters-english-pronunciation.txt`) avoid 404 in staging but are not a substitute for the real PDF/ZIP on the live site.
+
+After deploy, test from the **product page** (email unlock → Download), not by opening the API URL alone without the unlock cookie.
 
 ## Local development
 

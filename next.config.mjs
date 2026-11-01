@@ -2,6 +2,7 @@
 const nextConfig = {
   outputFileTracingIncludes: {
     "/api/downloads/[productId]": ["./private/downloads/**"],
+    "/api/free-downloads/[productId]": ["./private/downloads/**"],
     "/checkout/success": ["./private/downloads/**"],
   },
   async redirects() {
