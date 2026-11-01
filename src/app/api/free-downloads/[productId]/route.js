@@ -2,6 +2,7 @@ import { createReadStream } from "node:fs";
 import { Readable } from "node:stream";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { recordProductDownload } from "@/lib/download-events";
 import { freeDownloadCookieName } from "@/lib/free-download-cookie";
 import { getFreeDownloadGrant } from "@/lib/free-download";
 import { resolveDownload } from "@/lib/fulfillment";
@@ -30,6 +31,12 @@ export async function GET(_request, { params }) {
   if (!grant) {
     return NextResponse.json({ error: "Enter your email on the product page to unlock this download." }, { status: 401 });
   }
+
+  await recordProductDownload({
+    productId,
+    email: grant.email,
+    channel: "free",
+  });
 
   const stream = Readable.toWeb(createReadStream(file.filePath));
   return new NextResponse(stream, {

@@ -1,101 +1,77 @@
 import fs from "node:fs";
 import path from "node:path";
 
+const DOWNLOADS_ROOT = path.join(process.cwd(), "private", "downloads");
+
+function downloadPath(fileName) {
+  return path.join(DOWNLOADS_ROOT, fileName);
+}
+
+/** productId → files in private/downloads (first existing archive is served). */
 const PRODUCTS = {
   "bootstrap-templates-bundle": {
-    archivePath: path.join(process.cwd(), "private", "downloads", "bootstrap-templates-bundle.zip"),
-    placeholderPath: path.join(
-      process.cwd(),
-      "private",
-      "downloads",
-      "bootstrap-templates-bundle.txt",
-    ),
+    archivePaths: [downloadPath("bootstrap-templates-bundle.zip")],
+    placeholderPath: downloadPath("bootstrap-templates-bundle.txt"),
     downloadName: "bootstrap-templates-bundle",
   },
   "ui-ux-fundamentals-course": {
-    archivePath: path.join(process.cwd(), "private", "downloads", "ui-ux-fundamentals-course.zip"),
-    placeholderPath: path.join(
-      process.cwd(),
-      "private",
-      "downloads",
-      "ui-ux-fundamentals-course.txt",
-    ),
+    archivePaths: [downloadPath("ui-ux-fundamentals-course.zip")],
+    placeholderPath: downloadPath("ui-ux-fundamentals-course.txt"),
     downloadName: "ui-ux-fundamentals-course",
   },
   "ai-video-creation-course": {
-    archivePath: path.join(process.cwd(), "private", "downloads", "ai-video-creation-course.zip"),
-    placeholderPath: path.join(
-      process.cwd(),
-      "private",
-      "downloads",
-      "ai-video-creation-course.txt",
-    ),
+    archivePaths: [downloadPath("ai-video-creation-course.zip")],
+    placeholderPath: downloadPath("ai-video-creation-course.txt"),
     downloadName: "ai-video-creation-course",
   },
   "genai-learning-syllabus": {
-    archivePath: path.join(process.cwd(), "private", "downloads", "genai-learning-syllabus.docx"),
-    placeholderPath: path.join(
-      process.cwd(),
-      "private",
-      "downloads",
-      "genai-learning-syllabus.txt",
-    ),
+    archivePaths: [downloadPath("genai-learning-syllabus.docx")],
+    placeholderPath: downloadPath("genai-learning-syllabus.txt"),
     downloadName: "genai-learning-syllabus",
   },
   "500-tongue-twisters-english-pronunciation": {
-    archivePath: path.join(
-      process.cwd(),
-      "private",
-      "downloads",
-      "500-tongue-twisters-english-pronunciation.pdf",
-    ),
-    placeholderPath: path.join(
-      process.cwd(),
-      "private",
-      "downloads",
-      "500-tongue-twisters-english-pronunciation.txt",
-    ),
+    archivePaths: [downloadPath("500-tongue-twisters-english-pronunciation.pdf")],
+    placeholderPath: downloadPath("500-tongue-twisters-english-pronunciation.txt"),
     downloadName: "500-tongue-twisters-english-pronunciation",
   },
   "free-ats-resume-template-freshers-2026": {
-    archivePath: path.join(process.cwd(), "private", "downloads", "ATS-Resume-Template-Pack.zip"),
-    placeholderPath: path.join(
-      process.cwd(),
-      "private",
-      "downloads",
-      "free-ats-resume-template-freshers-2026.txt",
-    ),
+    archivePaths: [downloadPath("ATS-Resume-Template-Pack.zip")],
+    placeholderPath: downloadPath("free-ats-resume-template-freshers-2026.txt"),
     downloadName: "ATS-Resume-Template-Pack",
   },
   "free-job-application-tracker": {
-    archivePath: path.join(process.cwd(), "private", "downloads", "Job-Application-Tracker.xlsx"),
-    placeholderPath: path.join(
-      process.cwd(),
-      "private",
-      "downloads",
-      "free-job-application-tracker.txt",
-    ),
+    archivePaths: [downloadPath("Job-Application-Tracker.xlsx")],
+    placeholderPath: downloadPath("free-job-application-tracker.txt"),
     downloadName: "Job-Application-Tracker",
   },
   "free-chatgpt-prompts-job-seekers-2026": {
-    archivePath: path.join(process.cwd(), "private", "downloads", "AI-Prompt-Pack-for-Job-Seekers.zip"),
-    placeholderPath: path.join(
-      process.cwd(),
-      "private",
-      "downloads",
-      "free-chatgpt-prompts-job-seekers-2026.txt",
-    ),
+    archivePaths: [
+      downloadPath("AI-Prompt-Pack-for-Job-Seekers.zip"),
+      downloadPath("free-chatgpt-prompts-job-seekers-2026.pdf"),
+    ],
+    placeholderPath: downloadPath("free-chatgpt-prompts-job-seekers-2026.txt"),
     downloadName: "AI-Prompt-Pack-for-Job-Seekers",
   },
 };
 
 function safeExisting(filePath) {
-  const root = path.resolve(process.cwd(), "private", "downloads");
   const resolved = path.resolve(filePath);
-  if (resolved !== root && !resolved.startsWith(`${root}${path.sep}`)) {
+  if (resolved !== DOWNLOADS_ROOT && !resolved.startsWith(`${DOWNLOADS_ROOT}${path.sep}`)) {
     return false;
   }
   return fs.existsSync(filePath);
+}
+
+function pickFilePath(entry) {
+  for (const candidate of entry.archivePaths ?? []) {
+    if (safeExisting(candidate)) {
+      return candidate;
+    }
+  }
+  if (entry.placeholderPath && safeExisting(entry.placeholderPath)) {
+    return entry.placeholderPath;
+  }
+  return null;
 }
 
 function contentTypeFor(ext) {
@@ -123,12 +99,7 @@ export function resolveDownload(productId) {
     return null;
   }
 
-  const primaryExists = safeExisting(entry.archivePath);
-  const filePath = primaryExists
-    ? entry.archivePath
-    : safeExisting(entry.placeholderPath)
-      ? entry.placeholderPath
-      : null;
+  const filePath = pickFilePath(entry);
   if (!filePath) {
     return null;
   }

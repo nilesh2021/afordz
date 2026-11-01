@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { recordProductDownload } from "@/lib/download-events";
 import { DOWNLOAD_COOKIE } from "@/lib/download-cookie";
 import { resolveDownload } from "@/lib/fulfillment";
 import { getPaidOrderByToken } from "@/lib/orders";
@@ -24,6 +25,13 @@ export async function GET(_request, { params }) {
   if (!ownsProduct) {
     return NextResponse.json({ error: "The download link has expired." }, { status: 401 });
   }
+
+  await recordProductDownload({
+    productId,
+    email: order.customerEmail,
+    channel: "paid",
+    orderId: order.id,
+  });
 
   const stream = Readable.toWeb(createReadStream(file.filePath));
   return new NextResponse(stream, {

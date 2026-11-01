@@ -86,6 +86,36 @@ const SCHEMA_STEPS = [
     sql: `CREATE INDEX IF NOT EXISTS free_course_grants_course_slug
     ON free_course_grants (course_slug)`,
   },
+  {
+    id: "create_product_download_events",
+    sqlKind: "ddl",
+    sql: `CREATE TABLE IF NOT EXISTS product_download_events (
+    id TEXT PRIMARY KEY,
+    product_id TEXT NOT NULL,
+    email TEXT NOT NULL,
+    channel TEXT NOT NULL CHECK (channel IN ('free', 'paid')),
+    order_id TEXT,
+    downloaded_at TEXT NOT NULL
+  )`,
+  },
+  {
+    id: "create_index_product_download_events_product",
+    sqlKind: "ddl",
+    sql: `CREATE INDEX IF NOT EXISTS product_download_events_product_id
+    ON product_download_events (product_id)`,
+  },
+  {
+    id: "create_index_product_download_events_email",
+    sqlKind: "ddl",
+    sql: `CREATE INDEX IF NOT EXISTS product_download_events_email
+    ON product_download_events (email)`,
+  },
+  {
+    id: "create_index_product_download_events_downloaded_at",
+    sqlKind: "ddl",
+    sql: `CREATE INDEX IF NOT EXISTS product_download_events_downloaded_at
+    ON product_download_events (downloaded_at)`,
+  },
 ];
 
 function attachStatement(error, step) {

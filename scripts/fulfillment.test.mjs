@@ -47,9 +47,12 @@ test("career free ChatGPT prompts pack resolves under private/downloads", () => 
   assert.ok(file);
   assert.match(
     file.filePath.replaceAll("\\", "/"),
-    /private\/downloads\/(AI-Prompt-Pack-for-Job-Seekers\.zip|free-chatgpt-prompts-job-seekers-2026\.txt)$/,
+    /private\/downloads\/(AI-Prompt-Pack-for-Job-Seekers\.zip|free-chatgpt-prompts-job-seekers-2026\.pdf|free-chatgpt-prompts-job-seekers-2026\.txt)$/,
   );
   assert.equal(file.downloadName.startsWith("AI-Prompt-Pack-for-Job-Seekers"), true);
+  if (file.downloadName.endsWith(".pdf")) {
+    assert.equal(file.contentType, "application/pdf");
+  }
 });
 
 test("unknown products have no download", () => {
